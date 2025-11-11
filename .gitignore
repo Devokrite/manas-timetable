@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+
+# next
+.next/
+out/
+.vercel/
+
+# env / secrets
+.env
+.env.local
+.env.*.local
+
+# misc
+.DS_Store
+npm-debug.log*
+*.log
+# build artifacts
+*.tsbuildinfo
+
+# editor
+.vscode/
+.idea/
