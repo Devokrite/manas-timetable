@@ -1,0 +1,849 @@
+{
+  "slots": [
+    {
+      "day": "Pazartesi",
+      "time": "8:00-8:45",
+      "courseName": "Ayrılmış (Reserved)"
+    },
+    {
+      "day": "Salı",
+      "time": "8:00-8:45",
+      "courseName": "Ayrılmış (Reserved)"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "8:00-8:45",
+      "courseName": "Ayrılmış (Reserved)"
+    },
+    {
+      "day": "Perşembe",
+      "time": "8:00-8:45",
+      "courseName": "MAT-173 CEBİR VE UYGULAMASI"
+    },
+    {
+      "day": "Perşembe",
+      "time": "8:00-8:45",
+      "courseName": "PEYİL ESENGUL KIZI"
+    },
+    {
+      "day": "Perşembe",
+      "time": "8:00-8:45",
+      "courseName": "İİBF 127"
+    },
+    {
+      "day": "Cuma",
+      "time": "8:00-8:45",
+      "courseName": "MAT-171.01 MATEMATİK I"
+    },
+    {
+      "day": "Cuma",
+      "time": "8:00-8:45",
+      "courseName": "ASAN BAYZAKOV"
+    },
+    {
+      "day": "Cuma",
+      "time": "8:00-8:45",
+      "courseName": "İİBF 127"
+    },
+    {
+      "day": "Salı",
+      "time": "8:55-9:40",
+      "courseName": "UME-111.01 (U) FİZİK I (UYGULAMA)"
+    },
+    {
+      "day": "Salı",
+      "time": "8:55-9:40",
+      "courseName": "NAZGÜL ADANBAYEVA"
+    },
+    {
+      "day": "Salı",
+      "time": "8:55-9:40",
+      "courseName": "MFFB 118"
+    },
+    {
+      "day": "Salı",
+      "time": "8:55-9:40",
+      "courseName": "BIL-101.02 BİLGİSAYAR MÜHENDİSLİĞİ KAVRAMLARINA GİRİŞ"
+    },
+    {
+      "day": "Salı",
+      "time": "8:55-9:40",
+      "courseName": "ÇINARA CUMABAYEVA"
+    },
+    {
+      "day": "Salı",
+      "time": "8:55-9:40",
+      "courseName": "MFFB 524"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "8:55-9:40",
+      "courseName": "UME-111.02 GENEL FİZİK I"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "8:55-9:40",
+      "courseName": "TAMARA KARAŞEVA"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "8:55-9:40",
+      "courseName": "İİBF 128"
+    },
+    {
+      "day": "Perşembe",
+      "time": "8:55-9:40",
+      "courseName": "MAT-173 CEBİR VE UYGULAMASI"
+    },
+    {
+      "day": "Perşembe",
+      "time": "8:55-9:40",
+      "courseName": "PEYİL ESENGUL KIZI"
+    },
+    {
+      "day": "Perşembe",
+      "time": "8:55-9:40",
+      "courseName": "İİBF 127"
+    },
+    {
+      "day": "Cuma",
+      "time": "8:55-9:40",
+      "courseName": "MAT-171.01 MATEMATİK I"
+    },
+    {
+      "day": "Cuma",
+      "time": "8:55-9:40",
+      "courseName": "ASAN BAYZAKOV"
+    },
+    {
+      "day": "Cuma",
+      "time": "8:55-9:40",
+      "courseName": "İİBF 127"
+    },
+    {
+      "day": "Salı",
+      "time": "9:50-10:35",
+      "courseName": "UME-111.01 (U) FİZİK I (UYGULAMA)"
+    },
+    {
+      "day": "Salı",
+      "time": "9:50-10:35",
+      "courseName": "NAZGÜL ADANBAYEVA"
+    },
+    {
+      "day": "Salı",
+      "time": "9:50-10:35",
+      "courseName": "MFFB 118"
+    },
+    {
+      "day": "Salı",
+      "time": "9:50-10:35",
+      "courseName": "BIL-101.02 BİLGİSAYAR MÜHENDİSLİĞİ KAVRAMLARINA GİRİŞ"
+    },
+    {
+      "day": "Salı",
+      "time": "9:50-10:35",
+      "courseName": "ÇINARA CUMABAYEVA"
+    },
+    {
+      "day": "Salı",
+      "time": "9:50-10:35",
+      "courseName": "MFFB 524"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "9:50-10:35",
+      "courseName": "UME-111.02 GENEL FİZİK I"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "9:50-10:35",
+      "courseName": "TAMARA KARAŞEVA"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "9:50-10:35",
+      "courseName": "İİBF 128"
+    },
+    {
+      "day": "Cuma",
+      "time": "9:50-10:35",
+      "courseName": "MAT-171.01 MATEMATİK I"
+    },
+    {
+      "day": "Cuma",
+      "time": "9:50-10:35",
+      "courseName": "ASAN BAYZAKOV"
+    },
+    {
+      "day": "Cuma",
+      "time": "9:50-10:35",
+      "courseName": "İİBF 127"
+    },
+    {
+      "day": "Salı",
+      "time": "10:45-11:30",
+      "courseName": "BIL-101.01 BİLGİSAYAR MÜHENDİSLİĞİ KAVRAMLARINA GİRİŞ"
+    },
+    {
+      "day": "Salı",
+      "time": "10:45-11:30",
+      "courseName": "MEHMET KENAN DÖNMEZ"
+    },
+    {
+      "day": "Salı",
+      "time": "10:45-11:30",
+      "courseName": "MFFB 524"
+    },
+    {
+      "day": "Salı",
+      "time": "10:45-11:30",
+      "courseName": "UME-111.02 (U) FİZİK I (UYGULAMA)"
+    },
+    {
+      "day": "Salı",
+      "time": "10:45-11:30",
+      "courseName": "NAZGÜL ADANBAYEVA"
+    },
+    {
+      "day": "Salı",
+      "time": "10:45-11:30",
+      "courseName": "MFFB 118"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "10:45-11:30",
+      "courseName": "UME-111.02 GENEL FİZİK I"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "10:45-11:30",
+      "courseName": "TAMARA KARAŞEVA"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "10:45-11:30",
+      "courseName": "İİBF 128"
+    },
+    {
+      "day": "Perşembe",
+      "time": "10:45-11:30",
+      "courseName": "MAT-171.01 MATEMATİK I"
+    },
+    {
+      "day": "Perşembe",
+      "time": "10:45-11:30",
+      "courseName": "ASAN BAYZAKOV"
+    },
+    {
+      "day": "Perşembe",
+      "time": "10:45-11:30",
+      "courseName": "İİBF 128"
+    },
+    {
+      "day": "Cuma",
+      "time": "10:45-11:30",
+      "courseName": "UME-111.01 GENEL FİZİK I"
+    },
+    {
+      "day": "Cuma",
+      "time": "10:45-11:30",
+      "courseName": "TAMARA KARAŞEVA"
+    },
+    {
+      "day": "Cuma",
+      "time": "10:45-11:30",
+      "courseName": "İİBF 127"
+    },
+    {
+      "day": "Salı",
+      "time": "11:40-12:25",
+      "courseName": "BIL-101.01 BİLGİSAYAR MÜHENDİSLİĞİ KAVRAMLARINA GİRİŞ"
+    },
+    {
+      "day": "Salı",
+      "time": "11:40-12:25",
+      "courseName": "MEHMET KENAN DÖNMEZ"
+    },
+    {
+      "day": "Salı",
+      "time": "11:40-12:25",
+      "courseName": "MFFB 524"
+    },
+    {
+      "day": "Salı",
+      "time": "11:40-12:25",
+      "courseName": "UME-111.02 (U) FİZİK I (UYGULAMA)"
+    },
+    {
+      "day": "Salı",
+      "time": "11:40-12:25",
+      "courseName": "NAZGÜL ADANBAYEVA"
+    },
+    {
+      "day": "Salı",
+      "time": "11:40-12:25",
+      "courseName": "MFFB 118"
+    },
+    {
+      "day": "Perşembe",
+      "time": "11:40-12:25",
+      "courseName": "MAT-171.01 MATEMATİK I"
+    },
+    {
+      "day": "Perşembe",
+      "time": "11:40-12:25",
+      "courseName": "ASAN BAYZAKOV"
+    },
+    {
+      "day": "Perşembe",
+      "time": "11:40-12:25",
+      "courseName": "İİBF 128"
+    },
+    {
+      "day": "Cuma",
+      "time": "11:40-12:25",
+      "courseName": "UME-111.01 GENEL FİZİK I"
+    },
+    {
+      "day": "Cuma",
+      "time": "11:40-12:25",
+      "courseName": "TAMARA KARAŞEVA"
+    },
+    {
+      "day": "Cuma",
+      "time": "11:40-12:25",
+      "courseName": "İİBF 127"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "13:30-14:15",
+      "courseName": "MAT-173 CEBİR VE UYGULAMASI"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "13:30-14:15",
+      "courseName": "PEYİL ESENGUL KIZI"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "13:30-14:15",
+      "courseName": "İİBF 128"
+    },
+    {
+      "day": "Salı",
+      "time": "13:30-14:15",
+      "courseName": "BİL-107.01 PROGRAMLAMA DİLLERİ I (Yarı Yıl Ödevi Dahil)"
+    },
+    {
+      "day": "Salı",
+      "time": "13:30-14:15",
+      "courseName": "BAKIT ŞARŞEMBAYEV"
+    },
+    {
+      "day": "Salı",
+      "time": "13:30-14:15",
+      "courseName": "MFFB 525"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "13:30-14:15",
+      "courseName": "BİL-107.02 PROGRAMLAMA DİLLERİ I (Yarı Yıl Ödevi Dahil)"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "13:30-14:15",
+      "courseName": "BAKIT ŞARŞEMBAYEV"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "13:30-14:15",
+      "courseName": "MFFB 525"
+    },
+    {
+      "day": "Perşembe",
+      "time": "13:30-14:15",
+      "courseName": "KGZ-103 KIRGIZ DİLİ VE EDEBİYATI I"
+    },
+    {
+      "day": "Perşembe",
+      "time": "13:30-14:15",
+      "courseName": "AYNURA BEYŞEYEVA"
+    },
+    {
+      "day": "Perşembe",
+      "time": "13:30-14:15",
+      "courseName": "İİBF 128"
+    },
+    {
+      "day": "Cuma",
+      "time": "13:30-14:15",
+      "courseName": "UME-111.01 GENEL FİZİK I"
+    },
+    {
+      "day": "Cuma",
+      "time": "13:30-14:15",
+      "courseName": "TAMARA KARAŞEVA"
+    },
+    {
+      "day": "Cuma",
+      "time": "13:30-14:15",
+      "courseName": "İİBF 127"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "14:25-15:10",
+      "courseName": "MAT-173 CEBİR VE UYGULAMASI"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "14:25-15:10",
+      "courseName": "PEYİL ESENGUL KIZI"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "14:25-15:10",
+      "courseName": "İİBF 128"
+    },
+    {
+      "day": "Salı",
+      "time": "14:25-15:10",
+      "courseName": "BİL-107.01 PROGRAMLAMA DİLLERİ I (Yarı Yıl Ödevi Dahil)"
+    },
+    {
+      "day": "Salı",
+      "time": "14:25-15:10",
+      "courseName": "BAKIT ŞARŞEMBAYEV"
+    },
+    {
+      "day": "Salı",
+      "time": "14:25-15:10",
+      "courseName": "MFFB 525"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "14:25-15:10",
+      "courseName": "BİL-107.02 PROGRAMLAMA DİLLERİ I (Yarı Yıl Ödevi Dahil)"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "14:25-15:10",
+      "courseName": "BAKIT ŞARŞEMBAYEV"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "14:25-15:10",
+      "courseName": "MFFB 525"
+    },
+    {
+      "day": "Perşembe",
+      "time": "14:25-15:10",
+      "courseName": "KGZ-103 KIRGIZ DİLİ VE EDEBİYATI I"
+    },
+    {
+      "day": "Perşembe",
+      "time": "14:25-15:10",
+      "courseName": "AYNURA BEYŞEYEVA"
+    },
+    {
+      "day": "Perşembe",
+      "time": "14:25-15:10",
+      "courseName": "İİBF 128"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "15:20-16:05",
+      "courseName": "MAT-173 CEBİR VE UYGULAMASI"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "15:20-16:05",
+      "courseName": "PEYİL ESENGUL KIZI"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "15:20-16:05",
+      "courseName": "İİBF 128"
+    },
+    {
+      "day": "Salı",
+      "time": "15:20-16:05",
+      "courseName": "BİL-107.01 PROGRAMLAMA DİLLERİ I (Yarı Yıl Ödevi Dahil)"
+    },
+    {
+      "day": "Salı",
+      "time": "15:20-16:05",
+      "courseName": "BAKIT ŞARŞEMBAYEV"
+    },
+    {
+      "day": "Salı",
+      "time": "15:20-16:05",
+      "courseName": "MFFB 525"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "15:20-16:05",
+      "courseName": "BİL-107.02 PROGRAMLAMA DİLLERİ I (Yarı Yıl Ödevi Dahil)"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "15:20-16:05",
+      "courseName": "BAKIT ŞARŞEMBAYEV"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "15:20-16:05",
+      "courseName": "MFFB 525"
+    },
+    {
+      "day": "Perşembe",
+      "time": "15:20-16:05",
+      "courseName": "BES-111 BEDEN EĞİTİMİ VE SPOR I"
+    },
+    {
+      "day": "Perşembe",
+      "time": "15:20-16:05",
+      "courseName": "SIYMIK ARSTANBEKOV"
+    },
+    {
+      "day": "Perşembe",
+      "time": "15:20-16:05",
+      "courseName": "KSSB Spor sahası (kapalı)"
+    },
+    {
+      "day": "Cuma",
+      "time": "15:20-16:05",
+      "courseName": "RSC-103 RUSÇA I"
+    },
+    {
+      "day": "Cuma",
+      "time": "15:20-16:05",
+      "courseName": "SVETLANA PARMANASOVA"
+    },
+    {
+      "day": "Cuma",
+      "time": "15:20-16:05",
+      "courseName": "MFFB ONLINE"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "16:15-17:00",
+      "courseName": "BES-111(LFK) BEDEN EĞİTİMİ VE SPOR I (SAĞLIK GRUBU)"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "16:15-17:00",
+      "courseName": "Emiliya Boljirova"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "16:15-17:00",
+      "courseName": "KSSB A-1"
+    },
+    {
+      "day": "Salı",
+      "time": "16:15-17:00",
+      "courseName": "BES-111(LFK) BEDEN EĞİTİMİ VE SPOR I (SAĞLIK GRUBU)"
+    },
+    {
+      "day": "Salı",
+      "time": "16:15-17:00",
+      "courseName": "Emiliya Boljirova"
+    },
+    {
+      "day": "Salı",
+      "time": "16:15-17:00",
+      "courseName": "KSSB A-1"
+    },
+    {
+      "day": "Salı",
+      "time": "16:15-17:00",
+      "courseName": "BİL-107.01 (U) PROGRAMLAMA DİLLERİ I (Yarı Yıl Ödevi Dahil) (Uygulama)"
+    },
+    {
+      "day": "Salı",
+      "time": "16:15-17:00",
+      "courseName": "BAKIT ŞARŞEMBAYEV"
+    },
+    {
+      "day": "Salı",
+      "time": "16:15-17:00",
+      "courseName": "MFFB 525"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "16:15-17:00",
+      "courseName": "BES-111(LFK) BEDEN EĞİTİMİ VE SPOR I (SAĞLIK GRUBU)"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "16:15-17:00",
+      "courseName": "Emiliya Boljirova"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "16:15-17:00",
+      "courseName": "KSSB A-1"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "16:15-17:00",
+      "courseName": "BİL-107.02 (U) PROGRAMLAMA DİLLERİ I (Yarı Yıl Ödevi Dahil) (Uygulama)"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "16:15-17:00",
+      "courseName": "BAKIT ŞARŞEMBAYEV"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "16:15-17:00",
+      "courseName": "MFFB 525"
+    },
+    {
+      "day": "Perşembe",
+      "time": "16:15-17:00",
+      "courseName": "BES-111 BEDEN EĞİTİMİ VE SPOR I"
+    },
+    {
+      "day": "Perşembe",
+      "time": "16:15-17:00",
+      "courseName": "SIYMIK ARSTANBEKOV"
+    },
+    {
+      "day": "Perşembe",
+      "time": "16:15-17:00",
+      "courseName": "KSSB Spor sahası (kapalı)"
+    },
+    {
+      "day": "Perşembe",
+      "time": "16:15-17:00",
+      "courseName": "ING-111 İNGİLİZCE I"
+    },
+    {
+      "day": "Perşembe",
+      "time": "16:15-17:00",
+      "courseName": "SVETLANA CEENBEKOBA"
+    },
+    {
+      "day": "Perşembe",
+      "time": "16:15-17:00",
+      "courseName": "MFFB ONLINE"
+    },
+    {
+      "day": "Perşembe",
+      "time": "16:15-17:00",
+      "courseName": "BES-111(LFK) BEDEN EĞİTİMİ VE SPOR I (SAĞLIK GRUBU)"
+    },
+    {
+      "day": "Perşembe",
+      "time": "16:15-17:00",
+      "courseName": "Emiliya Boljirova"
+    },
+    {
+      "day": "Perşembe",
+      "time": "16:15-17:00",
+      "courseName": "KSSB A-1"
+    },
+    {
+      "day": "Cuma",
+      "time": "16:15-17:00",
+      "courseName": "RSC-103 RUSÇA I"
+    },
+    {
+      "day": "Cuma",
+      "time": "16:15-17:00",
+      "courseName": "SVETLANA PARMANASOVA"
+    },
+    {
+      "day": "Cuma",
+      "time": "16:15-17:00",
+      "courseName": "MFFB ONLINE"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "17:10-17:55",
+      "courseName": "BES-111(LFK) BEDEN EĞİTİMİ VE SPOR I (SAĞLIK GRUBU)"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "17:10-17:55",
+      "courseName": "Emiliya Boljirova"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "17:10-17:55",
+      "courseName": "KSSB A-1"
+    },
+    {
+      "day": "Salı",
+      "time": "17:10-17:55",
+      "courseName": "BES-111(LFK) BEDEN EĞİTİMİ VE SPOR I (SAĞLIK GRUBU)"
+    },
+    {
+      "day": "Salı",
+      "time": "17:10-17:55",
+      "courseName": "Emiliya Boljirova"
+    },
+    {
+      "day": "Salı",
+      "time": "17:10-17:55",
+      "courseName": "KSSB A-1"
+    },
+    {
+      "day": "Salı",
+      "time": "17:10-17:55",
+      "courseName": "BİL-107.01 (U) PROGRAMLAMA DİLLERİ I (Yarı Yıl Ödevi Dahil) (Uygulama)"
+    },
+    {
+      "day": "Salı",
+      "time": "17:10-17:55",
+      "courseName": "BAKIT ŞARŞEMBAYEV"
+    },
+    {
+      "day": "Salı",
+      "time": "17:10-17:55",
+      "courseName": "MFFB 525"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "17:10-17:55",
+      "courseName": "BES-111(LFK) BEDEN EĞİTİMİ VE SPOR I (SAĞLIK GRUBU)"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "17:10-17:55",
+      "courseName": "Emiliya Boljirova"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "17:10-17:55",
+      "courseName": "KSSB A-1"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "17:10-17:55",
+      "courseName": "BİL-107.02 (U) PROGRAMLAMA DİLLERİ I (Yarı Yıl Ödevi Dahil) (Uygulama)"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "17:10-17:55",
+      "courseName": "BAKIT ŞARŞEMBAYEV"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "17:10-17:55",
+      "courseName": "MFFB 525"
+    },
+    {
+      "day": "Perşembe",
+      "time": "17:10-17:55",
+      "courseName": "ING-111 İNGİLİZCE I"
+    },
+    {
+      "day": "Perşembe",
+      "time": "17:10-17:55",
+      "courseName": "SVETLANA CEENBEKOBA"
+    },
+    {
+      "day": "Perşembe",
+      "time": "17:10-17:55",
+      "courseName": "MFFB ONLINE"
+    },
+    {
+      "day": "Perşembe",
+      "time": "17:10-17:55",
+      "courseName": "BES-111(LFK) BEDEN EĞİTİMİ VE SPOR I (SAĞLIK GRUBU)"
+    },
+    {
+      "day": "Perşembe",
+      "time": "17:10-17:55",
+      "courseName": "Emiliya Boljirova"
+    },
+    {
+      "day": "Perşembe",
+      "time": "17:10-17:55",
+      "courseName": "KSSB A-1"
+    },
+    {
+      "day": "Cuma",
+      "time": "17:10-17:55",
+      "courseName": "BES-111(T) BEDEN EĞİTİMİ VE SPOR I (Teorik)"
+    },
+    {
+      "day": "Cuma",
+      "time": "17:10-17:55",
+      "courseName": "ATİLLA ÇAKAR"
+    },
+    {
+      "day": "Cuma",
+      "time": "17:10-17:55",
+      "courseName": "KSSB Online Sport"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "18:05-18:50",
+      "courseName": "Ayrılmış (Reserved)"
+    },
+    {
+      "day": "Salı",
+      "time": "18:05-18:50",
+      "courseName": "Ayrılmış (Reserved)"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "18:05-18:50",
+      "courseName": "Ayrılmış (Reserved)"
+    },
+    {
+      "day": "Cuma",
+      "time": "18:05-18:50",
+      "courseName": "BES-111(T) BEDEN EĞİTİMİ VE SPOR I (Teorik)"
+    },
+    {
+      "day": "Cuma",
+      "time": "18:05-18:50",
+      "courseName": "ATİLLA ÇAKAR"
+    },
+    {
+      "day": "Cuma",
+      "time": "18:05-18:50",
+      "courseName": "KSSB Online Sport"
+    },
+    {
+      "day": "Pazartesi",
+      "time": "19:00-19:45",
+      "courseName": "Ayrılmış (Reserved)"
+    },
+    {
+      "day": "Salı",
+      "time": "19:00-19:45",
+      "courseName": "Ayrılmış (Reserved)"
+    },
+    {
+      "day": "Çarşamba",
+      "time": "19:00-19:45",
+      "courseName": "Ayrılmış (Reserved)"
+    },
+    {
+      "day": "Perşembe",
+      "time": "19:00-19:45",
+      "courseName": "Ayrılmış (Reserved)"
+    },
+    {
+      "day": "Cuma",
+      "time": "19:00-19:45",
+      "courseName": "Ayrılmış (Reserved)"
+    }
+  ],
+  "meta": {
+    "days": [
+      "Pazartesi",
+      "Salı",
+      "Çarşamba",
+      "Perşembe",
+      "Cuma"
+    ],
+    "departmentName": "Bölüm Bazında Haftalık Plan"
+  }
+}
