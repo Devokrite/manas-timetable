@@ -1,23 +1,24 @@
 "use client";
 
-type Slot = {
-  day: string;
-  time: string;
-  courseName: string; // combined text
-};
+type Slot = { day: string; time: string; courseName: string };
+type Data = { slots: Slot[]; meta?: { days?: string[] } };
 
-type Data = {
-  slots: Slot[];
-  meta?: { days?: string[] };
-};
+const DAY_ORDER = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"];
+
+function colorFor(text: string) {
+  const hash = Array.from(text).reduce((a, c) => a + c.charCodeAt(0), 0);
+  const colors = ["blue","violet","green","orange","cyan"];
+  return colors[hash % colors.length] as "blue"|"violet"|"green"|"orange"|"cyan";
+}
 
 export default function Timetable({ data }: { data: Data; deptId?: string }) {
-  const days = data.meta?.days?.length ? data.meta.days : ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"];
+  const days = (data.meta?.days?.length ? data.meta.days : DAY_ORDER).slice(0,5);
+  // stable order: Mon..Fri by DAY_ORDER
+  const dayIdx = new Map(days.map((d,i)=>[d,i]));
+  days.sort((a,b)=>DAY_ORDER.indexOf(a)-DAY_ORDER.indexOf(b));
 
-  // collect times in sorted order (string compare is fine because site uses HH:MM-HH:MM)
   const times = Array.from(new Set(data.slots.map(s => s.time))).sort();
 
-  // build a map: key = day|time -> array of course names (handles multiple entries)
   const map = new Map<string, string[]>();
   for (const s of data.slots) {
     const key = `${s.day}|${s.time}`;
@@ -27,46 +28,59 @@ export default function Timetable({ data }: { data: Data; deptId?: string }) {
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="text-left px-4 py-3 border-b border-gray-100 w-36 text-slate-500">Time</th>
-            {days.map((d) => (
-              <th key={d} className="text-left px-4 py-3 border-b border-gray-100 text-slate-500">{d}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="bg-white">
-          {times.map((t) => (
-            <tr key={t} className="border-b border-gray-100">
-              <td className="px-4 py-3 font-medium text-slate-700">{t}</td>
-              {days.map((d) => {
-                const key = `${d}|${t}`;
-                const val = map.get(key) || [];
-                return (
-                  <td key={key} className="px-4 py-3 align-top">
-                    <div className="flex flex-col gap-1">
-                      {val.length === 0 ? (
-                        <span className="text-slate-300">—</span>
-                      ) : (
-                        val.map((line, i) => (
-                          <span
-                            key={i}
-                            className="inline-block rounded-lg bg-blue-50 text-slate-700 border border-blue-100 px-2 py-1"
-                          >
-                            {line}
-                          </span>
-                        ))
-                      )}
-                    </div>
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="p-4 md:p-6">
+      <div className="rounded-2xl border border-slate-800/70 bg-slate-950/30 overflow-hidden">
+        <div className="px-4 py-3 border-b border-slate-800/70 flex items-center gap-3 bg-slate-950/40">
+          <div className="h-2 w-2 rounded-full bg-emerald-400/80 shadow" />
+          <div className="text-sm text-slate-300">Calendar</div>
+        </div>
+
+        <div className="overflow-x-auto p-3 md:p-5">
+          <table className="min-w-[720px] w-full text-sm">
+            <thead>
+              <tr className="text-slate-400">
+                <th className="text-left p-2 md:p-3 w-28">Time</th>
+                {days.map((d) => (
+                  <th key={d} className="text-left p-2 md:p-3">{d}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="text-slate-100">
+              {times.map((t) => (
+                <tr key={t}>
+                  <td className="p-2 md:p-3 text-slate-300">{t}</td>
+                  {days.map((d) => {
+                    const key = `${d}|${t}`;
+                    const items = map.get(key) || [];
+                    return (
+                      <td key={key} className="p-2 md:p-3">
+                        <div className="cell">
+                          {items.length === 0 ? (
+                            <div className="text-slate-600">—</div>
+                          ) : (
+                            <div className="flex flex-col gap-1.5">
+                              {items.map((txt, i) => {
+                                const c = colorFor(txt);
+                                // pick between pill and hex to add variety:
+                                const shaped = (i % 2 === 0) ? "badge hex" : "badge";
+                                return (
+                                  <span key={i} className={`${shaped} ${"badge " + c}`}>
+                                    {txt}
+                                  </span>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
