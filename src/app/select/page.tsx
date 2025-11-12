@@ -1,10 +1,10 @@
 "use client";
+
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 type Entry = { id: number; name: string; grade?: number };
-
-const ALLOWED = new Set([1, 7, 10, 191]); // <-- only these 4
+const ALLOWED = new Set([1, 7, 10, 191]); // only these four
 
 export default function SelectPage() {
   const [items, setItems] = useState<Entry[]>([]);
@@ -14,64 +14,57 @@ export default function SelectPage() {
 
   useEffect(() => {
     let live = true;
-
     (async () => {
       try {
-        // cache-bust the static file to avoid stale CDN content
         const res = await fetch(`/catalog-1.json?v=${Date.now()}`, { cache: "no-store" });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
         const all: Entry[] = json.items || [];
-        const onlyAllowed = all.filter((x) => ALLOWED.has(Number(x.id)));
-        if (live) setItems(onlyAllowed);
+        const only = all.filter((x) => ALLOWED.has(Number(x.id)));
+        if (live) setItems(only);
       } catch (e: any) {
         if (live) setError(e?.message || "Failed to load catalog");
       } finally {
         if (live) setLoading(false);
       }
     })();
-
     return () => { live = false; };
   }, []);
 
   const filtered = useMemo(() => {
-    const s = q.toLowerCase();
+    const s = q.toLowerCase().trim();
+    if (!s) return items;
     return items.filter((x) => x.name.toLowerCase().includes(s));
   }, [items, q]);
 
   return (
-    <main className="min-h-screen p-6 max-w-5xl mx-auto">
-      <h1 className="text-2xl font-bold mb-2">Choose your timetable</h1>
-      <p className="mb-4 opacity-80">Showing <strong>1. sınıf</strong> departments only (4 selected).</p>
+    <main className="min-h-screen py-10">
+      <div className="container-slim">
+        <h1 className="text-3xl font-semibold text-center mb-2">Choose your department</h1>
+        <p className="text-center text-slate-500 mb-8">
+          Showing <b>1. sınıf</b> departments (4 selected).
+        </p>
 
-      <div className="mb-4 flex gap-2 items-center">
-        <input
-          className="rounded-xl border px-3 py-2 bg-white/10 flex-1"
-          placeholder="Search department…"
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-        />
-        {loading && <span className="text-sm opacity-70 whitespace-nowrap">Loading…</span>}
-      </div>
+        <div className="mb-8">
+          <input
+            className="input"
+            placeholder="Search department…"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+          />
+          {loading && <div className="text-sm text-slate-500 mt-2">Loading…</div>}
+          {error && <div className="text-sm text-red-500 mt-2">Error: {error}</div>}
+        </div>
 
-      {error && <div className="mb-3 text-sm text-red-400">Error: {error}</div>}
-
-      {filtered.length === 0 && !loading ? (
-        <div className="opacity-70">No departments found.</div>
-      ) : (
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3">
           {filtered.map((d) => (
-            <Link
-              key={d.id}
-              href={`/departments/${d.id}`}
-              className="rounded-2xl border hover:border-white/40 bg-white/5 p-3"
-            >
-              <div className="font-medium">{d.name}</div>
-              <div className="text-xs opacity-60 mt-1">ID: {d.id} • 1. sınıf</div>
+            <Link key={d.id} href={`/departments/${d.id}`} className="card card-hover p-5">
+              <div className="text-lg font-medium">{d.name}</div>
+              <div className="text-sm text-slate-500 mt-1">ID: {d.id} • 1. sınıf</div>
             </Link>
           ))}
         </div>
-      )}
+      </div>
     </main>
   );
 }
