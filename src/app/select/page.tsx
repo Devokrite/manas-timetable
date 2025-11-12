@@ -4,6 +4,8 @@ import Link from "next/link";
 
 type Entry = { id: number; name: string; grade?: number };
 
+const ALLOWED = new Set([1, 7, 10, 191]); // <-- only these 4
+
 export default function SelectPage() {
   const [items, setItems] = useState<Entry[]>([]);
   const [q, setQ] = useState("");
@@ -13,20 +15,22 @@ export default function SelectPage() {
   useEffect(() => {
     let live = true;
 
-    async function load() {
+    (async () => {
       try {
-        const res = await fetch("/catalog-1.json", { cache: "force-cache" });
+        // cache-bust the static file to avoid stale CDN content
+        const res = await fetch(`/catalog-1.json?v=${Date.now()}`, { cache: "no-store" });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
-        if (live) setItems((json.items || []).filter((x: Entry) => (x.grade ?? 1) === 1));
+        const all: Entry[] = json.items || [];
+        const onlyAllowed = all.filter((x) => ALLOWED.has(Number(x.id)));
+        if (live) setItems(onlyAllowed);
       } catch (e: any) {
         if (live) setError(e?.message || "Failed to load catalog");
       } finally {
         if (live) setLoading(false);
       }
-    }
+    })();
 
-    load();
     return () => { live = false; };
   }, []);
 
@@ -38,7 +42,7 @@ export default function SelectPage() {
   return (
     <main className="min-h-screen p-6 max-w-5xl mx-auto">
       <h1 className="text-2xl font-bold mb-2">Choose your timetable</h1>
-      <p className="mb-4 opacity-80">Showing <strong>1. sınıf</strong> (first grade) departments only.</p>
+      <p className="mb-4 opacity-80">Showing <strong>1. sınıf</strong> departments only (4 selected).</p>
 
       <div className="mb-4 flex gap-2 items-center">
         <input
@@ -50,9 +54,7 @@ export default function SelectPage() {
         {loading && <span className="text-sm opacity-70 whitespace-nowrap">Loading…</span>}
       </div>
 
-      {error && (
-        <div className="mb-3 text-sm text-red-400">Error: {error}</div>
-      )}
+      {error && <div className="mb-3 text-sm text-red-400">Error: {error}</div>}
 
       {filtered.length === 0 && !loading ? (
         <div className="opacity-70">No departments found.</div>
@@ -73,4 +75,3 @@ export default function SelectPage() {
     </main>
   );
 }
-
