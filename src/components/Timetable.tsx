@@ -17,7 +17,16 @@ export default function Timetable({ data }: { data: Data; deptId?: string }) {
   const dayIdx = new Map(days.map((d,i)=>[d,i]));
   days.sort((a,b)=>DAY_ORDER.indexOf(a)-DAY_ORDER.indexOf(b));
 
-  const times = Array.from(new Set(data.slots.map(s => s.time))).sort();
+  // turn "8:00-8:45" -> 480, "19:00-19:45" -> 1140
+function startMinutes(t: string) {
+  const start = t.split("-")[0].trim();       // "8:00"
+  const [h, m] = start.split(":").map(Number);
+  return h * 60 + m;
+}
+
+// unique times, sorted by numeric start
+const times = Array.from(new Set(data.slots.map((s) => s.time)))
+  .sort((a, b) => startMinutes(a) - startMinutes(b));
 
   const map = new Map<string, string[]>();
   for (const s of data.slots) {
