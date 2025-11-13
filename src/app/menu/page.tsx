@@ -91,29 +91,24 @@ export default async function MenuPage() {
                 {/* Right side: 4 image slots linked to 1st–4th dishes */}
                 <div className="md:w-72 lg:w-80">
                   <div className="grid grid-cols-2 gap-3">
-  {Array.from({ length: 4 }).map((_, idx) => {
-    const meal = day.meals[idx];
-    return (
-      <div
-        key={idx}
-        className="aspect-square rounded-xl border border-slate-600/80 bg-slate-900/80 shadow-inner shadow-black/40"
-      >
-        <div className="flex h-full flex-col justify-between p-2">
-          <div className="h-5 w-10 rounded-md bg-slate-800/70" />
-          <p className="line-clamp-2 text-[11px] text-slate-200/90">
-            {meal ? meal.name : "No dish"}
-          </p>
-        </div>
-      </div>
-    );
-  })}
-</div>
-
-      </div>
-    );
-  })}
-</div>
-</div>
+                    {Array.from({ length: 4 }).map((_, idx) => {
+                      const meal = day.meals[idx];
+                      return (
+                        <div
+                          key={idx}
+                          className="aspect-square rounded-xl border border-slate-600/80 bg-slate-900/80 shadow-inner shadow-black/40"
+                        >
+                          {/* 
+                            This is where you can later put real <Image /> tags. 
+                            For now we show dish name in the corner so you know
+                            which picture belongs to which dish.
+                          */}
+                          <div className="flex h-full flex-col justify-between p-2">
+                            <div className="h-5 w-10 rounded-md bg-slate-800/70" />
+                            <p className="line-clamp-2 text-[11px] text-slate-200/90">
+                              {meal ? meal.name : "No dish"}
+                            </p>
+                          </div>
                         </div>
                       );
                     })}
