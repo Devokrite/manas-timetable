@@ -25,8 +25,8 @@ export function parseCafeteriaMenu(html: string): CafeteriaMenu {
   let lastMealIndex: number | null = null;
 
   // The page is basically a sequence of h5 (dates + dish names) and h6 (calories)
-  $("h5, h6").each((_i, el) => {
-    const tag = (el as cheerio.Element).tagName?.toLowerCase?.() ?? "";
+  $("h5, h6").each((_, el: any) => {
+    const tag = (el.tagName || "").toLowerCase();
     const text = $(el).text().trim();
     if (!text) return;
 
