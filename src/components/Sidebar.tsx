@@ -14,6 +14,8 @@ const DEPTS = [
 export default function Sidebar() {
   const pathname = usePathname();
   const activeId = pathname?.match(/\/departments\/(\d+)/)?.[1];
+  const onMenu = pathname?.startsWith("/menu");
+
 
   return (
     <aside className="w-[260px] shrink-0 bg-slate-950/40 border-r border-slate-800/70 p-4 md:p-5 sticky top-0 h-dvh">
@@ -34,6 +36,11 @@ export default function Sidebar() {
         <Link href="/select" className="nav-btn">All Departments</Link>
         <Link href="/" className="nav-btn">Home</Link>
       </div>
+      <div className="mt-2 px-1">
+    <Link href="/menu" className={cn("nav-btn", onMenu && "nav-btn--active")}>
+  🍽️ Cafeteria Menu
+</Link>
+
 
       <div className="absolute left-0 right-0 bottom-0 p-4 md:p-5 border-t border-slate-800/60">
         <div className="text-xs text-slate-400">Settings</div>
