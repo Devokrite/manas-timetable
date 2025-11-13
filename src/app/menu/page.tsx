@@ -1,81 +1,72 @@
-import { politeFetch } from "../../lib/fetchers";
-import { parseCafeteriaMenu } from "../../lib/menu";
+import * as cheerio from "cheerio";
 
-export const runtime = "nodejs";
-// refresh automatically (12 hours)
-export const revalidate = 43200;
+export interface CafeteriaMeal {
+  name: string;
+  calories?: string;
+}
 
-export default async function MenuPage() {
-  const html = await politeFetch("https://beslenme.manas.edu.kg/menu");
-  const { days } = parseCafeteriaMenu(html || "");
+export interface CafeteriaDay {
+  date: string;      // e.g. "13.11.2025"
+  weekday: string;   // e.g. "Perşembe"
+  meals: CafeteriaMeal[];
+}
 
-  return (
-    <main className="min-h-screen bg-[#050711] text-slate-50">
-      <div className="mx-auto max-w-5xl px-6 py-8">
-        {/* Header */}
-        <header className="mb-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Cafeteria Menu
-            </h1>
-            <p className="mt-1 text-sm text-slate-400">
-              Updated weekly · Data from beslenme.manas.edu.kg
-            </p>
-          </div>
-        </header>
+export interface CafeteriaMenu {
+  days: CafeteriaDay[];
+}
 
-        {/* Days */}
-        <section className="space-y-4">
-          {days.map((day) => (
-            <article
-              key={`${day.date}-${day.weekday}`}
-              className="rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-900/80 to-slate-900/40 px-5 py-4 shadow-xl shadow-black/40"
-            >
-              {/* Day header: weekday + date */}
-              <div className="flex items-baseline justify-between gap-4">
-                <h2 className="text-lg font-semibold">
-                  {day.weekday}
-                  <span className="ml-3 text-sm font-normal text-slate-400">
-                    {day.date}
-                  </span>
-                </h2>
-                {day.meals.length > 0 && (
-                  <span className="text-xs uppercase tracking-wide text-emerald-300/80">
-                    {day.meals.length}{" "}
-                    {day.meals.length === 1 ? "dish" : "dishes"}
-                  </span>
-                )}
-              </div>
+export function parseCafeteriaMenu(html: string): CafeteriaMenu {
+  const $ = cheerio.load(html);
 
-              {/* Menu items */}
-              {day.meals.length > 0 ? (
-                <ul className="mt-3 grid gap-1 text-sm text-slate-100">
-                  {day.meals.map((meal) => (
-                    <li
-                      key={meal.name + (meal.calories ?? "")}
-                      className="flex items-start gap-2"
-                    >
-                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
-                      <span>
-                        {meal.name}
-                        {meal.calories && (
-                          <span className="ml-2 text-xs text-slate-400">
-                            ({meal.calories} kcal)
-                          </span>
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="mt-3 text-sm text-slate-500">
-                  No menu found for this day yet.
-                </p>
-              )}
-            </article>
-          ))}
-        </section>
-      </div>
-    </main>
-  );
+  const days: CafeteriaDay[] = [];
+
+  let currentDay: CafeteriaDay | null = null;
+  let currentMeals: CafeteriaMeal[] = [];
+  let lastMealIndex: number | null = null;
+
+  // The page is basically a sequence of h5 (dates + dish names) and h6 (calories)
+  $("h5, h6").each((_i: number, el: any) => {
+    const tag = (el.tagName || "").toLowerCase();
+    const text = $(el).text().trim();
+    if (!text) return;
+
+    if (tag === "h5") {
+      // Day heading? Example: "13.11.2025 Perşembe"
+      const m = text.match(/^(\d{2}\.\d{2}\.\d{4})\s+(.+)/);
+      if (m) {
+        // If we were already inside a day, finalize it
+        if (currentDay) {
+          currentDay.meals = currentMeals;
+          days.push(currentDay);
+        }
+
+        currentDay = {
+          date: m[1],      // 13.11.2025
+          weekday: m[2],   // Perşembe
+          meals: [],
+        };
+        currentMeals = [];
+        lastMealIndex = null;
+      } else if (currentDay) {
+        // This h5 is a dish name under the current day
+        currentMeals.push({ name: text });
+        lastMealIndex = currentMeals.length - 1;
+      }
+    } else if (tag === "h6" && currentDay && lastMealIndex != null) {
+      // Likely "Kalori: 258"
+      if (/kalori/i.test(text)) {
+        const calories = text.replace(/.*?:\s*/i, "").trim();
+        const meal = currentMeals[lastMealIndex];
+        meal.calories = calories;
+      }
+    }
+  });
+
+  // Push the last day we were building
+  if (currentDay) {
+    currentDay.meals = currentMeals;
+    days.push(currentDay);
+  }
+
+  return { days };
 }
