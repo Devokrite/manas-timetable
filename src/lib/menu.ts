@@ -1,59 +1,83 @@
 import * as cheerio from "cheerio";
 
-export function parseCafeteriaMenu(html: string) {
+type Meal = { label: string; items: string[] };
+type Day = { name: string; date?: string; meals: Meal[] };
+type Week = { title?: string; days: Day[] };
+
+export function parseCafeteriaMenu(html: string): { weeks: Week[] } {
   const $ = cheerio.load(html);
   const DAY_NAMES = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"];
 
-  const weeks: Array<{
-    title?: string;
-    days: Array<{ name: string; date?: string; meals: Array<{ label: string; items: string[] }> }>;
-  }> = [];
+  const weeks: Week[] = [];
 
-  const candidates: cheerio.Cheerio[] = [];
-  $("section, .container, .content, .panel, .card, main, article, .row, .col, .columns, div").each((_, el) => {
-    const text = $(el).text();
-    let count = 0;
-    for (const d of DAY_NAMES) if (text.includes(d)) count++;
-    if (count >= 3) candidates.push($(el));
-  });
+  // Find big containers that likely hold the week menu
+  const candidates: any[] = [];
+  $("section, .container, .content, .panel, .card, main, article, .row, .col, .columns, div").each(
+    (_idx, el) => {
+      const text = $(el).text();
+      let count = 0;
+      for (const d of DAY_NAMES) {
+        if (text.includes(d)) count++;
+      }
+      if (count >= 3) {
+        candidates.push($(el));
+      }
+    }
+  );
 
-  let root = candidates.sort((a, b) => b.text().length - a.text().length)[0] || $("body");
+  // biggest text block = likely the main menu area
+  let root: any = candidates.sort(
+    (a: any, b: any) => b.text().length - a.text().length
+  )[0] || $("body");
 
-  const daysFound: Array<{ name: string; $node: cheerio.Cheerio }> = [];
-  root.find("*").each((_, el) => {
+  // Find all day headings inside that root
+  const daysFound: { name: string; node: any }[] = [];
+  root.find("*").each((_i: number, el: any) => {
     const txt = $(el).text().trim();
-    if (DAY_NAMES.includes(txt)) daysFound.push({ name: txt, $node: $(el) });
+    if (DAY_NAMES.includes(txt)) {
+      daysFound.push({ name: txt, node: $(el) });
+    }
   });
 
-  const week = { title: findWeekTitle(root), days: [] as any[] };
+  const week: Week = { title: findWeekTitle(root), days: [] };
+
   for (let i = 0; i < daysFound.length; i++) {
-    const { name, $node } = daysFound[i];
-    const $end = daysFound[i + 1]?.$node || null;
-    const $slice = sliceBetween($node, $end);
-    const { date, meals } = extractMeals($slice);
+    const { name, node } = daysFound[i];
+    const next = daysFound[i + 1]?.node ?? null;
+
+    const slice = sliceBetween(node, next);
+    const { date, meals } = extractMeals(slice);
+
     week.days.push({ name, date, meals });
   }
-  if (week.days.length) weeks.push(week);
+
+  if (week.days.length) {
+    weeks.push(week);
+  }
 
   return { weeks };
 }
 
-function findWeekTitle(root: cheerio.Cheerio) {
+// Try to find a title near the top (like current week range)
+function findWeekTitle(root: any): string | undefined {
   const t = root.find("h1,h2,h3,h4").first().text().trim();
   return t || undefined;
 }
 
-function sliceBetween($start: cheerio.Cheerio, $end: cheerio.Cheerio | null) {
-  const out: cheerio.Element[] = [];
+// Grab nodes between two markers
+function sliceBetween(start: any, end: any): any {
+  const out: any[] = [];
   let collecting = false;
 
-  const $parent = $start.closest("*").parent();
-  if (!$parent.length) return cheerio.load("<div/>")("div");
+  const parent = start.closest("*").parent();
+  if (!parent.length) {
+    return cheerio.load("<div/>")("div");
+  }
 
-  $parent.children().each((_, el) => {
-    if (el === $start.get(0)) collecting = true;
+  parent.children().each((_i: number, el: any) => {
+    if (el === start.get(0)) collecting = true;
     if (collecting) out.push(el);
-    if ($end && el === $end.get(0)) return false;
+    if (end && el === end.get(0)) return false;
   });
 
   const $ = cheerio.load("<div/>");
@@ -61,46 +85,70 @@ function sliceBetween($start: cheerio.Cheerio, $end: cheerio.Cheerio | null) {
   return $("div");
 }
 
-function extractMeals($slice: cheerio.Cheerio) {
+// Parse meals from the slice
+function extractMeals(slice: any): { date?: string; meals: Meal[] } {
   let date: string | undefined;
-  const maybeDate = $slice.find("small, .date, time").first().text().trim();
+
+  const maybeDate = slice.find("small, .date, time").first().text().trim();
   if (maybeDate) date = maybeDate;
 
-  const meals: Array<{ label: string; items: string[] }> = [];
+  const meals: Meal[] = [];
 
-  $slice.find("table").each((_, table) => {
+  // Tables
+  slice.find("table").each((_i: number, table: any) => {
     const $t = cheerio.load(table)("table");
-    const ths = $t.find("th").map((_, th) => cheerio.load(th)("th").text().trim()).get();
-    const items = $t.find("td,li").map((_, td) => cheerio.load(td)(td).text().trim()).get().filter(Boolean);
-    if (items.length) meals.push({ label: ths.length ? ths.join(" • ") : "Menü", items });
+    const ths = $t
+      .find("th")
+      .map((_j: number, th: any) => cheerio.load(th)("th").text().trim())
+      .get();
+    const items = $t
+      .find("td,li")
+      .map((_j: number, td: any) => cheerio.load(td)(td).text().trim())
+      .get()
+      .filter(Boolean);
+
+    if (items.length) {
+      meals.push({ label: ths.length ? ths.join(" • ") : "Menü", items });
+    }
   });
 
-  $slice.find("h4,h5,strong,b").each((_, h) => {
+  // Headings + lists (e.g. "Öğle", "Akşam")
+  slice.find("h4,h5,strong,b").each((_i: number, h: any) => {
     const label = cheerio.load(h)(h).text().trim();
     if (!label) return;
+
     const items: string[] = [];
-    let $n = cheerio.load(h)(h).next();
-    for (let i = 0; i < 10 && $n.length; i++) {
-      const tag = ($n.get(0)?.tagName || "").toLowerCase();
-      if (["ul", "ol"].includes(tag)) {
-        $n.find("li").each((_, li) => {
+    let n = cheerio.load(h)(h).next();
+    for (let k = 0; k < 10 && n.length; k++) {
+      const tag = (n.get(0)?.tagName || "").toLowerCase();
+      if (tag === "ul" || tag === "ol") {
+        n.find("li").each((_l: number, li: any) => {
           const t = cheerio.load(li)(li).text().trim();
           if (t) items.push(t);
         });
         break;
       }
       if (tag === "p") {
-        const t = $n.text().trim();
+        const t = n.text().trim();
         if (t) items.push(t);
       }
-      $n = $n.next();
+      n = n.next();
     }
-    if (items.length) meals.push({ label, items });
+    if (items.length) {
+      meals.push({ label, items });
+    }
   });
 
+  // Fallback: any <li> items in the slice
   if (!meals.length) {
-    const items = $slice.find("li").map((_, li) => cheerio.load(li)(li).text().trim()).get().filter(Boolean);
-    if (items.length) meals.push({ label: "Menü", items });
+    const items = slice
+      .find("li")
+      .map((_i: number, li: any) => cheerio.load(li)(li).text().trim())
+      .get()
+      .filter(Boolean);
+    if (items.length) {
+      meals.push({ label: "Menü", items });
+    }
   }
 
   return { date, meals };
