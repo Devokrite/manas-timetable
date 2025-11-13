@@ -1,76 +1,125 @@
+// src/lib/menu.ts
 import * as cheerio from "cheerio";
 
-export interface CafeteriaMeal {
+export type CafeteriaMeal = {
   name: string;
-  calories?: string;
-}
+  calories?: number;
+  imageUrl?: string | null;
+};
 
-export interface CafeteriaDay {
-  date: string;      // e.g. "13.11.2025"
-  weekday: string;   // e.g. "Perşembe"
+export type CafeteriaDay = {
+  date: string;     // "13.11.2025"
+  weekday: string;  // "Perşembe"
   meals: CafeteriaMeal[];
+};
+
+export async function fetchCafeteriaHtml(): Promise<string> {
+  const res = await fetch("https://beslenme.manas.edu.kg/menu", {
+    // make sure we always hit the real page (no cache)
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch cafeteria menu");
+  }
+  return res.text();
 }
 
-export interface CafeteriaMenu {
-  days: CafeteriaDay[];
-}
-
-export function parseCafeteriaMenu(html: string): CafeteriaMenu {
+export function parseCafeteriaMenu(html: string): CafeteriaDay[] {
   const $ = cheerio.load(html);
 
   const days: CafeteriaDay[] = [];
 
-  // We keep current day meta + meals separately
-  let currentDay: { date: string; weekday: string } | null = null;
+  let currentDay: CafeteriaDay | null = null;
   let currentMeals: CafeteriaMeal[] = [];
-  let lastMealIndex: number | null = null;
+  let lastImageUrl: string | null = null;
 
-  // Helper to push whatever we have collected so far
-  const flushCurrentDay = () => {
-    if (!currentDay) return;
-    days.push({
-      date: currentDay.date,
-      weekday: currentDay.weekday,
-      meals: currentMeals.slice(),
-    });
-  };
+  /**
+   * The HTML pattern is basically:
+   *   h5  -> "13.11.2025 Perşembe"   (date + weekday)
+   *   img -> photo for first dish
+   *   h5  -> "Bakla Çorbası"        (dish name)
+   *   h6  -> "Kalori: 258"          (calories)
+   *   img -> photo for second dish
+   *   h5  -> second dish name
+   *   h6  -> ...
+   * and so on, then another date h5 when the next day starts.
+   */
 
-  // The page is basically a sequence of h5 (dates + dish names) and h6 (calories)
-  $("h5, h6").each((_, el: any) => {
-    const tag = (el.tagName || "").toLowerCase();
+  $("h5, h6, img").each((_i, el) => {
+    const tag = (el as any).tagName?.toLowerCase?.() ?? "";
     const text = $(el).text().trim();
+
+    if (tag === "img") {
+      const src = $(el).attr("src") || "";
+      if (!src) return;
+
+      // Images live on info.manas.edu.kg; sometimes src may be relative, so normalise
+      const absolute = src.startsWith("http")
+        ? src
+        : `https://info.manas.edu.kg${src}`;
+
+      lastImageUrl = absolute;
+      return;
+    }
+
+    // from here on we handle h5 / h6
     if (!text) return;
 
     if (tag === "h5") {
-      // Day heading? Example: "13.11.2025 Perşembe"
-      const m = text.match(/^(\d{2}\.\d{2}\.\d{4})\s+(.+)/);
-      if (m) {
-        // We are starting a NEW day → flush the previous one
-        flushCurrentDay();
+      const dateMatch = text.match(/^(\d{2}\.\d{2}\.\d{4})\s+(.+)$/);
+
+      if (dateMatch) {
+        // This h5 is a *day header* (date + weekday)
+        const [, date, weekday] = dateMatch;
+
+        // push previous day first
+        if (currentDay) {
+          currentDay.meals = currentMeals;
+          if (currentDay.meals.length) {
+            days.push(currentDay);
+          }
+        }
 
         currentDay = {
-          date: m[1],      // 13.11.2025
-          weekday: m[2],   // Perşembe
+          date,
+          weekday,
+          meals: [],
         };
         currentMeals = [];
-        lastMealIndex = null;
-      } else if (currentDay) {
-        // This h5 is a dish name under the current day
-        currentMeals.push({ name: text });
-        lastMealIndex = currentMeals.length - 1;
+        lastImageUrl = null;
+      } else {
+        // This h5 is a *dish name*
+        if (!currentDay) {
+          // if somehow no day started yet, ignore
+          return;
+        }
+
+        const meal: CafeteriaMeal = {
+          name: text,
+          imageUrl: lastImageUrl, // whatever img we saw right before this
+        };
+        currentMeals.push(meal);
+        lastImageUrl = null; // don't leak this image to the next dish
       }
-    } else if (tag === "h6" && currentDay && lastMealIndex != null) {
-      // Likely "Kalori: 258"
-      if (/kalori/i.test(text)) {
-        const calories = text.replace(/.*?:\s*/i, "").trim();
-        const meal = currentMeals[lastMealIndex];
-        meal.calories = calories;
+    } else if (tag === "h6") {
+      // calories line: "Kalori: 258"
+      const calMatch = text.match(/(\d+)\s*kcal/i);
+      const calories = calMatch ? Number(calMatch[1]) : undefined;
+
+      if (currentMeals.length && calories && !currentMeals[currentMeals.length - 1].calories) {
+        currentMeals[currentMeals.length - 1].calories = calories;
       }
     }
   });
 
-  // Flush the last day we were building
-  flushCurrentDay();
+  // push the last day
+  if (currentDay) {
+    currentDay.meals = currentMeals;
+    if (currentDay.meals.length) {
+      days.push(currentDay);
+    }
+  }
 
-  return { days };
+  // just in case there is junk on the page
+  return days.filter((d) => d.meals.length > 0);
 }
