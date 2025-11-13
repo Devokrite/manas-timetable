@@ -1,123 +1,120 @@
+// src/app/menu/page.tsx
+import Image from "next/image";
 import Link from "next/link";
-import { politeFetch } from "../../lib/fetchers";
-import { parseCafeteriaMenu } from "../../lib/menu";
+import { fetchCafeteriaHtml, parseCafeteriaMenu } from "@/lib/menu";
 
-export const runtime = "nodejs";
-export const revalidate = 43200;
+export const dynamic = "force-dynamic";
 
 export default async function MenuPage() {
-  const html = await politeFetch("https://beslenme.manas.edu.kg/menu");
-  const { days } = parseCafeteriaMenu(html || "");
+  const html = await fetchCafeteriaHtml();
+  const days = parseCafeteriaMenu(html);
 
   return (
-    <main className="min-h-screen bg-[#050711] text-slate-50">
-      <div className="mx-auto max-w-5xl px-6 py-8">
-        {/* Header */}
-        <header className="mb-6 flex items-center justify-between">
-          <div>
-            <div className="mb-3">
-              {/* Back to departments */}
-              <Link
-                href="/select"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs text-slate-300 hover:border-emerald-400 hover:text-emerald-200"
-              >
-                <span className="text-sm">←</span>
-                <span>Back to timetables</span>
-              </Link>
-            </div>
-
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Cafeteria Menu
-            </h1>
-            <p className="mt-1 text-sm text-slate-400">
-              Updated weekly · Data from beslenme.manas.edu.kg
-            </p>
-          </div>
-        </header>
-
-        {/* Days list */}
-        <section className="space-y-4">
-          {days.map((day) => (
-            <article
-              key={`${day.date}-${day.weekday}`}
-              className="rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-900/80 to-slate-900/40 px-5 py-4 shadow-xl shadow-black/40"
+    <main className="min-h-screen bg-slate-950 text-slate-50">
+      <div className="mx-auto max-w-5xl px-4 py-8">
+        <div className="mb-4 flex items-center justify-between">
+          <Link
+            href="/select"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-3 py-1 text-xs font-medium text-slate-200 hover:bg-slate-800"
+          >
+            ← Back to timetables
+          </Link>
+          <span className="text-[11px] text-slate-400">
+            Updated weekly · Data from{" "}
+            <a
+              href="https://beslenme.manas.edu.kg/menu"
+              className="underline underline-offset-2 hover:text-slate-200"
+              target="_blank"
             >
-              <div className="flex flex-col gap-4 md:flex-row md:items-stretch md:justify-between">
-                {/* Left side: text menu */}
+              beslenme.manas.edu.kg
+            </a>
+          </span>
+        </div>
+
+        <h1 className="text-2xl font-semibold tracking-tight mb-1">
+          Cafeteria Menu
+        </h1>
+
+        <div className="space-y-6 mt-4">
+          {days.map((day) => (
+            <section
+              key={day.date + day.weekday}
+              className="rounded-3xl bg-slate-900/70 ring-1 ring-slate-800/70 shadow-[0_18px_60px_rgba(0,0,0,0.6)] overflow-hidden"
+            >
+              <div className="flex flex-col gap-4 p-4 sm:p-5 md:flex-row md:items-stretch">
+                {/* LEFT: day + dishes list */}
                 <div className="flex-1">
-                  {/* Day header */}
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h2 className="text-lg font-semibold">
+                  <div className="mb-3 flex items-baseline gap-3">
+                    <p className="text-sm font-semibold text-slate-100">
                       {day.weekday}
-                      <span className="ml-3 text-sm font-normal text-slate-400">
-                        {day.date}
-                      </span>
-                    </h2>
-                    {day.meals.length > 0 && (
-                      <span className="text-xs uppercase tracking-wide text-emerald-300/80">
-                        {day.meals.length}{" "}
-                        {day.meals.length === 1 ? "dish" : "dishes"}
-                      </span>
-                    )}
+                    </p>
+                    <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">
+                      {day.date}
+                    </p>
+                    <div className="ml-auto text-[10px] font-medium text-emerald-400">
+                      {day.meals.length} DISHES
+                    </div>
                   </div>
 
-                  {/* Menu items */}
-                  {day.meals.length > 0 ? (
-                    <ul className="mt-3 grid gap-1 text-sm text-slate-100">
-                      {day.meals.map((meal) => (
-                        <li
-                          key={meal.name + (meal.calories ?? "")}
-                          className="flex items-start gap-2"
-                        >
-                          <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
-                          <span>
-                            {meal.name}
-                            {meal.calories && (
-                              <span className="ml-2 text-xs text-slate-400">
-                                ({meal.calories} kcal)
-                              </span>
-                            )}
+                  <ul className="space-y-1.5 text-sm">
+                    {day.meals.map((meal, idx) => (
+                      <li
+                        key={meal.name + idx}
+                        className="flex items-baseline gap-2 text-slate-200"
+                      >
+                        <span className="mt-[3px] h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                        <span>{meal.name}</span>
+                        {meal.calories && (
+                          <span className="text-[11px] text-slate-500">
+                            ({meal.calories} kcal)
                           </span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="mt-3 text-sm text-slate-500">
-                      No menu found for this day yet.
-                    </p>
-                  )}
+                        )}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                {/* Right side: 4 image slots linked to 1st–4th dishes */}
-                <div className="md:w-72 lg:w-80">
+                {/* RIGHT: image grid – first 4 dishes */}
+                <div className="w-full shrink-0 md:w-[360px] lg:w-[420px]">
                   <div className="grid grid-cols-2 gap-3">
-                    {Array.from({ length: 4 }).map((_, idx) => {
-                      const meal = day.meals[idx];
-                      return (
-                        <div
-                          key={idx}
-                          className="aspect-square rounded-xl border border-slate-600/80 bg-slate-900/80 shadow-inner shadow-black/40"
-                        >
-                          {/* 
-                            This is where you can later put real <Image /> tags. 
-                            For now we show dish name in the corner so you know
-                            which picture belongs to which dish.
-                          */}
-                          <div className="flex h-full flex-col justify-between p-2">
-                            <div className="h-5 w-10 rounded-md bg-slate-800/70" />
-                            <p className="line-clamp-2 text-[11px] text-slate-200/90">
-                              {meal ? meal.name : "No dish"}
-                            </p>
+                    {day.meals.slice(0, 4).map((meal, idx) => (
+                      <div
+                        key={meal.name + idx}
+                        className="relative h-28 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/60"
+                      >
+                        {meal.imageUrl ? (
+                          <Image
+                            src={meal.imageUrl}
+                            alt={meal.name}
+                            fill
+                            sizes="180px"
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="flex h-full items-center justify-center text-[10px] text-slate-500">
+                            no image
                           </div>
+                        )}
+
+                        {/* dark gradient + dish name badge */}
+                        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+                        <div className="absolute inset-x-2 bottom-2 flex items-center justify-between gap-2 rounded-full bg-black/60 px-2 py-1 text-[10px] font-medium text-slate-50 backdrop-blur-sm">
+                          <span className="truncate">{meal.name}</span>
+                          {meal.calories && (
+                            <span className="shrink-0 text-[9px] text-emerald-300/90">
+                              {meal.calories} kcal
+                            </span>
+                          )}
                         </div>
-                      );
-                    })}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-            </article>
+            </section>
           ))}
-        </section>
+        </div>
       </div>
     </main>
   );
