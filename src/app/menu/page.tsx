@@ -21,7 +21,10 @@ export default async function MenuPage() {
       <section className="container-slim py-6">
         <div className="grid gap-4 md:gap-6 md:grid-cols-2">
           {data.weeks.map((week, wi) => (
-            <div key={wi} className="rounded-2xl border border-slate-800/70 bg-slate-950/30 overflow-hidden">
+            <div
+              key={wi}
+              className="rounded-2xl border border-slate-800/70 bg-slate-950/30 overflow-hidden"
+            >
               <div className="px-4 py-3 border-b border-slate-800/70 flex items-center gap-3 bg-slate-950/40">
                 <div className="h-2 w-2 rounded-full bg-emerald-400/80 shadow" />
                 <div className="text-sm text-slate-300">
@@ -34,13 +37,19 @@ export default async function MenuPage() {
                   <div key={di} className="cell">
                     <div className="flex items-center justify-between mb-2">
                       <div className="font-medium">{day.name}</div>
-                      {day.date && <div className="text-xs text-slate-400">{day.date}</div>}
+                      {day.date && (
+                        <div className="text-xs text-slate-400">
+                          {day.date}
+                        </div>
+                      )}
                     </div>
 
-                    {/* Meals */}
                     <div className="grid gap-2 sm:grid-cols-2">
                       {day.meals.map((m, mi) => (
-                        <div key={mi} className="rounded-xl border border-slate-800 bg-slate-900/50 p-3">
+                        <div
+                          key={mi}
+                          className="rounded-xl border border-slate-800 bg-slate-900/50 p-3"
+                        >
                           <div className="text-xs uppercase tracking-wide text-slate-400 mb-1">
                             {m.label}
                           </div>
@@ -63,7 +72,15 @@ export default async function MenuPage() {
 
         {/* Debug link */}
         <div className="mt-6 text-xs text-slate-500">
-          Debug JSON: <a className="underline" href="/api/menu" target="_blank" rel="noreferrer">/api/menu</a>
+          Debug JSON:{" "}
+          <a
+            className="underline"
+            href="/api/menu"
+            target="_blank"
+            rel="noreferrer"
+          >
+            /api/menu
+          </a>
         </div>
       </section>
     </main>
