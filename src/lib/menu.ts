@@ -1,155 +1,72 @@
 import * as cheerio from "cheerio";
 
-type Meal = { label: string; items: string[] };
-type Day = { name: string; date?: string; meals: Meal[] };
-type Week = { title?: string; days: Day[] };
+export interface CafeteriaMeal {
+  name: string;
+  calories?: string;
+}
 
-export function parseCafeteriaMenu(html: string): { weeks: Week[] } {
+export interface CafeteriaDay {
+  date: string;      // e.g. "13.11.2025"
+  weekday: string;   // e.g. "Perşembe"
+  meals: CafeteriaMeal[];
+}
+
+export interface CafeteriaMenu {
+  days: CafeteriaDay[];
+}
+
+export function parseCafeteriaMenu(html: string): CafeteriaMenu {
   const $ = cheerio.load(html);
-  const DAY_NAMES = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"];
 
-  const weeks: Week[] = [];
+  const days: CafeteriaDay[] = [];
 
-  // Find big containers that likely hold the week menu
-  const candidates: any[] = [];
-  $("section, .container, .content, .panel, .card, main, article, .row, .col, .columns, div").each(
-    (_idx, el) => {
-      const text = $(el).text();
-      let count = 0;
-      for (const d of DAY_NAMES) {
-        if (text.includes(d)) count++;
+  let currentDay: CafeteriaDay | null = null;
+  let currentMeals: CafeteriaMeal[] = [];
+  let lastMealIndex: number | null = null;
+
+  // The page is basically a sequence of h5 (dates + dish names) and h6 (calories)
+  $("h5, h6").each((_i, el) => {
+    const tag = (el as cheerio.Element).tagName?.toLowerCase?.() ?? "";
+    const text = $(el).text().trim();
+    if (!text) return;
+
+    if (tag === "h5") {
+      // Day heading? Example: "13.11.2025 Perşembe"
+      const m = text.match(/^(\d{2}\.\d{2}\.\d{4})\s+(.+)/);
+      if (m) {
+        // If we were already inside a day, finalize it
+        if (currentDay) {
+          currentDay.meals = currentMeals;
+          days.push(currentDay);
+        }
+
+        currentDay = {
+          date: m[1],      // 13.11.2025
+          weekday: m[2],   // Perşembe
+          meals: [],
+        };
+        currentMeals = [];
+        lastMealIndex = null;
+      } else if (currentDay) {
+        // This h5 is a dish name under the current day
+        currentMeals.push({ name: text });
+        lastMealIndex = currentMeals.length - 1;
       }
-      if (count >= 3) {
-        candidates.push($(el));
+    } else if (tag === "h6" && currentDay && lastMealIndex != null) {
+      // Likely "Kalori: 258"
+      if (/kalori/i.test(text)) {
+        const calories = text.replace(/.*?:\s*/i, "").trim();
+        const meal = currentMeals[lastMealIndex];
+        meal.calories = calories;
       }
-    }
-  );
-
-  // biggest text block = likely the main menu area
-  let root: any = candidates.sort(
-    (a: any, b: any) => b.text().length - a.text().length
-  )[0] || $("body");
-
-  // Find all day headings inside that root
-  const daysFound: { name: string; node: any }[] = [];
-  root.find("*").each((_i: number, el: any) => {
-    const txt = $(el).text().trim();
-    if (DAY_NAMES.includes(txt)) {
-      daysFound.push({ name: txt, node: $(el) });
     }
   });
 
-  const week: Week = { title: findWeekTitle(root), days: [] };
-
-  for (let i = 0; i < daysFound.length; i++) {
-    const { name, node } = daysFound[i];
-    const next = daysFound[i + 1]?.node ?? null;
-
-    const slice = sliceBetween(node, next);
-    const { date, meals } = extractMeals(slice);
-
-    week.days.push({ name, date, meals });
+  // Push the last day we were building
+  if (currentDay) {
+    currentDay.meals = currentMeals;
+    days.push(currentDay);
   }
 
-  if (week.days.length) {
-    weeks.push(week);
-  }
-
-  return { weeks };
-}
-
-// Try to find a title near the top (like current week range)
-function findWeekTitle(root: any): string | undefined {
-  const t = root.find("h1,h2,h3,h4").first().text().trim();
-  return t || undefined;
-}
-
-// Grab nodes between two markers
-function sliceBetween(start: any, end: any): any {
-  const out: any[] = [];
-  let collecting = false;
-
-  const parent = start.closest("*").parent();
-  if (!parent.length) {
-    return cheerio.load("<div/>")("div");
-  }
-
-  parent.children().each((_i: number, el: any) => {
-    if (el === start.get(0)) collecting = true;
-    if (collecting) out.push(el);
-    if (end && el === end.get(0)) return false;
-  });
-
-  const $ = cheerio.load("<div/>");
-  out.forEach((el) => $("div").append(el));
-  return $("div");
-}
-
-// Parse meals from the slice
-function extractMeals(slice: any): { date?: string; meals: Meal[] } {
-  let date: string | undefined;
-
-  const maybeDate = slice.find("small, .date, time").first().text().trim();
-  if (maybeDate) date = maybeDate;
-
-  const meals: Meal[] = [];
-
-  // Tables
-  slice.find("table").each((_i: number, table: any) => {
-    const $t = cheerio.load(table)("table");
-    const ths = $t
-      .find("th")
-      .map((_j: number, th: any) => cheerio.load(th)("th").text().trim())
-      .get();
-    const items = $t
-      .find("td,li")
-      .map((_j: number, td: any) => cheerio.load(td)(td).text().trim())
-      .get()
-      .filter(Boolean);
-
-    if (items.length) {
-      meals.push({ label: ths.length ? ths.join(" • ") : "Menü", items });
-    }
-  });
-
-  // Headings + lists (e.g. "Öğle", "Akşam")
-  slice.find("h4,h5,strong,b").each((_i: number, h: any) => {
-    const label = cheerio.load(h)(h).text().trim();
-    if (!label) return;
-
-    const items: string[] = [];
-    let n = cheerio.load(h)(h).next();
-    for (let k = 0; k < 10 && n.length; k++) {
-      const tag = (n.get(0)?.tagName || "").toLowerCase();
-      if (tag === "ul" || tag === "ol") {
-        n.find("li").each((_l: number, li: any) => {
-          const t = cheerio.load(li)(li).text().trim();
-          if (t) items.push(t);
-        });
-        break;
-      }
-      if (tag === "p") {
-        const t = n.text().trim();
-        if (t) items.push(t);
-      }
-      n = n.next();
-    }
-    if (items.length) {
-      meals.push({ label, items });
-    }
-  });
-
-  // Fallback: any <li> items in the slice
-  if (!meals.length) {
-    const items = slice
-      .find("li")
-      .map((_i: number, li: any) => cheerio.load(li)(li).text().trim())
-      .get()
-      .filter(Boolean);
-    if (items.length) {
-      meals.push({ label: "Menü", items });
-    }
-  }
-
-  return { date, meals };
+  return { days };
 }
