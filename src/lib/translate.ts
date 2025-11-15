@@ -6,7 +6,6 @@ export async function translateTrToRu(texts: string[]): Promise<string[]> {
       const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=tr&tl=ru&dt=t&q=${encodeURIComponent(
         text
       )}`;
-
       const res = await fetch(url);
       const json = await res.json();
       const translated = json?.[0]?.[0]?.[0] || text;
