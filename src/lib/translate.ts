@@ -23,7 +23,7 @@ export async function translateTrToRu(texts: string[]): Promise<string[]> {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: Api-Key ${apiKey},
+        Authorization: `Api-Key ${apiKey}`,
       },
       body: JSON.stringify({
         sourceLanguageCode: "tr",
