@@ -25,6 +25,8 @@ export default async function MenuPage() {
       ruMap = new Map(uniqueTurkish.map((tr) => [tr, tr]));
     }
   }
+  console.log("🔤 uniqueTurkish", uniqueTurkish);
+  console.log("📘 translated ruMap", ruMap);
 
 
   return (
