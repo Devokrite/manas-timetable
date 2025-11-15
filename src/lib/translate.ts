@@ -1,21 +1,19 @@
-import translate from "google-translate-open-api";
-
 export async function translateTrToRu(texts: string[]): Promise<string[]> {
   const results: string[] = [];
 
   for (const text of texts) {
     try {
-      const res = await translate(text, {
-        tld: "com", // could also be "ru"
-        to: "ru",
-        from: "tr",
-      });
+      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=tr&tl=ru&dt=t&q=${encodeURIComponent(
+        text
+      )}`;
 
-      const translated = Array.isArray(res.data) ? res.data[0] : text;
+      const res = await fetch(url);
+      const json = await res.json();
+      const translated = json?.[0]?.[0]?.[0] || text;
       results.push(translated);
     } catch (e) {
       console.error("Translation failed:", e);
-      results.push(text); // fallback
+      results.push(text);
     }
   }
 
