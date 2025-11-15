@@ -1,5 +1,6 @@
 // src/lib/translate.ts
-import { GoogleTranslator } from "deep-translator";
+import translate from "@vitalets/google-translate-api";
+
 
 export async function translateTrToRu(texts: string[]): Promise<string[]> {
   const results: string[] = [];
