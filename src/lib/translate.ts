@@ -1,4 +1,5 @@
 export async function translateTrToRu(texts: string[]): Promise<string[]> {
+  console.log("🧠 translateTrToRu() called with:", texts);  // 👈 add this
   const results: string[] = [];
 
   for (const text of texts) {
