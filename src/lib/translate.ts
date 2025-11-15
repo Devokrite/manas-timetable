@@ -1,27 +1,21 @@
 // src/lib/translate.ts
+
 const API_URL =
   "https://translate.api.cloud.yandex.net/translate/v2/translate";
 
 /**
- * Simple in-memory cache so we don't spam the API
- * key: original Turkish string
- * value: Russian translation
+ * Batch translate Turkish -> Russian.
+ * Input:  ["Patates Musakka", "Maş Çorbası"]
+ * Output: ["Картофельная мусака", "Суп из маша"]
  */
-const cache = new Map<string, string>();
+export async function translateTrToRu(texts: string[]): Promise<string[]> {
+  const cleaned = texts.map((t) => t.trim()).filter(Boolean);
+  if (cleaned.length === 0) return texts;
 
-export async function translateTrToRu(text: string): Promise<string> {
-  const trimmed = text.trim();
-  if (!trimmed) return "";
-
-  // 1. Check cache
-  const cached = cache.get(trimmed);
-  if (cached) return cached;
-
-  // 2. Get API key from env (set in Vercel as YANDEX_TRANSLATE_API_KEY)
-  const apiKey = process.env.YANDEX_API_KEY;
+  const apiKey = process.env.YANDEX_TRANSLATE_API_KEY;
   if (!apiKey) {
-    // If no key configured, just return original text to avoid breaking the UI
-    return trimmed;
+    // no key configured => just return original texts
+    return texts;
   }
 
   try {
@@ -29,34 +23,32 @@ export async function translateTrToRu(text: string): Promise<string> {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Api-Key ${apiKey}`,
+        Authorization: Api-Key ${apiKey},
       },
       body: JSON.stringify({
         sourceLanguageCode: "tr",
         targetLanguageCode: "ru",
         format: "PLAIN_TEXT",
-        texts: [trimmed],
+        texts: cleaned,
       }),
     });
 
     if (!res.ok) {
       console.error("Yandex Translate error:", res.status, await res.text());
-      return trimmed;
+      return texts;
     }
 
     const data = (await res.json()) as {
       translations?: { text: string }[];
     };
 
-    const translated =
-      data.translations && data.translations[0]
-        ? data.translations[0].text
-        : trimmed;
+    if (!data.translations || data.translations.length !== cleaned.length) {
+      return texts;
+    }
 
-    cache.set(trimmed, translated);
-    return translated;
+    return data.translations.map((t) => t.text);
   } catch (err) {
     console.error("Yandex Translate request failed:", err);
-    return trimmed;
+    return texts;
   }
 }
