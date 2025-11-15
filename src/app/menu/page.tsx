@@ -1,4 +1,5 @@
 // src/app/menu/page.tsx
+import { translateTrToRu } from "@/lib/translate";
 import Image from "next/image";
 import Link from "next/link";
 import { fetchCafeteriaHtml, parseCafeteriaMenu } from "@/lib/menu";
@@ -8,6 +9,23 @@ export const dynamic = "force-dynamic";
 export default async function MenuPage() {
   const html = await fetchCafeteriaHtml();
   const days = parseCafeteriaMenu(html);
+    // --- Build a map: Turkish dish name -> Russian translation ---
+  const allMeals = days.flatMap((day) => day.meals);
+  const uniqueTurkish = Array.from(new Set(allMeals.map((m) => m.name)));
+
+  let ruMap = new Map<string, string>();
+
+  if (uniqueTurkish.length > 0) {
+    try {
+      const ruTexts = await translateTrToRu(uniqueTurkish);
+      ruMap = new Map(uniqueTurkish.map((tr, i) => [tr, ruTexts[i] ?? tr]));
+    } catch (e) {
+      console.error("Translation error", e);
+      // fall back to just Turkish
+      ruMap = new Map(uniqueTurkish.map((tr) => [tr, tr]));
+    }
+  }
+
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
@@ -56,22 +74,28 @@ export default async function MenuPage() {
                     </div>
                   </div>
 
-                  <ul className="space-y-1.5 text-sm">
-                    {day.meals.map((meal, idx) => (
-                      <li
-                        key={meal.name + idx}
-                        className="flex items-baseline gap-2 text-slate-200"
-                      >
-                        <span className="mt-[3px] h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                        <span>{meal.name}</span>
-                        {meal.calories && (
-                          <span className="text-[11px] text-slate-500">
-                            ({meal.calories} kcal)
-                          </span>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
+                  <ul className="space-y-1">
+                 {day.meals.map((meal) => {
+                  const ru = ruMap.get(meal.name);
+                  return (
+                    <li key={meal.name} className="flex flex-col text-sm text-slate-100">
+                    <span className="font-medium">
+                {meal.name}
+                {ru && ru !== meal.name && (
+                  <span className="ml-2 text-slate-400">
+                    · {ru}
+                  </span>
+                )}
+                </span>
+
+              <span className="text-xs text-slate-500">
+            {meal.calories ? `${meal.calories} kcal` : ""}
+        </span>
+      </li>
+    );
+  })}
+</ul>
+
                 </div>
 
                 {/* RIGHT: image grid – first 4 dishes */}
