@@ -90,7 +90,7 @@ export function parseCafeteriaMenu(html: string): CafeteriaDay[] {
 
     // === CALORIES ===
     if (tag === "h6") {
-      const calMatch = text.match(/(\d+)\s*(?:kcal|kalori)/i);
+      const calMatch = text.match(/Kalori:\s*(\d+)/i);
       if (calMatch && currentMeals.length > 0) {
         currentMeals[currentMeals.length - 1].calories = Number(calMatch[1]);
       }
