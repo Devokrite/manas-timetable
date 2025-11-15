@@ -1,27 +1,18 @@
-export async function translateToRU(text: string): Promise<string> {
-  const apiKey = process.env.YANDEX_API_KEY;
-  if (!apiKey) return text;
+// src/lib/translate.ts
+import translate from "@vitalets/google-translate-api";
 
-  try {
-    const response = await fetch(
-      "https://translate.api.cloud.yandex.net/translate/v2/translate",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Api-Key ${apiKey}`,
-        },
-        body: JSON.stringify({
-          targetLanguageCode: "ru",
-          texts: [text],
-        }),
-      }
-    );
+export async function translateTrToRu(texts: string[]): Promise<string[]> {
+  const results: string[] = [];
 
-    const data = await response.json();
-
-    return data.translations?.[0]?.text ?? text;
-  } catch (e) {
-    return text; // fallback if API fails
+  for (const text of texts) {
+    try {
+      const res = await translate(text, { from: "tr", to: "ru" });
+      results.push(res.text);
+    } catch (e) {
+      console.error("Translation failed:", e);
+      results.push(text); // fallback
+    }
   }
+
+  return results;
 }
