@@ -18,7 +18,7 @@ export async function translateTrToRu(text: string): Promise<string> {
   if (cached) return cached;
 
   // 2. Get API key from env (set in Vercel as YANDEX_TRANSLATE_API_KEY)
-  const apiKey = process.env.YANDEX_TRANSLATE_API_KEY;
+  const apiKey = process.env.YANDEX_API_KEY;
   if (!apiKey) {
     // If no key configured, just return original text to avoid breaking the UI
     return trimmed;
