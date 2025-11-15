@@ -15,7 +15,6 @@ export type CafeteriaDay = {
 
 export async function fetchCafeteriaHtml(): Promise<string> {
   const res = await fetch("https://beslenme.manas.edu.kg/menu", {
-    // make sure we always hit the real page (no cache)
     cache: "no-store",
   });
   if (!res.ok) {
@@ -34,18 +33,20 @@ export function parseCafeteriaMenu(html: string): CafeteriaDay[] {
   let lastImageUrl: string | null = null;
 
   /**
-   * The HTML pattern is basically:
+   * Pattern we’re parsing:
+   *
    *   h5  -> "13.11.2025 Perşembe"   (date + weekday)
    *   img -> photo for first dish
-   *   h5  -> "Bakla Çorbası"        (dish name)
-   *   h6  -> "Kalori: 258"          (calories)
+   *   h5  -> "Bakla Çorbası"         (dish name)
+   *   h6  -> "Kalori: 258"           (calories)
    *   img -> photo for second dish
    *   h5  -> second dish name
    *   h6  -> ...
-   * and so on, then another date h5 when the next day starts.
+   *
+   * then another h5 with date for the next day, etc.
    */
 
-  $("h5, h6, img").each((_i, el) => {
+  $("h5, h6, img").each((_i: number, el: cheerio.AnyNode) => {
     const tag = (el as any).tagName?.toLowerCase?.() ?? "";
     const text = $(el).text().trim();
 
@@ -53,7 +54,6 @@ export function parseCafeteriaMenu(html: string): CafeteriaDay[] {
       const src = $(el).attr("src") || "";
       if (!src) return;
 
-      // Images live on info.manas.edu.kg; sometimes src may be relative, so normalise
       const absolute = src.startsWith("http")
         ? src
         : `https://info.manas.edu.kg${src}`;
@@ -62,7 +62,6 @@ export function parseCafeteriaMenu(html: string): CafeteriaDay[] {
       return;
     }
 
-    // from here on we handle h5 / h6
     if (!text) return;
 
     if (tag === "h5") {
@@ -72,11 +71,12 @@ export function parseCafeteriaMenu(html: string): CafeteriaDay[] {
         // This h5 is a *day header* (date + weekday)
         const [, date, weekday] = dateMatch;
 
-        // push previous day first
-        if (currentDay) {
-          currentDay.meals = currentMeals;
-          if (currentDay.meals.length) {
-            days.push(currentDay);
+        // push previous day
+        if (currentDay !== null) {
+          const day: CafeteriaDay = currentDay;
+          day.meals = currentMeals;
+          if (day.meals.length) {
+            days.push(day);
           }
         }
 
@@ -89,37 +89,40 @@ export function parseCafeteriaMenu(html: string): CafeteriaDay[] {
         lastImageUrl = null;
       } else {
         // This h5 is a *dish name*
-        if (!currentDay) {
-          // if somehow no day started yet, ignore
+        if (currentDay === null) {
           return;
         }
 
         const meal: CafeteriaMeal = {
           name: text,
-          imageUrl: lastImageUrl, // whatever img we saw right before this
+          imageUrl: lastImageUrl,
         };
         currentMeals.push(meal);
-        lastImageUrl = null; // don't leak this image to the next dish
+        lastImageUrl = null;
       }
     } else if (tag === "h6") {
       // calories line: "Kalori: 258"
       const calMatch = text.match(/(\d+)\s*kcal/i);
       const calories = calMatch ? Number(calMatch[1]) : undefined;
 
-      if (currentMeals.length && calories && !currentMeals[currentMeals.length - 1].calories) {
+      if (
+        currentMeals.length &&
+        typeof calories === "number" &&
+        !currentMeals[currentMeals.length - 1].calories
+      ) {
         currentMeals[currentMeals.length - 1].calories = calories;
       }
     }
   });
 
-  // push the last day
-  if (currentDay) {
-    currentDay.meals = currentMeals;
-    if (currentDay.meals.length) {
-      days.push(currentDay);
+  // push last day
+  if (currentDay !== null) {
+    const day: CafeteriaDay = currentDay;
+    day.meals = currentMeals;
+    if (day.meals.length) {
+      days.push(day);
     }
   }
 
-  // just in case there is junk on the page
   return days.filter((d) => d.meals.length > 0);
 }
