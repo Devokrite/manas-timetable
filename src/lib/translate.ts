@@ -1,4 +1,3 @@
-// src/lib/translate.ts
 import translate from "@vitalets/google-translate-api";
 
 export async function translateTrToRu(texts: string[]): Promise<string[]> {
