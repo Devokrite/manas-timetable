@@ -12,7 +12,7 @@ export async function translateTrToRu(texts: string[]): Promise<string[]> {
   const cleaned = texts.map((t) => t.trim()).filter(Boolean);
   if (cleaned.length === 0) return texts;
 
-  const apiKey = process.env.YANDEX_TRANSLATE_API_KEY;
+  const apiKey = process.env.YANDEX_API_KEY;
   if (!apiKey) {
     // no key configured => just return original texts
     return texts;
