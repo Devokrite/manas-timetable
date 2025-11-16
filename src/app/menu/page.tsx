@@ -35,10 +35,13 @@ export default async function MenuPage() {
 
     {/* Collapsible sidebar on mobile */}
     <div className="md:hidden block p-4">
-      <details className="bg-slate-800 rounded-md">
-        <summary className="p-2 text-sm font-medium cursor-pointer">☰ Menu</summary>
-        <Sidebar />
-      </details>
+      <details className="bg-slate-800 rounded-md overflow-hidden">
+  <summary className="p-2 text-sm font-medium cursor-pointer">☰ Menu</summary>
+  <div className="collapsible-content">
+    <Sidebar />
+  </div>
+</details>
+
     </div>
 
     <main className="flex-1 bg-slate-950 text-slate-50">
