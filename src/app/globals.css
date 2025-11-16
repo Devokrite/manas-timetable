@@ -60,3 +60,13 @@ body {
 .badge.green { background-color: #165B3A; }
 .badge.orange{ background-color: #7A3A0B; }
 .badge.cyan  { background-color: #0C5060; }
+.collapsible-content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-in-out;
+}
+
+details[open] .collapsible-content {
+  max-height: 1000px; /* large enough for full sidebar */
+}
+
