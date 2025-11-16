@@ -1,5 +1,6 @@
 // src/app/menu/page.tsx
 import { translateTrToRu } from "@/lib/translate";
+import Sidebar from "@/components/Sidebar"; // adjust path if needed
 import Image from "next/image";
 import Link from "next/link";
 import { fetchCafeteriaHtml, parseCafeteriaMenu } from "@/lib/menu";
@@ -30,8 +31,10 @@ export default async function MenuPage() {
 
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50">
-      <div className="mx-auto max-w-5xl px-4 py-8">
+    <div className="flex">
+      <Sidebar />
+        <main className="flex-1 bg-slate-950 text-slate-50">
+          <div className="mx-auto max-w-5xl px-4 py-8">
         <div className="mb-4 flex items-center justify-between">
           <Link
             href="/select"
