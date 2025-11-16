@@ -18,7 +18,7 @@ export default function Sidebar() {
 
   return (
     <aside className="w-[260px] shrink-0 bg-slate-950/40 border-r border-slate-800/70 p-4 md:p-5 sticky top-0 h-dvh flex flex-col">
-      <div className="mb-4 px-1">
+      <div className="mb-4 px-1 space-y-2">
         <div className="text-xs uppercase tracking-wider text-slate-400 mb-2">
           Timetables
         </div>
