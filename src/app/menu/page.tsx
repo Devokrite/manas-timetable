@@ -27,9 +27,21 @@ export default async function MenuPage() {
   }
 
   return (
-    <div className="flex">
+  <div className="flex">
+    {/* Sidebar for desktop */}
+    <div className="hidden md:block">
       <Sidebar />
-      <main className="flex-1 bg-slate-950 text-slate-50">
+    </div>
+
+    {/* Collapsible sidebar on mobile */}
+    <div className="md:hidden block p-4">
+      <details className="bg-slate-800 rounded-md">
+        <summary className="p-2 text-sm font-medium cursor-pointer">☰ Menu</summary>
+        <Sidebar />
+      </details>
+    </div>
+
+    <main className="flex-1 bg-slate-950 text-slate-50">
         <div className="mx-auto max-w-5xl px-4 py-8">
           <span className="text-[11px] text-slate-400 mb-2 block">
             Updated weekly · Data from{" "}
