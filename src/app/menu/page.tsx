@@ -35,15 +35,18 @@ export default async function MenuPage() {
 
     {/* Collapsible sidebar on mobile */}
     <div className="md:hidden block px-4 pt-4">
-  <details className="rounded-xl bg-slate-800/80 backdrop-blur-md shadow-md">
-    <summary className="cursor-pointer select-none p-3 font-medium text-sm text-white flex items-center gap-2">
-      <span className="text-lg">☰</span> <span>Menu</span>
+  <details className="bg-slate-900/90 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden ring-1 ring-slate-700">
+    <summary className="cursor-pointer select-none px-4 py-3 text-base font-medium text-white flex items-center justify-between">
+      <span className="text-xl">☰</span>
+      <span>Open Menu</span>
     </summary>
-    <div className="collapsible-content px-3 pb-3 pt-1">
+
+    <div className="collapsible-content px-4 py-4 space-y-4">
       <Sidebar />
     </div>
   </details>
 </div>
+
 
 
     <main className="flex-1 bg-slate-950 text-slate-50">
