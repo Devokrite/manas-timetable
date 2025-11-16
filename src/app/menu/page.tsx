@@ -38,7 +38,6 @@ export default async function MenuPage() {
   <details className="bg-slate-900/90 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden ring-1 ring-slate-700">
     <summary className="cursor-pointer select-none px-4 py-3 text-base font-medium text-white flex items-center justify-between">
       <span className="text-xl">☰</span>
-      <span>Open Menu</span>
     </summary>
 
     <div className="collapsible-content px-4 py-4 space-y-4">
