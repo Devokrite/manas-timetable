@@ -49,7 +49,7 @@ export default async function MenuPage() {
 
 
     <main className="flex-1 bg-slate-950 text-slate-50">
-        <div className="mx-auto max-w-5xl px-4 py-8">
+        <div className="mx-auto w-full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
           <span className="text-[11px] text-slate-400 mb-2 block">
             Updated weekly · Data from{" "}
             <a
