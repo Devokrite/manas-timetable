@@ -74,7 +74,7 @@ export default async function MenuPage() {
                 <div className="flex flex-col gap-4 p-4 sm:p-5 md:flex-row md:items-stretch">
                   <div className="flex-1">
                     <div className="mb-3 flex items-baseline gap-3">
-                      <p className="text-sm font-semibold text-slate-100">
+                      <p className="text-base font-semibold text-slate-100">
                         {day.weekday}
                       </p>
                       <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">
@@ -85,7 +85,7 @@ export default async function MenuPage() {
                       </div>
                     </div>
 
-                    <ul className="space-y-1">
+                    <ul className="space-y-3">
                       {day.meals.map((meal) => {
                         const ru = ruMap.get(meal.name);
                         return (
@@ -110,7 +110,7 @@ export default async function MenuPage() {
                   </div>
 
                   <div className="w-full shrink-0 md:w-[360px] lg:w-[420px]">
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-4 sm:gap-5">
                       {day.meals.slice(0, 4).map((meal, idx) => (
                         <div
                           key={meal.name + idx}
