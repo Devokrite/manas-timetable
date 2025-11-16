@@ -27,25 +27,25 @@ export default async function MenuPage() {
   }
 
   return (
-  <div className="flex">
-    {/* Sidebar for desktop */}
-    <div className="hidden md:block">
-      <Sidebar />
-    </div>
+    <div className="flex">
+      {/* Sidebar for desktop */}
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
 
-    {/* Collapsible sidebar on mobile */}
-    <div className="md:hidden block px-4 pt-4">
-      <details className="bg-slate-900/90 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden ring-1 ring-slate-700">
-        <summary className="cursor-pointer select-none px-4 py-3 text-base font-medium text-white flex items-center justify-between">
-          <span className="text-xl">☰</span>
-        </summary>
-        <div className="collapsible-content px-4 py-4 space-y-4">
-          <Sidebar />
-        </div>
-      </details>
-    </div>
+      {/* Collapsible sidebar on mobile */}
+      <div className="md:hidden block px-4 pt-4">
+        <details className="bg-slate-900/90 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden ring-1 ring-slate-700">
+          <summary className="cursor-pointer select-none px-4 py-3 text-base font-medium text-white flex items-center justify-between">
+            <span className="text-xl">☰</span>
+          </summary>
+          <div className="collapsible-content px-4 py-4 space-y-4">
+            <Sidebar />
+          </div>
+        </details>
+      </div>
 
-    <main className="flex-1 bg-slate-950 text-slate-50">
+      <main className="flex-1 bg-slate-950 text-slate-50">
         <div className="mx-auto w-full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
           <span className="text-[11px] text-slate-400 mb-2 block">
             Updated weekly · Data from{" "}
@@ -68,58 +68,35 @@ export default async function MenuPage() {
                 key={day.date + day.weekday}
                 className="rounded-3xl bg-slate-900/70 ring-1 ring-slate-800/70 shadow-[0_18px_60px_rgba(0,0,0,0.6)] overflow-hidden"
               >
-                <div className="flex flex-col gap-4 p-4 sm:p-5 md:flex-row md:items-stretch">
-                  <div className="flex-1">
-                    <div className="mb-3 flex items-baseline gap-3">
-                      <p className="text-base font-semibold text-slate-100">
-                        {day.weekday}
-                      </p>
-                      <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">
-                        {day.date}
-                      </p>
-                      <div className="ml-auto text-[10px] font-medium text-emerald-400">
-                        {day.meals.length} DISHES
-                      </div>
+                <div className="p-4 sm:p-5">
+                  <div className="mb-3 flex items-baseline gap-3">
+                    <p className="text-base font-semibold text-slate-100">
+                      {day.weekday}
+                    </p>
+                    <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">
+                      {day.date}
+                    </p>
+                    <div className="ml-auto text-[10px] font-medium text-emerald-400">
+                      {day.meals.length} DISHES
                     </div>
-
-                    <ul className="space-y-3">
-                      {day.meals.map((meal) => {
-                        const ru = ruMap.get(meal.name);
-                        return (
-                          <li
-                            key={meal.name}
-                            className="flex flex-col text-sm text-slate-100"
-                          >
-                            <span className="font-medium">
-                              {meal.name}
-                              {ru && ru !== meal.name && (
-                                <span className="ml-2 text-slate-400">· {ru}</span>
-                              )}
-                            </span>
-                            <span className="text-xs text-slate-500">
-                              {meal.calories ? `${meal.calories} kcal` : ""}
-                            </span>
-                          </li>
-                        );
-                      })}
-                    </ul>
                   </div>
 
-                  <div className="w-full shrink-0 md:w-[360px] lg:w-[420px]">
-                    <div className="grid grid-cols-2 gap-4 sm:gap-5">
-                      {day.meals.slice(0, 4).map((meal, idx) => (
+                  <div className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-4">
+                    {day.meals.slice(0, 4).map((meal, idx) => {
+                      const ru = ruMap.get(meal.name);
+                      return (
                         <div
                           key={meal.name + idx}
-                          className="flex flex-col items-center overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/60"
+                          className="rounded-2xl border border-slate-800 bg-slate-950/60 overflow-hidden"
                         >
-                          <div className="relative h-28 w-full">
+                          <div className="relative h-28">
                             {meal.imageUrl ? (
                               <Image
                                 src={meal.imageUrl}
                                 alt={meal.name}
                                 fill
                                 sizes="180px"
-                                className="object-cover rounded-t-2xl"
+                                className="object-cover"
                               />
                             ) : (
                               <div className="flex h-full items-center justify-center text-[10px] text-slate-500">
@@ -127,23 +104,15 @@ export default async function MenuPage() {
                               </div>
                             )}
                           </div>
-
-                          <div className="p-2 text-center text-sm text-slate-100 font-medium">
-                            <div>
-                              {meal.name}
-                              {ruMap.get(meal.name) && ruMap.get(meal.name) !== meal.name && (
-                                <span className="text-slate-400"> · {ruMap.get(meal.name)}</span>
-                              )}
+                          <div className="p-2 text-xs text-slate-100 space-y-1">
+                            <div className="font-medium">
+                              {meal.name} {ru && ru !== meal.name && <span className="text-slate-400">· {ru}</span>}
                             </div>
-                            {meal.calories && (
-                              <div className="text-xs text-slate-500 mt-0.5">
-                                {meal.calories} kcal
-                              </div>
-                            )}
+                            {meal.calories && <div className="text-emerald-400">{meal.calories} kcal</div>}
                           </div>
                         </div>
-                      ))}
-                    </div>
+                      );
+                    })}
                   </div>
                 </div>
               </section>
