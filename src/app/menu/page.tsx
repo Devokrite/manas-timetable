@@ -35,18 +35,15 @@ export default async function MenuPage() {
 
     {/* Collapsible sidebar on mobile */}
     <div className="md:hidden block px-4 pt-4">
-  <details className="bg-slate-900/90 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden ring-1 ring-slate-700">
-    <summary className="cursor-pointer select-none px-4 py-3 text-base font-medium text-white flex items-center justify-between">
-      <span className="text-xl">☰</span>
-    </summary>
-
-    <div className="collapsible-content px-4 py-4 space-y-4">
-      <Sidebar />
+      <details className="bg-slate-900/90 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden ring-1 ring-slate-700">
+        <summary className="cursor-pointer select-none px-4 py-3 text-base font-medium text-white flex items-center justify-between">
+          <span className="text-xl">☰</span>
+        </summary>
+        <div className="collapsible-content px-4 py-4 space-y-4">
+          <Sidebar />
+        </div>
+      </details>
     </div>
-  </details>
-</div>
-
-
 
     <main className="flex-1 bg-slate-950 text-slate-50">
         <div className="mx-auto w-full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
@@ -99,7 +96,6 @@ export default async function MenuPage() {
                                 <span className="ml-2 text-slate-400">· {ru}</span>
                               )}
                             </span>
-
                             <span className="text-xs text-slate-500">
                               {meal.calories ? `${meal.calories} kcal` : ""}
                             </span>
@@ -114,30 +110,35 @@ export default async function MenuPage() {
                       {day.meals.slice(0, 4).map((meal, idx) => (
                         <div
                           key={meal.name + idx}
-                          className="relative h-28 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/60"
+                          className="flex flex-col items-center overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/60"
                         >
-                          {meal.imageUrl ? (
-                            <Image
-                              src={meal.imageUrl}
-                              alt={meal.name}
-                              fill
-                              sizes="180px"
-                              className="object-cover"
-                            />
-                          ) : (
-                            <div className="flex h-full items-center justify-center text-[10px] text-slate-500">
-                              no image
+                          <div className="relative h-28 w-full">
+                            {meal.imageUrl ? (
+                              <Image
+                                src={meal.imageUrl}
+                                alt={meal.name}
+                                fill
+                                sizes="180px"
+                                className="object-cover rounded-t-2xl"
+                              />
+                            ) : (
+                              <div className="flex h-full items-center justify-center text-[10px] text-slate-500">
+                                no image
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="p-2 text-center text-sm text-slate-100 font-medium">
+                            <div>
+                              {meal.name}
+                              {ruMap.get(meal.name) && ruMap.get(meal.name) !== meal.name && (
+                                <span className="text-slate-400"> · {ruMap.get(meal.name)}</span>
+                              )}
                             </div>
-                          )}
-
-                          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-
-                          <div className="absolute inset-x-2 bottom-2 flex items-center justify-between gap-2 rounded-full bg-black/60 px-2 py-1 text-[10px] font-medium text-slate-50 backdrop-blur-sm">
-                            <span className="truncate">{meal.name}</span>
                             {meal.calories && (
-                              <span className="shrink-0 text-[9px] text-emerald-300/90">
+                              <div className="text-xs text-slate-500 mt-0.5">
                                 {meal.calories} kcal
-                              </span>
+                              </div>
                             )}
                           </div>
                         </div>
