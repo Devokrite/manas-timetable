@@ -1,0 +1,126 @@
+*** Begin Patch
+*** Update File: src/components/Sidebar.tsx
+@@
+   const onMenu = pathname?.startsWith("/menu");
++  // Determine if the current page is within the flashcards section
++  const onFlashcards = pathname?.startsWith("/flashcards");
+@@
+       <div className="mt-6 border-t border-slate-800/60 pt-4 px-1 space-y-2">
+         <Link
+           href="/menu"
+           className={cn("nav-btn", onMenu && "nav-btn--active")}
+         >
+           🍽️ Cafeteria Menu
+         </Link>
++
++        {/* Flashcards link */}
++        <Link
++          href="/flashcards"
++          className={cn("nav-btn", onFlashcards && "nav-btn--active")}
++        >
++          📚 Flashcards
++        </Link>
+       </div>
+*** End Patch
+
+*** Begin Patch
+*** Add File: src/app/flashcards/page.tsx
++import Sidebar from "@/components/Sidebar";
++import Link from "next/link";
++
++// Force dynamic rendering so that the page always updates on navigation
++export const dynamic = "force-dynamic";
++
++/**
++ * Top-level flashcards page.  Presents a list of available subjects for which
++ * flashcards can be generated.  Each link navigates to a dedicated subject
++ * page where users will eventually be able to upload course materials and
++ * generate flashcards.
++ */
++export default function FlashcardsPage() {
++  return (
++    <div className="flex">
++      <div className="hidden md:block">
++        <Sidebar />
++      </div>
++      <div className="md:hidden block px-4 pt-4">
++        <details className="bg-slate-900/90 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden ring-1 ring-slate-700">
++          <summary className="cursor-pointer select-none px-4 py-3 text-base font-medium text-white flex items-center justify-between">
++            <span className="text-xl">☰</span>
++          </summary>
++          <div className="collapsible-content px-4 py-4 space-y-4">
++            <Sidebar />
++          </div>
++        </details>
++      </div>
++      <main className="flex-1 bg-slate-950 text-slate-50">
++        <div className="mx-auto w-full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
++          <h1 className="text-2xl font-semibold tracking-tight mb-1">Flashcards</h1>
++          <p className="text-slate-400 text-sm mb-4">
++            Select a subject to start studying.
++          </p>
++          <div className="space-y-3">
++            <Link href="/flashcards/economics" className="nav-btn">
++              📈 Economics
++            </Link>
++            <Link href="/flashcards/accounting" className="nav-btn">
++              📊 Accounting
++            </Link>
++            <Link href="/flashcards/management" className="nav-btn">
++              🧑‍💼 Management
++            </Link>
++          </div>
++        </div>
++      </main>
++    </div>
++  );
++}
+*** End Patch
+
+*** Begin Patch
+*** Add File: src/app/flashcards/[subject]/page.tsx
++import Sidebar from "@/components/Sidebar";
++
++interface PageProps {
++  params: {
++    subject: string;
++  };
++}
++
++/**
++ * Dynamic flashcards subject page.  Displays a heading for the selected
++ * subject and invites the user to upload course materials.  Future work
++ * could include parsing uploaded files to automatically generate flashcards.
++ */
++export default function FlashcardsSubjectPage({ params }: PageProps) {
++  const { subject } = params;
++  const title = subject.charAt(0).toUpperCase() + subject.slice(1);
++  return (
++    <div className="flex">
++      <div className="hidden md:block">
++        <Sidebar />
++      </div>
++      <div className="md:hidden block px-4 pt-4">
++        <details className="bg-slate-900/90 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden ring-1 ring-slate-700">
++          <summary className="cursor-pointer select-none px-4 py-3 text-base font-medium text-white flex items-center justify-between">
++            <span className="text-xl">☰</span>
++          </summary>
++          <div className="collapsible-content px-4 py-4 space-y-4">
++            <Sidebar />
++          </div>
++        </details>
++      </div>
++      <main className="flex-1 bg-slate-950 text-slate-50">
++        <div className="mx-auto w-full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
++          <h1 className="text-2xl font-semibold tracking-tight mb-1">
++            {title} Flashcards
++          </h1>
++          <p className="text-slate-400 text-sm">
++            Upload your lessons or presentations to generate flashcards for {title}.
++          </p>
++        </div>
++      </main>
++    </div>
++  );
++}
+*** End Patch
