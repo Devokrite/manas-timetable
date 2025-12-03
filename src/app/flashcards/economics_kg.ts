@@ -1,11 +1,11 @@
-export type Flashcard = {
+export type EconomicsFlashcard = {
   id: string;
   topic: string;
   question: string;
   answer: string;
 };
 
-export const economicsKgFlashcards: Flashcard[] = [
+export const economicsKgFlashcards: EconomicsFlashcard[] = [
   // --------------------- БӨЛҮМ 1: ЖАЛПЫ ТҮШҮНҮКТӨР ---------------------
   {
     id: "econ-base-1",
