@@ -1,5 +1,5 @@
 import Sidebar from "@/components/Sidebar";
-import { economicsKgFlashcards, Flashcard } from "@/flashcards/economics_kg";
+import { economicsKgFlashcards } from "@/flashcards/economics_kg";
 
 interface PageProps {
   params: { subject: string };
@@ -16,8 +16,8 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
 
   const title = titleMap[subject] ?? subject;
 
-  // ✅ Явно указываем тип
-  const flashcards: Flashcard[] =
+  // TypeScript сам понимает тип из economicsKgFlashcards
+  const flashcards =
     subject === "economics" ? economicsKgFlashcards : [];
 
   return (
@@ -40,8 +40,10 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
       </div>
 
       <main className="flex-1 bg-slate-950 text-slate-50">
-        <div className="mx-auto w/full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
-          <h1 className="text-2xl font-semibold">{title} — Флэшкарталар</h1>
+        <div className="mx-auto w-full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
+          <h1 className="text-2xl font-semibold">
+            {title} — Флэшкарталар
+          </h1>
 
           {flashcards.length === 0 ? (
             <p className="text-slate-400">
