@@ -49,4 +49,22 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
               материалдарын жиберсеңиз — түзүп берем.
             </p>
           ) : (
-            <div classN
+            <div className="space-y-4">
+              {flashcards.map((card) => (
+                <details
+                  key={card.id}
+                  className="bg-slate-900 border border-slate-700 rounded-xl p-4"
+                >
+                  <summary className="cursor-pointer text-lg font-medium text-emerald-400">
+                    {card.question}
+                  </summary>
+                  <p className="mt-2 text-slate-200">{card.answer}</p>
+                </details>
+              ))}
+            </div>
+          )}
+        </div>
+      </main>
+    </div>
+  );
+}
