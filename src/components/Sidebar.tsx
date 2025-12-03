@@ -15,6 +15,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const activeId = pathname?.match(/\/departments\/(\d+)/)?.[1];
   const onMenu = pathname?.startsWith("/menu");
+  const onFlashcards = pathname?.startsWith("/flashcards");
 
   return (
     <aside className="w-[260px] shrink-0 bg-slate-950/40 border-r border-slate-800/70 p-4 md:p-5 sticky top-0 h-dvh flex flex-col">
@@ -43,6 +44,13 @@ export default function Sidebar() {
           className={cn("nav-btn", onMenu && "nav-btn--active")}
         >
           🍽️ Cafeteria Menu
+        </Link>
+
+        <Link
+          href="/flashcards"
+          className={cn("nav-btn", onFlashcards && "nav-btn--active")}
+        >
+          📚 Flashcards
         </Link>
       </div>
 
