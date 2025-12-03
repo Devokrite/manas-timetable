@@ -1,5 +1,5 @@
 import Sidebar from "@/components/Sidebar";
-import { economicsKgFlashcards } from "@/flashcards/economics_kg";
+import { economicsKgFlashcards, Flashcard } from "@/flashcards/economics_kg";
 
 interface PageProps {
   params: { subject: string };
@@ -16,11 +16,9 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
 
   const title = titleMap[subject] ?? subject;
 
-  let flashcards = [];
-
-  if (subject === "economics") {
-    flashcards = economicsKgFlashcards;
-  }
+  // ✅ Явно указываем тип
+  const flashcards: Flashcard[] =
+    subject === "economics" ? economicsKgFlashcards : [];
 
   return (
     <div className="flex">
@@ -42,7 +40,7 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
       </div>
 
       <main className="flex-1 bg-slate-950 text-slate-50">
-        <div className="mx-auto w-full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
+        <div className="mx-auto w/full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
           <h1 className="text-2xl font-semibold">{title} — Флэшкарталар</h1>
 
           {flashcards.length === 0 ? (
@@ -51,22 +49,4 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
               материалдарын жиберсеңиз — түзүп берем.
             </p>
           ) : (
-            <div className="space-y-4">
-              {flashcards.map((card) => (
-                <details
-                  key={card.id}
-                  className="bg-slate-900 border border-slate-700 rounded-xl p-4"
-                >
-                  <summary className="cursor-pointer text-lg font-medium text-emerald-400">
-                    {card.question}
-                  </summary>
-                  <p className="mt-2 text-slate-200">{card.answer}</p>
-                </details>
-              ))}
-            </div>
-          )}
-        </div>
-      </main>
-    </div>
-  );
-}
+            <div classN
