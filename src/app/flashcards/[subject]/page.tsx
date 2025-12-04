@@ -8,15 +8,15 @@ interface PageProps {
 export default function FlashcardsSubjectPage({ params }: PageProps) {
   const { subject } = params;
 
+  // Title mapping
   const titleMap: Record<string, string> = {
     economics: "Экономика",
     accounting: "Бухгалтердик эсеп",
     management: "Менеджмент",
   };
-
   const title = titleMap[subject] ?? subject;
 
-  // TypeScript сам понимает тип из economicsKgFlashcards
+  // Load Kyrgyz flashcards for economics only
   const flashcards =
     subject === "economics" ? economicsKgFlashcards : [];
 
@@ -47,8 +47,8 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
 
           {flashcards.length === 0 ? (
             <p className="text-slate-400">
-              Бул предмет үчүн флэшкарталар азырынча кошула элек. Сабак
-              материалдарын жиберсеңиз — түзүп берем.
+              Бул предмет үчүн флэшкарталар азырынча кошула элек.
+              Сабак материалдарын жиберсеңиз — түзүп берем.
             </p>
           ) : (
             <div className="space-y-4">
