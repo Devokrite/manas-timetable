@@ -2,9 +2,9 @@ import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
 
 const SUBJECTS = [
-  { id: "economics", label: "Economics" },
-  { id: "accounting", label: "Accounting" },
-  { id: "management", label: "Management" },
+  { id: "economics", label: "Экономика" },
+  { id: "accounting", label: "Бухгалтердик эсеп" },
+  { id: "management", label: "Менеджмент" },
 ];
 
 export default function FlashcardsPage() {
@@ -31,8 +31,8 @@ export default function FlashcardsPage() {
         <div className="mx-auto w-full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
           <h1 className="text-2xl font-semibold tracking-tight">Flashcards</h1>
           <p className="text-sm text-slate-300">
-            Choose a subject. Later we&apos;ll generate flashcards from your
-            lessons and presentations.
+            Choose a subject. Later we’ll generate flashcards from your lessons
+            and presentations.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
