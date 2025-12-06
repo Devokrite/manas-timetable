@@ -15,18 +15,14 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
   };
   const title = titleMap[subject] ?? subject;
 
-  // Кардтар: азырынча экономиканын эле
   const flashcards =
     subject === "economics" ? economicsKgFlashcards : [];
 
   return (
     <div className="flex">
-      {/* Sidebar for desktop */}
       <div className="hidden md:block">
         <Sidebar />
       </div>
-
-      {/* Mobile sidebar */}
       <div className="md:hidden block px-4 pt-4">
         <details className="bg-slate-900/90 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden ring-1 ring-slate-700">
           <summary className="cursor-pointer select-none px-4 py-3 text-base font-medium text-white flex items-center justify-between">
@@ -37,24 +33,15 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
           </div>
         </details>
       </div>
-
       <main className="flex-1 bg-slate-950 text-slate-50">
         <div className="mx-auto w-full max-w-3xl px-6 sm:px-8 py-6 space-y-6">
           <h1 className="text-2xl font-semibold">
             {title} — Флэшкарталар
           </h1>
-
-          {/* 🔍 DEBUG INFO */}
-          <div className="text-xs text-slate-500 space-y-1 border border-slate-800 rounded-lg p-3">
-            <div>subject param: <b>{subject}</b></div>
-            <div>economicsKgFlashcards length: <b>{economicsKgFlashcards.length}</b></div>
-            <div>flashcards length: <b>{flashcards.length}</b></div>
-          </div>
-
           {flashcards.length === 0 ? (
             <p className="text-slate-400">
               Бул предмет үчүн флэшкарталар азырынча кошула элек.
-              Сабак материалдарын жиберсеңиз — түзүп берем.
+              Сабак материалдарын жиберсеңиз — түзүп берем.
             </p>
           ) : (
             <div className="space-y-4">
