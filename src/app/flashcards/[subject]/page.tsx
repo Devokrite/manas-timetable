@@ -8,7 +8,6 @@ interface PageProps {
 export default function FlashcardsSubjectPage({ params }: PageProps) {
   const { subject } = params;
 
-  // Title mapping
   const titleMap: Record<string, string> = {
     economics: "Экономика",
     accounting: "Бухгалтердик эсеп",
@@ -16,13 +15,13 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
   };
   const title = titleMap[subject] ?? subject;
 
-  // Load Kyrgyz flashcards for economics only
+  // Кардтар: азырынча экономиканын эле
   const flashcards =
     subject === "economics" ? economicsKgFlashcards : [];
 
   return (
     <div className="flex">
-      {/* Desktop sidebar */}
+      {/* Sidebar for desktop */}
       <div className="hidden md:block">
         <Sidebar />
       </div>
@@ -44,6 +43,13 @@ export default function FlashcardsSubjectPage({ params }: PageProps) {
           <h1 className="text-2xl font-semibold">
             {title} — Флэшкарталар
           </h1>
+
+          {/* 🔍 DEBUG INFO */}
+          <div className="text-xs text-slate-500 space-y-1 border border-slate-800 rounded-lg p-3">
+            <div>subject param: <b>{subject}</b></div>
+            <div>economicsKgFlashcards length: <b>{economicsKgFlashcards.length}</b></div>
+            <div>flashcards length: <b>{flashcards.length}</b></div>
+          </div>
 
           {flashcards.length === 0 ? (
             <p className="text-slate-400">
