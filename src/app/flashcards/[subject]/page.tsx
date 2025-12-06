@@ -29,7 +29,7 @@ interface PageProps {
   params: { subject: string };
 }
 
-export default function FlashcardsSubjectPage({ params }: PageProps) {
+export default function FlashcardsSubjectPage({ params }: SubjectPageProps) {
   const { subject } = params;
   // Pick flashcards for the current subject; empty array if not found
   const flashcards = flashcardsMap[subject] ?? [];
