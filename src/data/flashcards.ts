@@ -519,4 +519,387 @@ export const SUBJECTS: Record<string, {
       },
     },
   },
+  man: {
+    name: 'Менеджмент (Introduction to Business)',
+    chapters: {
+      man_ch1: {
+        name: 'Ch 1. What is a Business?',
+        flashcards: [
+          {
+            q: 'What is the definition of a "Business"?',
+            a: 'An organized group of people involved in professional, commercial, or industrial activities to produce goods or services for profit.'
+          },
+          {
+            q: 'What are the main functions of a business?',
+            a: '1. Management\n2. Operations\n3. Marketing/Sales\n4. Finance\n5. Research & Development.'
+          },
+          {
+            q: 'What is a "Business Model"?',
+            a: 'A plan that describes how a company creates, delivers, and captures value (e.g., Subscription, Freemium, Direct Sales).'
+          },
+          {
+            q: 'What is a "Non-Profit Organization"?',
+            a: 'A business entity focused on a social cause rather than profit. Any revenue generated is reinvested into the organization.'
+          },
+          {
+            q: 'Who are "Internal Stakeholders"?',
+            a: 'Individuals who are directly involved in the business operations, such as employees, managers, and owners.'
+          },
+          {
+            q: 'Who are "External Stakeholders"?',
+            a: 'Individuals or groups outside the business who are affected by its actions, such as customers, suppliers, community, and government.'
+          },
+          {
+            q: 'What is the difference between "Goods" and "Services"?',
+            a: 'Goods are tangible products (like a phone). Services are intangible actions performed for a customer (like consulting).'
+          },
+          {
+            q: 'What is "B2B" (Business to Business)?',
+            a: 'Transactions between two businesses, such as a manufacturer selling parts to an assembler.'
+          },
+          {
+            q: 'What is "B2C" (Business to Consumer)?',
+            a: 'Transactions where businesses sell directly to the end consumer (like a retail store).'
+          }
+        ]
+      },
+      man_ch2: {
+        name: 'Ch 2. Thriving in Business',
+        flashcards: [
+          {
+            q: 'What is a "Growth Mindset"?',
+            a: 'The belief that abilities and intelligence can be developed through dedication and hard work. It views failure as a learning opportunity.'
+          },
+          {
+            q: 'What is a "Fixed Mindset"?',
+            a: 'The belief that basic qualities like intelligence or talent are fixed traits. It avoids challenges and gives up easily.'
+          },
+          {
+            q: 'What is "Emotional Intelligence" (EQ)?',
+            a: 'The ability to understand, use, and manage your own emotions in positive ways to relieve stress, communicate effectively, empathize with others, and defuse conflict.'
+          },
+          {
+            q: 'What are the 5 components of Emotional Intelligence?',
+            a: '1. Self-awareness\n2. Self-regulation\n3. Motivation\n4. Empathy\n5. Social skills.'
+          },
+          {
+            q: 'What is "Corporate Social Responsibility" (CSR)?',
+            a: 'A management concept whereby companies integrate social and environmental concerns in their business operations and interactions with stakeholders.'
+          },
+          {
+            q: 'What is "Business Ethics"?',
+            a: 'The study of appropriate business policies and practices regarding potentially controversial subjects including corporate governance, insider trading, bribery, discrimination, and fiduciary responsibilities.'
+          },
+          {
+            q: 'What is "Adaptability" in business?',
+            a: 'The ability of a business to adjust to new conditions, such as market trends, technology changes, or economic shifts.'
+          },
+          {
+            q: 'What is "Business Myopia"?',
+            a: 'A shortsighted focus on selling products and services rather than focusing on the big picture of what customers really want or need.'
+          }
+        ]
+      },
+      man_ch3: {
+        name: 'Ch 3. Communication in Business',
+        flashcards: [
+          {
+            q: 'What is the "Communication Process"?',
+            a: 'Sender -> Encoding -> Message -> Channel -> Decoding -> Receiver -> Feedback (with Noise interfering).'
+          },
+          {
+            q: 'What is "Active Listening"?',
+            a: 'Fully concentrating on what is being said rather than just passively hearing the message of the speaker.'
+          },
+          {
+            q: 'What are the 4 main Social Styles?',
+            a: '1. Analytical (Focus on facts)\n2. Driver (Focus on results)\n3. Amiable (Focus on relationships)\n4. Expressive (Focus on creativity/energy).'
+          },
+          {
+            q: 'What is an "Elevator Pitch"?',
+            a: 'A brief, persuasive speech that you use to spark interest in what you or your organization does (usually 30-60 seconds).'
+          },
+          {
+            q: 'What is "Non-verbal Communication"?',
+            a: 'Transmission of messages or signals through a nonverbal platform such as eye contact, facial expressions, gestures, posture, and body language.'
+          },
+          {
+            q: 'What is "Cultural Intelligence" (CQ) in communication?',
+            a: 'The capability to relate and work effectively across cultures.'
+          },
+          {
+            q: 'What is "Internal Communication"?',
+            a: 'Communication between people within an organization (emails, meetings, memos).'
+          },
+          {
+            q: 'What is "External Communication"?',
+            a: 'Communication between the organization and the outside world (press releases, marketing, customer support).'
+          }
+        ]
+      },
+      man_ch4: {
+        name: 'Ch 4. Hiring and Retaining People',
+        flashcards: [
+          {
+            q: 'What is "Human Resource Management" (HRM)?',
+            a: 'The strategic approach to the effective management of people in a company or organization such that they help their business gain a competitive advantage.'
+          },
+          {
+            q: 'What are the key functions of HR?',
+            a: 'Recruitment, Training, Compensation, Benefits, Employee Relations, Compliance, and Performance Management.'
+          },
+          {
+            q: 'What is "Recruitment"?',
+            a: 'The process of actively seeking out, finding, and hiring candidates for a specific position or job.'
+          },
+          {
+            q: 'What is "Onboarding"?',
+            a: 'The process of integrating a new employee into an organization and its culture.'
+          },
+          {
+            q: 'What is the difference between "Equity" and "Equality"?',
+            a: 'Equality means giving everyone the same resources. Equity means recognizing that each person has different circumstances and allocating the resources needed to reach an equal outcome.'
+          },
+          {
+            q: 'What is "Diversity" in the workplace?',
+            a: 'The presence of differences within a given setting (gender, race, ethnicity, religion, age, sexual orientation, etc.).'
+          },
+          {
+            q: 'What is "Inclusion"?',
+            a: 'The practice of ensuring that people feel they belong in the workplace.'
+          },
+          {
+            q: 'What is "Employee Retention"?',
+            a: 'The ability of an organization to keep its employees.'
+          }
+        ]
+      },
+      man_ch5: {
+        name: 'Ch 5. Operations Management',
+        flashcards: [
+          {
+            q: 'What is "Operations Management"?',
+            a: 'The administration of business practices to create the highest level of efficiency possible within an organization. It involves converting materials and labor into goods and services.'
+          },
+          {
+            q: 'What is the "Input-Process-Output" model?',
+            a: 'Input (Resources) -> Transformation Process (Value Add) -> Output (Goods/Services).'
+          },
+          {
+            q: 'What is the difference between "Product" and "Service" operations?',
+            a: 'Products are tangible and can be stored (inventory). Services are intangible, consumed as produced, and cannot be stored.'
+          },
+          {
+            q: 'What is "Supply Chain Management"?',
+            a: 'The management of the flow of goods and services and includes all processes that transform raw materials into final products.'
+          },
+          {
+            q: 'What is "Quality Control"?',
+            a: 'A process through which a business seeks to ensure that product quality is maintained or improved.'
+          },
+          {
+            q: 'What is "Productivity"?',
+            a: 'A ratio of output volume to the volume of inputs. Productivity = Output / Input.'
+          },
+          {
+            q: 'What is "Lean Manufacturing"?',
+            a: 'A methodology that focuses on minimizing waste within manufacturing systems while simultaneously maximizing productivity.'
+          },
+          {
+            q: 'What is the "Make or Buy" decision?',
+            a: 'The act of choosing between manufacturing a product in-house or purchasing it from an external supplier.'
+          }
+        ]
+      },
+      man_ch6: {
+        name: 'Ch 6. Building a Strong Supply Chain',
+        flashcards: [
+          {
+            q: 'What is a "Supply Chain"?',
+            a: 'A network of individuals, organizations, resources, activities, and technology involved in the creation and sale of a product.'
+          },
+          {
+            q: 'What are the components of a Supply Chain?',
+            a: 'Sourcing (Suppliers) -> Manufacturing -> Warehousing -> Distribution -> Retail -> Consumer.'
+          },
+          {
+            q: 'What is "Logistics"?',
+            a: 'The detailed coordination of a complex operation involving many people, facilities, or supplies.'
+          },
+          {
+            q: 'What is "Upstream" in a supply chain?',
+            a: 'Activities involved in searching for and extracting raw materials (moving towards the supplier).'
+          },
+          {
+            q: 'What is "Downstream" in a supply chain?',
+            a: 'Activities involved in processing the materials into finished products and selling them (moving towards the customer).'
+          },
+          {
+            q: 'What is "Just-In-Time" (JIT) inventory?',
+            a: 'A strategy where materials are ordered and received only as they are needed in the production process to reduce inventory costs.'
+          },
+          {
+            q: 'What is "Sustainability" in supply chains?',
+            a: 'The management of environmental, social, and economic impacts and the encouragement of good governance practices throughout the lifecycles of goods and services.'
+          },
+          {
+            q: 'What is the "Bullwhip Effect"?',
+            a: 'A distribution channel phenomenon in which demand forecasts yield supply chain inefficiencies. Small fluctuations in demand at the retail level can cause progressively larger fluctuations in demand at the wholesale, distributor, manufacturer, and raw material supplier levels.'
+          }
+        ]
+      },
+      man_ch7: {
+        name: 'Ch 7. Selling Value',
+        flashcards: [
+          {
+            q: 'What is "Value" in sales?',
+            a: 'The benefit a customer gets from a product or service minus the cost. Value = Benefit - Cost.'
+          },
+          {
+            q: 'What is a "Value Proposition"?',
+            a: 'A statement that summarizes why a consumer should buy a product or use a service. It convinces a potential customer that one particular product or service will add more value or better solve a problem than other similar offerings.'
+          },
+          {
+            q: 'What is the "Sales Process"?',
+            a: '1. Prospecting\n2. Preparation\n3. Approach\n4. Presentation\n5. Handling Objections\n6. Closing\n7. Follow-up.'
+          },
+          {
+            q: 'What is "B2B Sales"?',
+            a: 'Selling products or services to other businesses. Often involves longer sales cycles and higher transaction values.'
+          },
+          {
+            q: 'What is "B2C Sales"?',
+            a: 'Selling products or services directly to individual consumers.'
+          },
+          {
+            q: 'What is "Consultative Selling"?',
+            a: 'A sales approach that prioritizes relationships and open dialogue to identify and provide solutions to a customers needs.'
+          },
+          {
+            q: 'What is "Social Selling"?',
+            a: 'The practice of using a brand\'s social media channels to connect with prospects, develop a connection with them, and engage with potential leads.'
+          },
+          {
+            q: 'What is "Customer Relationship Management" (CRM)?',
+            a: 'Technology for managing all your company\'s relationships and interactions with customers and potential customers.'
+          }
+        ]
+      },
+      man_ch8: {
+        name: 'Ch 8. Marketing the Business',
+        flashcards: [
+          {
+            q: 'What is the definition of "Marketing"?',
+            a: 'The activity, set of institutions, and processes for creating, communicating, delivering, and exchanging offerings that have value for customers, clients, partners, and society at large.'
+          },
+          {
+            q: 'What are the "4 Ps" of Marketing (Marketing Mix)?',
+            a: '1. Product\n2. Price\n3. Place\n4. Promotion.'
+          },
+          {
+            q: 'What is "Target Market"?',
+            a: 'A specific group of consumers at which a company aims its products and services.'
+          },
+          {
+            q: 'What is "Market Segmentation"?',
+            a: 'Dividing a market into distinct groups of buyers who have different needs, characteristics, or behaviors.'
+          },
+          {
+            q: 'What is "Branding"?',
+            a: 'The process of creating a strong, positive perception of a company, its products or services in the customer\'s mind.'
+          },
+          {
+            q: 'What is "Digital Marketing"?',
+            a: 'Marketing of products or services using digital technologies, mainly on the Internet, but also including mobile phones, display advertising, and any other digital medium.'
+          },
+          {
+            q: 'What is the "Product Life Cycle"?',
+            a: 'The stages a product goes through from when it was first thought of until it finally is removed from the market: Introduction, Growth, Maturity, and Decline.'
+          },
+          {
+            q: 'What is "SWOT Analysis"?',
+            a: 'A strategic planning technique used to identify Strengths, Weaknesses, Opportunities, and Threats.'
+          }
+        ]
+      },
+      man_ch9: {
+        name: 'Ch 9. Accounting',
+        flashcards: [
+          {
+            q: 'What is "Accounting"?',
+            a: 'The process of recording, summarizing, analyzing, and reporting financial transactions.'
+          },
+          {
+            q: 'What is the fundamental "Accounting Equation"?',
+            a: 'Assets = Liabilities + Owner\'s Equity.'
+          },
+          {
+            q: 'What are "Assets"?',
+            a: 'Resources owned by a business that have economic value (cash, inventory, property).'
+          },
+          {
+            q: 'What are "Liabilities"?',
+            a: 'Debts or obligations the business owes to outsiders (loans, accounts payable).'
+          },
+          {
+            q: 'What is "Owner\'s Equity"?',
+            a: 'The owner\'s claim to the assets of the business after liabilities are deducted.'
+          },
+          {
+            q: 'What is a "Balance Sheet"?',
+            a: 'A financial statement that reports a company\'s assets, liabilities, and shareholders\' equity at a specific point in time.'
+          },
+          {
+            q: 'What is an "Income Statement" (Profit & Loss)?',
+            a: 'A financial statement that reports a company\'s financial performance over a specific accounting period (Revenue - Expenses = Net Income).'
+          },
+          {
+            q: 'What is a "Cash Flow Statement"?',
+            a: 'A financial statement that summarizes the amount of cash and cash equivalents entering and leaving a company.'
+          },
+          {
+            q: 'What is "Double-Entry Bookkeeping"?',
+            a: 'A system where every entry to an account requires a corresponding and opposite entry to a different account.'
+          }
+        ]
+      },
+      man_ch10: {
+        name: 'Ch 10. Financing the Business',
+        flashcards: [
+          {
+            q: 'What is "Finance"?',
+            a: 'The management of money, including investing, borrowing, lending, budgeting, saving, and forecasting.'
+          },
+          {
+            q: 'What is "Debt Financing"?',
+            a: 'Raising capital by borrowing money (loans, bonds) that must be repaid over time with interest.'
+          },
+          {
+            q: 'What is "Equity Financing"?',
+            a: 'Raising capital by selling shares of the business to investors (stock market, venture capital). No repayment is required, but ownership is diluted.'
+          },
+          {
+            q: 'What is "Bootstrapping"?',
+            a: 'Starting a business with little or no outside funding, using personal savings and revenue from the business.'
+          },
+          {
+            q: 'What is "Venture Capital"?',
+            a: 'A form of private equity and a type of financing that investors provide to startup companies and small businesses that are believed to have long-term growth potential.'
+          },
+          {
+            q: 'What is an "Angel Investor"?',
+            a: 'A high-net-worth individual who provides financial backing for small startups or entrepreneurs, typically in exchange for ownership equity in the company.'
+          },
+          {
+            q: 'What is "Crowdfunding"?',
+            a: 'The practice of funding a project or venture by raising small amounts of money from a large number of people, typically via the Internet.'
+          },
+          {
+            q: 'What is "Return on Investment" (ROI)?',
+            a: 'A performance measure used to evaluate the efficiency of an investment. ROI = (Net Profit / Cost of Investment) x 100.'
+          }
+        ]
+      }
+    }
+  }
 };
