@@ -900,6 +900,305 @@ export const SUBJECTS: Record<string, {
           }
         ]
       }
+    },
+  },
+  acc: {
+    name: 'Бухгалтердик эсеп (Accounting)',
+    chapters: {
+      acc_ch1: {
+        name: 'Lesson 1. Introduction',
+        flashcards: [
+          {
+            q: 'What is "Accounting"?',
+            a: 'The art of recording, classifying, and summarizing financial transactions and interpreting the results thereof.'
+          },
+          {
+            q: 'Who are "Internal Users" of accounting information?',
+            a: 'Owners, Managers, Employees.'
+          },
+          {
+            q: 'Who are "External Users" of accounting information?',
+            a: 'Investors, Creditors, Government, Public, Researchers.'
+          },
+          {
+            q: 'What is the "Accounting Process"?',
+            a: 'Identifying -> Recording -> Classifying -> Summarizing -> Analyzing -> Interpreting -> Communicating.'
+          },
+          {
+            q: 'What is the main purpose of accounting?',
+            a: 'To provide useful financial information for decision-making.'
+          }
+        ]
+      },
+      acc_ch2: {
+        name: 'Lesson 2. Org Forms',
+        flashcards: [
+          {
+            q: 'What are the 3 main forms of business ownership?',
+            a: 'Sole Proprietorship, Partnership, Corporation.'
+          },
+          {
+            q: 'What is a "Sole Proprietorship"?',
+            a: 'A business owned by one person. Easiest to start, but has unlimited liability.'
+          },
+          {
+            q: 'What is "Unlimited Liability"?',
+            a: 'The owner is personally responsible for all debts and legal obligations of the business.'
+          },
+          {
+            q: 'What is a "Partnership"?',
+            a: 'A business owned by two or more people who share profits and liabilities.'
+          },
+          {
+            q: 'What is a "Corporation"?',
+            a: 'A legal entity separate from its owners. It has limited liability but is harder to set up and subject to double taxation.'
+          },
+          {
+            q: 'What is a "Limited Liability Partnership" (LLP)?',
+            a: 'A partnership where some or all partners have limited liabilities.'
+          }
+        ]
+      },
+      acc_ch3: {
+        name: 'Lesson 3. Financial Position',
+        flashcards: [
+          {
+            q: 'What is the "Balance Sheet Equation"?',
+            a: 'Assets = Liabilities + Equity.'
+          },
+          {
+            q: 'What is a "Balance Sheet"?',
+            a: 'A snapshot of a company\'s financial position at a specific point in time.'
+          },
+          {
+            q: 'What are "Current Assets"?',
+            a: 'Assets expected to be converted to cash or used within one year (e.g., Cash, Inventory, Accounts Receivable).'
+          },
+          {
+            q: 'What are "Non-Current Assets"?',
+            a: 'Long-term assets used for more than one year (e.g., Property, Plant, Equipment).'
+          },
+          {
+            q: 'What is "Accounts Receivable"?',
+            a: 'Money owed to the company by customers for goods/services delivered but not yet paid for.'
+          },
+          {
+            q: 'What is "Accounts Payable"?',
+            a: 'Money the company owes to suppliers for goods/services received but not yet paid for.'
+          },
+          {
+            q: 'What is "Equity"?',
+            a: 'The residual interest in the assets of the entity after deducting all its liabilities (Net Assets).'
+          }
+        ]
+      },
+      acc_ch4: {
+        name: 'Lesson 4. Double Entry',
+        flashcards: [
+          {
+            q: 'What is the "Double Entry System"?',
+            a: 'Every transaction affects at least two accounts: one is debited and another is credited.'
+          },
+          {
+            q: 'What is the golden rule for Assets?',
+            a: 'Increase -> Debit (Dr), Decrease -> Credit (Cr).'
+          },
+          {
+            q: 'What is the golden rule for Liabilities and Equity?',
+            a: 'Increase -> Credit (Cr), Decrease -> Debit (Dr).'
+          },
+          {
+            q: 'What is a "T-Account"?',
+            a: 'A visual representation of an account resembling the letter T, with Debit on the left and Credit on the right.'
+          },
+          {
+            q: 'What is a "Journal Entry"?',
+            a: 'The first recording of a transaction in chronological order.'
+          },
+          {
+            q: 'What is "Posting"?',
+            a: 'Transferring entries from the journal to the ledger accounts.'
+          }
+        ]
+      },
+      acc_ch5: {
+        name: 'Lesson 5. Classification',
+        flashcards: [
+          {
+            q: 'What are "Permanent Accounts"?',
+            a: 'Accounts that are not closed at the end of the period (Assets, Liabilities, Equity). Their balances carry forward.'
+          },
+          {
+            q: 'What are "Temporary Accounts"?',
+            a: 'Accounts that are closed at the end of the period (Revenue, Expenses, Dividends). They start with a zero balance each year.'
+          },
+          {
+            q: 'How do you increase an Expense account?',
+            a: 'Debit (Dr).'
+          },
+          {
+            q: 'How do you increase a Revenue account?',
+            a: 'Credit (Cr).'
+          },
+          {
+            q: 'What is a "Trial Balance"?',
+            a: 'A list of all accounts and their balances to ensure Debits equal Credits.'
+          }
+        ]
+      },
+      acc_ch6: {
+        name: 'Lesson 6. Chart of Accounts',
+        flashcards: [
+          {
+            q: 'What is a "Chart of Accounts" (COA)?',
+            a: 'A structured list of all accounts used by a company to record transactions.'
+          },
+          {
+            q: 'What is the typical numbering for Assets?',
+            a: 'Usually starts with 1 (e.g., 1000 - Cash).'
+          },
+          {
+            q: 'What is the typical numbering for Liabilities?',
+            a: 'Usually starts with 2 or 3.'
+          },
+          {
+            q: 'What is the typical numbering for Equity?',
+            a: 'Usually starts with 3 or 4.'
+          },
+          {
+            q: 'What is the typical numbering for Revenue?',
+            a: 'Usually starts with 4 or 5.'
+          },
+          {
+            q: 'What is the typical numbering for Expenses?',
+            a: 'Usually starts with 5, 6, or 7.'
+          },
+          {
+            q: 'What is a "Synthetic Account"?',
+            a: 'A general account that summarizes detailed sub-accounts (e.g., "Accounts Receivable" as a total).'
+          },
+          {
+            q: 'What is an "Analytical Account"?',
+            a: 'A detailed sub-account tracking specific items (e.g., "Accounts Receivable - Customer A").'
+          }
+        ]
+      },
+      acc_ch7: {
+        name: 'Lesson 7. Profit & Transformations',
+        flashcards: [
+          {
+            q: 'What is "Gross Profit"?',
+            a: 'Sales Revenue - Cost of Goods Sold (COGS).'
+          },
+          {
+            q: 'What is "Net Profit"?',
+            a: 'Gross Profit - Operating Expenses - Taxes - Interest.'
+          },
+          {
+            q: 'What are "Transformation Entries"?',
+            a: 'Adjusting entries made to align accounting records with economic reality (e.g., converting cash basis to accrual basis).'
+          },
+          {
+            q: 'What is "Revenue Recognition"?',
+            a: 'Recording revenue when it is earned, regardless of when cash is received.'
+          },
+          {
+            q: 'What is "Deferred Revenue" (Unearned Revenue)?',
+            a: 'Cash received before services are performed. It is a Liability.'
+          },
+          {
+            q: 'What is "Accrued Revenue"?',
+            a: 'Revenue earned but not yet received in cash. It is an Asset.'
+          }
+        ]
+      },
+      acc_ch8: {
+        name: 'Lesson 8. Accrual Basis',
+        flashcards: [
+          {
+            q: 'What is "Accrual Basis Accounting"?',
+            a: 'Recording transactions when they occur, not when cash changes hands.'
+          },
+          {
+            q: 'What is "Cash Basis Accounting"?',
+            a: 'Recording transactions only when cash is received or paid.'
+          },
+          {
+            q: 'What is "Depreciation"?',
+            a: 'Allocating the cost of a tangible asset over its useful life.'
+          },
+          {
+            q: 'What is "Accumulated Depreciation"?',
+            a: 'A contra-asset account showing the total depreciation expense charged against an asset to date.'
+          },
+          {
+            q: 'What is "Book Value"?',
+            a: 'Cost of Asset - Accumulated Depreciation.'
+          },
+          {
+            q: 'What is an "Accrued Expense"?',
+            a: 'An expense incurred but not yet paid (e.g., Salaries Payable).'
+          },
+          {
+            q: 'What is a "Prepaid Expense"?',
+            a: 'Payment made for goods/services to be received in the future. It is an Asset.'
+          }
+        ]
+      },
+      acc_ch9: {
+        name: 'Lesson 9. Closing Cycle',
+        flashcards: [
+          {
+            q: 'What is "Closing the Books"?',
+            a: 'The process of resetting temporary accounts (Revenue, Expense, Dividends) to zero for the next period.'
+          },
+          {
+            q: 'What is the "Income Summary" account?',
+            a: 'A temporary account used during the closing process to aggregate revenues and expenses before transferring net income to Retained Earnings.'
+          },
+          {
+            q: 'Which accounts appear on the "Post-Closing Trial Balance"?',
+            a: 'Only Permanent accounts (Assets, Liabilities, Equity).'
+          },
+          {
+            q: 'What is the order of the Accounting Cycle?',
+            a: 'Analyze -> Journalize -> Post -> Trial Balance -> Adjusting Entries -> Adjusted Trial Balance -> Financial Statements -> Closing Entries -> Post-Closing Trial Balance.'
+          }
+        ]
+      },
+      acc_ch10: {
+        name: 'Lesson 10. Trade Accounting',
+        flashcards: [
+          {
+            q: 'What is "Trade Accounting"?',
+            a: 'Accounting specifically focused on buying and selling goods (inventory).'
+          },
+          {
+            q: 'What is "Cost of Goods Sold" (COGS)?',
+            a: 'The direct costs attributable to the production of the goods sold by a company.'
+          },
+          {
+            q: 'What is the formula for COGS?',
+            a: 'Opening Inventory + Purchases - Closing Inventory.'
+          },
+          {
+            q: 'What is a "Trading Account"?',
+            a: 'An account used to determine Gross Profit or Loss.'
+          },
+          {
+            q: 'What are "Operating Expenses" (OpEx)?',
+            a: 'Day-to-day expenses needed to run a business (e.g., rent, salaries, utilities) not directly linked to production.'
+          },
+          {
+            q: 'What is "Realized Gain"?',
+            a: 'Profit made from a completed trade.'
+          },
+          {
+            q: 'What is "Unrealized Gain"?',
+            a: 'Potential profit on an asset that has increased in value but has not yet been sold.'
+          }
+        ]
+      }
     }
   }
 };
