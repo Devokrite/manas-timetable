@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 interface Flashcard {
   q: string;
   a: string;
+  diagram?: string;
 }
 
 export default function FlashcardViewer({ cards }: { cards: Flashcard[] }) {
@@ -101,14 +102,21 @@ export default function FlashcardViewer({ cards }: { cards: Flashcard[] }) {
 
           {/* Back (Answer) */}
           <div 
-            className="absolute inset-0 backface-hidden rounded-2xl bg-slate-900 border border-emerald-500/30 p-8 flex flex-col items-center justify-center text-center rotate-y-180"
+            className="absolute inset-0 backface-hidden rounded-2xl bg-slate-900 border border-emerald-500/30 p-8 flex flex-col items-center justify-center text-center rotate-y-180 overflow-y-auto"
           >
             <span className="text-xs uppercase tracking-widest text-indigo-400 mb-4 font-semibold">
               Answer
             </span>
-            <p className="text-lg md:text-xl text-slate-200 leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-200 leading-relaxed mb-4">
               {currentCard.a}
             </p>
+            {currentCard.diagram && (
+               <div className="mt-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700/50 w-full overflow-x-auto">
+                 <pre className="text-xs md:text-sm font-mono text-emerald-300 leading-tight whitespace-pre text-left mx-auto inline-block">
+                   {currentCard.diagram}
+                 </pre>
+               </div>
+            )}
           </div>
         </div>
       </div>
