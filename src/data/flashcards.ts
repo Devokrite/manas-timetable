@@ -2,7 +2,7 @@ export const SUBJECTS: Record<string, {
   name: string;
   chapters: Record<string, {
     name: string;
-    flashcards: { q: string; a: string }[];
+    flashcards: { q: string; a: string; diagram?: string }[];
   }>;
 }> = {
   eco: {
@@ -14,6 +14,19 @@ export const SUBJECTS: Record<string, {
           {
             q: 'Экономика илиминин негизги изилдөө объектиси эмне?',
             a: 'Чексиз муктаждыктарды канааттандырууда чектүү (сейрек) ресурстарды эң натыйжалуу пайдалануу жолдорун изилдөө.'
+            diagram: `
+              <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                <line x1="20" y1="130" x2="180" y2="130" stroke="white" stroke-width="2" />
+                <line x1="20" y1="130" x2="20" y2="20" stroke="white" stroke-width="2" />
+                <text x="170" y="145" fill="white" font-size="10">Товар Б</text>
+                <text x="10" y="15" fill="white" font-size="10">Товар А</text>
+                <path d="M 20 30 Q 100 50 160 130" stroke="#34d399" stroke-width="2" fill="none" />
+                <circle cx="50" cy="50" r="3" fill="#fbbf24" />
+                <text x="55" y="50" fill="white" font-size="8">А (Натыйжалуу)</text>
+                <circle cx="100" cy="80" r="3" fill="#fbbf24" />
+                <text x="105" y="80" fill="white" font-size="8">В (Натыйжалуу)</text>
+              </svg>
+            `
           },
           {
             q: 'Экономикалык муктаждыктар деген эмне?',
