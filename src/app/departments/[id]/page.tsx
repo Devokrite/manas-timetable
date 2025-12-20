@@ -14,9 +14,14 @@ async function getDepartmentData(id: string) {
   }
 }
 
-export default async function DepartmentPage({ params }: { params: { id: string } }) {
-  // 1. Fetch the data for this specific ID (e.g., "7")
-  const data = await getDepartmentData(params.id);
+// FIX: 'params' is defined as a Promise here
+export default async function DepartmentPage(props: { params: Promise<{ id: string }> }) {
+  // FIX: We must await the params before using them
+  const params = await props.params;
+  const id = params.id;
+
+  // 1. Fetch the data for this specific ID
+  const data = await getDepartmentData(id);
 
   // 2. If no file exists (e.g. 999.json), show 404
   if (!data) {
@@ -27,7 +32,7 @@ export default async function DepartmentPage({ params }: { params: { id: string 
   return (
     <div className="p-4 md:p-8">
       <h1 className="text-2xl font-bold mb-6 text-emerald-400">
-        {data.name || `Department ${params.id}`}
+        {data.name || `Department ${id}`}
       </h1>
       <Timetable data={data} />
     </div>
