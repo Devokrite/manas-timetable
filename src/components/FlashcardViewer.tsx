@@ -9,7 +9,14 @@ interface Flashcard {
   diagram?: string;
 }
 
-export default function FlashcardViewer({ cards }: { cards: Flashcard[] }) {
+// 1. Updated interface to include title
+interface FlashcardViewerProps {
+  cards: Flashcard[];
+  title: string;
+}
+
+// 2. Destructured title from props
+export default function FlashcardViewer({ cards, title }: FlashcardViewerProps) {
   const [index, setIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -59,6 +66,12 @@ export default function FlashcardViewer({ cards }: { cards: Flashcard[] }) {
 
   return (
     <div className="max-w-2xl mx-auto w-full space-y-6">
+      
+      {/* 3. Added Title Header */}
+      <h2 className="text-2xl font-bold text-center text-slate-100">
+        {title}
+      </h2>
+
       {/* Progress Bar */}
       <div className="flex items-center justify-between text-xs font-medium text-slate-400">
         <span>Card {index + 1} of {cards.length}</span>
@@ -111,11 +124,11 @@ export default function FlashcardViewer({ cards }: { cards: Flashcard[] }) {
               {currentCard.a}
             </p>
             {currentCard.diagram && (
-               <div className="mt-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700/50 w-full overflow-x-auto">
-                 <pre className="text-xs md:text-sm font-mono text-emerald-300 leading-tight whitespace-pre text-left mx-auto inline-block">
-                   {currentCard.diagram}
-                 </pre>
-               </div>
+                <div className="mt-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700/50 w-full overflow-x-auto">
+                  <pre className="text-xs md:text-sm font-mono text-emerald-300 leading-tight whitespace-pre text-left mx-auto inline-block">
+                    {currentCard.diagram}
+                  </pre>
+                </div>
             )}
           </div>
         </div>
