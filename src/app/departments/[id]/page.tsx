@@ -1,47 +1,36 @@
-import path from "path";
-import fs from "fs/promises";
-import Timetable from "../../../components/Timetable";
-import { politeFetch } from "../../../lib/fetchers";
-import { parseDepartmentHtml } from "../../../lib/parse";
+import Sidebar from "@/components/Sidebar";
+import Link from "next/link";
 
-export const runtime = "nodejs";
-export const dynamicParams = false;
-export const revalidate = false;
+// Hardcoded list based on your file structure, ideally this comes from an API or config
+const DEPARTMENTS = [
+  { id: "1", name: "Computer Engineering" }, // Assuming ID 1 or 7 is Comp Eng based on files
+  { id: "7", name: "Computer Engineering" }, 
+  { id: "10", name: "Department 10" },
+  { id: "191", name: "Department 191" },
+];
 
-export function generateStaticParams() {
-  return [{ id: "1" }, { id: "7" }, { id: "10" }, { id: "191" }];
-}
-
-async function readStaticJSON(id: string) {
-  try {
-    const p = path.join(process.cwd(), "public", "departments", `${id}.json`);
-    const txt = await fs.readFile(p, "utf-8");
-    return JSON.parse(txt);
-  } catch { return null; }
-}
-
-export default async function Page({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-
-  let data = await readStaticJSON(id);
-  if (!data) {
-    const html = await politeFetch(`https://timetable.manas.edu.kg/department-printer/${id}`);
-    data = parseDepartmentHtml(html || "");
-  }
-  const title = data?.meta?.departmentName?.trim() || `Department #${id}`;
-
+export default function DepartmentsListPage() {
   return (
-    <main className="min-h-screen w-full">
-      <header className="px-5 md:px-8 py-5 border-b border-slate-800/70 bg-slate-950/40">
-        <div className="flex items-center justify-between">
-          <h1 className="text-lg md:text-xl font-semibold">{title}</h1>
-          <div className="text-xs text-slate-400">1. sınıf</div>
+    <div className="flex min-h-screen">
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
+      <main className="flex-1 bg-slate-950 text-slate-50 p-6 md:p-10">
+        <h1 className="text-2xl font-semibold mb-6">Select Department</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {DEPARTMENTS.map((dept) => (
+            <Link
+              key={dept.id}
+              href={`/departments/${dept.id}`}
+              className="block p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition group"
+            >
+              <h2 className="text-lg font-medium text-slate-200 group-hover:text-emerald-400 transition-colors">
+                {dept.name} (ID: {dept.id})
+              </h2>
+            </Link>
+          ))}
         </div>
-      </header>
-
-      <section className="container-slim py-6">
-        <Timetable data={data} deptId={id} />
-      </section>
-    </main>
+      </main>
+    </div>
   );
 }
