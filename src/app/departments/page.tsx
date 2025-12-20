@@ -2,7 +2,7 @@ import Link from "next/link";
 
 // Update this list with your real departments
 const DEPARTMENTS = [
-  { id: "1", name: "Computer Engineering (1)" }, 
+  { id: "1", name: "Computer Engineering" }, 
   { id: "7", name: "Management" }, 
   { id: "10", name: "Biology" },
   { id: "191", name: "Electronic Engineering" },
