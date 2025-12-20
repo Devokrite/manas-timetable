@@ -16,7 +16,7 @@ export default function FlashcardsPage() {
             href="/" 
             className="text-xs font-medium text-slate-500 hover:text-emerald-400 transition-colors flex items-center gap-1"
           >
-            ← Back to Timetable
+            ← Back to Home
           </Link>
           <h1 className="text-2xl font-semibold">Flashcards</h1>
         </div>
