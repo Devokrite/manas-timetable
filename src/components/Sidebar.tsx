@@ -3,13 +3,52 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { 
-  LayoutGrid, 
-  Utensils, 
-  Building2, 
-  BookOpen, 
-  Library
-} from "lucide-react";
+
+// Inline SVG Icons
+const LayoutGridIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect width="7" height="7" x="3" y="3" rx="1" />
+    <rect width="7" height="7" x="14" y="3" rx="1" />
+    <rect width="7" height="7" x="14" y="14" rx="1" />
+    <rect width="7" height="7" x="3" y="14" rx="1" />
+  </svg>
+);
+
+const UtensilsIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+    <path d="M7 2v20" />
+    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
+  </svg>
+);
+
+const Building2Icon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
+    <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
+    <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
+    <path d="M10 6h4" />
+    <path d="M10 10h4" />
+    <path d="M10 14h4" />
+    <path d="M10 18h4" />
+  </svg>
+);
+
+const LibraryIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="m16 6 4 14" />
+    <path d="M12 6v14" />
+    <path d="M8 8v12" />
+    <path d="M4 4v16" />
+  </svg>
+);
+
+const BookOpenIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+  </svg>
+);
 
 // You can update this constant whenever you make changes
 const RECENT_UPDATE = {
@@ -21,27 +60,27 @@ const menuItems = [
   {
     title: "Timetable",
     href: "/",
-    icon: LayoutGrid,
+    icon: LayoutGridIcon,
   },
   {
     title: "Menu",
     href: "/menu",
-    icon: Utensils,
+    icon: UtensilsIcon,
   },
   {
     title: "Departments",
     href: "/departments/1", // Default to first dept
-    icon: Building2,
+    icon: Building2Icon,
   },
   {
     title: "Flashcards",
     href: "/flashcards",
-    icon: Library,
+    icon: LibraryIcon,
   },
   {
     title: "Catalog",
     href: "/catalog", // Assuming you might have a catalog page or similar
-    icon: BookOpen,
+    icon: BookOpenIcon,
     disabled: true // Example of disabled item
   }
 ];
