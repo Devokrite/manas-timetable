@@ -3,8 +3,8 @@ import Link from "next/link";
 
 // Hardcoded list based on your file structure, ideally this comes from an API or config
 const DEPARTMENTS = [
-  { id: "1", name: "Computer Engineering" }, // Assuming ID 1 or 7 is Comp Eng based on files
-  { id: "7", name: "Computer Engineering" }, 
+  { id: "1", name: "Computer Engineering (1)" }, 
+  { id: "7", name: "Computer Engineering (7)" }, 
   { id: "10", name: "Department 10" },
   { id: "191", name: "Department 191" },
 ];
@@ -25,8 +25,9 @@ export default function DepartmentsListPage() {
               className="block p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition group"
             >
               <h2 className="text-lg font-medium text-slate-200 group-hover:text-emerald-400 transition-colors">
-                {dept.name} (ID: {dept.id})
+                {dept.name}
               </h2>
+              <span className="text-xs text-slate-500">ID: {dept.id}</span>
             </Link>
           ))}
         </div>
