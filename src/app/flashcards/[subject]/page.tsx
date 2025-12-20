@@ -1,51 +1,62 @@
-import Sidebar from "@/components/Sidebar";
 import Link from "next/link";
-import { SUBJECTS } from "@/data/flashcards";
 import { notFound } from "next/navigation";
+import { SUBJECTS } from "@/data/flashcards";
 
-export default async function SubjectPage({
-  params,
-}: {
-  params: Promise<{ subject: string }>;
-}) {
-  const { subject } = await params;
-  const data = SUBJECTS[subject];
+// FIX: 'params' is a Promise in Next.js 15
+export default async function SubjectPage(props: { params: Promise<{ subject: string }> }) {
+  const params = await props.params;
+  const subjectId = params.subject;
+  const subject = SUBJECTS[subjectId];
 
-  if (!data) return notFound();
+  if (!subject) {
+    return notFound();
+  }
+
+  const chaptersList = Object.entries(subject.chapters).map(([id, data]) => ({
+    id,
+    ...data,
+  }));
 
   return (
-    <div className="flex min-h-screen">
-      <div className="hidden md:block">
-        <Sidebar />
-      </div>
-      <main className="flex-1 bg-slate-950 text-slate-50 p-6 md:p-10">
-        <div className="mb-8">
-          <Link
-            href="/flashcards"
-            className="text-xs text-slate-500 hover:text-slate-300 mb-2 inline-block"
-          >
-            ← Back to Subjects
-          </Link>
-          <h1 className="text-2xl font-semibold">{data.name}</h1>
-        </div>
+    // FIX: Added 'pb-24' for mobile scrolling safety
+    <div className="p-6 md:p-10 max-w-5xl mx-auto pb-24">
+      {/* Back Button */}
+      <Link 
+        href="/flashcards"
+        className="inline-flex items-center text-sm text-slate-400 hover:text-emerald-400 mb-6 transition-colors"
+      >
+        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"/></svg>
+        Back to Subjects
+      </Link>
 
-        <div className="space-y-3">
-          {Object.entries(data.chapters).map(([key, chapter]) => (
-            <Link
-              key={key}
-              href={`/flashcards/${subject}/${key}`}
-              className="flex items-center justify-between p-4 rounded-xl bg-slate-900/40 border border-slate-800 hover:border-slate-700 hover:bg-slate-800/60 transition"
-            >
-              <span className="font-medium text-slate-300">
-                {chapter.name}
+      <header className="mb-8 border-b border-slate-800 pb-8">
+        <h1 className="text-3xl font-bold text-slate-100 mb-2">{subject.name}</h1>
+        <p className="text-slate-400">Select a chapter to begin</p>
+      </header>
+      
+      <div className="grid gap-4">
+        {chaptersList.map((chapter) => (
+          <Link 
+            key={chapter.id} 
+            href={`/flashcards/${subjectId}/${chapter.id}`}
+            className="group block p-6 bg-slate-900/50 rounded-xl border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-800 transition-all"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-lg font-semibold text-slate-200 group-hover:text-emerald-400 transition-colors">
+                  {chapter.name}
+                </h2>
+                <p className="text-sm text-slate-500 mt-1">
+                  {chapter.flashcards.length} cards
+                </p>
+              </div>
+              <span className="text-slate-600 group-hover:translate-x-1 transition-transform group-hover:text-emerald-500">
+                Start &rarr;
               </span>
-              <span className="text-xs px-2.5 py-1 rounded-full bg-slate-950 border border-slate-800 text-slate-500">
-                {(chapter.flashcards || []).length} cards
-              </span>
-            </Link>
-          ))}
-        </div>
-      </main>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
