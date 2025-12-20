@@ -1,43 +1,42 @@
-import Sidebar from "@/components/Sidebar";
 import Link from "next/link";
-import { SUBJECTS } from "@/data/flashcards";
-
-export const dynamic = "force-dynamic";
+import { flashcards } from "@/data/flashcards";
 
 export default function FlashcardsPage() {
   return (
-    <div className="flex min-h-screen">
-      <div className="hidden md:block">
-        <Sidebar />
-      </div>
-      <main className="flex-1 bg-slate-950 text-slate-50 p-6 md:p-10">
-        <div className="mb-6 flex flex-col items-start gap-4">
+    <div className="p-6 md:p-10 max-w-7xl mx-auto">
+      <header className="mb-8">
+        <h1 className="text-3xl font-bold text-slate-100 mb-2">Flashcards</h1>
+        <p className="text-slate-400">Select a subject to start practicing</p>
+      </header>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {flashcards.map((subject) => (
           <Link 
-            href="/" 
-            className="text-xs font-medium text-slate-500 hover:text-emerald-400 transition-colors flex items-center gap-1"
+            key={subject.id} 
+            href={`/flashcards/${subject.id}`}
+            className="group relative overflow-hidden rounded-2xl bg-slate-800 border border-slate-700 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-900/20 transition-all duration-300"
           >
-            ← Back to Home
-          </Link>
-          <h1 className="text-2xl font-semibold">Flashcards</h1>
-        </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {Object.entries(SUBJECTS).map(([key, subject]) => (
-            <Link
-              key={key}
-              href={`/flashcards/${key}`}
-              className="block p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition group"
-            >
-              <h2 className="text-lg font-medium text-slate-200 group-hover:text-emerald-400 transition-colors">
-                {subject.name}
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-4xl">{subject.icon}</span>
+                <span className="text-xs font-mono text-slate-500 bg-slate-900/50 px-2 py-1 rounded-full">
+                  {subject.chapters.length} Chapters
+                </span>
+              </div>
+              
+              <h2 className="text-xl font-bold text-slate-100 mb-2 group-hover:text-emerald-400 transition-colors">
+                {subject.title}
               </h2>
-              <p className="text-sm text-slate-500 mt-2">
-                {Object.keys(subject.chapters).length} Chapters
+              <p className="text-sm text-slate-400 line-clamp-2">
+                {subject.description}
               </p>
-            </Link>
-          ))}
-        </div>
-      </main>
+            </div>
+            
+            {/* Hover Effect Bar */}
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-cyan-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
