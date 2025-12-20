@@ -5,8 +5,9 @@ import Link from "next/link";
 import { fetchCafeteriaHtml, parseCafeteriaMenu } from "@/lib/menu";
 import Sidebar from "@/components/Sidebar";
 
-export const dynamic = "force-dynamic";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 1800; // Cache for 30 minutes (in seconds)
 export default async function MenuPage() {
   const html = await fetchCafeteriaHtml();
   const days = parseCafeteriaMenu(html);
