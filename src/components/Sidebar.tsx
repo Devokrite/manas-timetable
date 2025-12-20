@@ -55,7 +55,7 @@ const menuItems = [
   },
   {
     title: "Departments",
-    href: "/departments", // Changed to /departments to allow selection
+    href: "/departments", // Points to the listing page
     icon: Building2Icon,
   },
   {
@@ -86,6 +86,7 @@ export default function Sidebar() {
         {menuItems.map((item) => {
           if (item.disabled) return null;
           
+          // Simplified active logic
           const isActive = pathname.startsWith(item.href);
           
           return (
