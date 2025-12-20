@@ -3,10 +3,10 @@ import Link from "next/link";
 
 // Hardcoded list based on your file structure, ideally this comes from an API or config
 const DEPARTMENTS = [
-  { id: "1", name: "Computer Engineering (1)" }, 
-  { id: "7", name: "Computer Engineering (7)" }, 
-  { id: "10", name: "Department 10" },
-  { id: "191", name: "Department 191" },
+  { id: "1", name: "Computer Engineering" }, 
+  { id: "7", name: "Management" }, 
+  { id: "10", name: "Biology" },
+  { id: "191", name: "Electronic Engineering" },
 ];
 
 export default function DepartmentsListPage() {
