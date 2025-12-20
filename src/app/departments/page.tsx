@@ -1,9 +1,8 @@
-import Sidebar from "@/components/Sidebar";
 import Link from "next/link";
 
-// Hardcoded list based on your file structure, ideally this comes from an API or config
+// Update this list with your real departments
 const DEPARTMENTS = [
-  { id: "1", name: "Computer Engineering" }, 
+  { id: "1", name: "Computer Engineering (1)" }, 
   { id: "7", name: "Management" }, 
   { id: "10", name: "Biology" },
   { id: "191", name: "Electronic Engineering" },
@@ -11,27 +10,22 @@ const DEPARTMENTS = [
 
 export default function DepartmentsListPage() {
   return (
-    <div className="flex min-h-screen">
-      <div className="hidden md:block">
-        <Sidebar />
+    <div className="p-6 md:p-10">
+      <h1 className="text-2xl font-semibold mb-6 text-slate-100">Select Department</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {DEPARTMENTS.map((dept) => (
+          <Link
+            key={dept.id}
+            href={`/departments/${dept.id}`}
+            className="block p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition group"
+          >
+            <h2 className="text-lg font-medium text-slate-200 group-hover:text-emerald-400 transition-colors">
+              {dept.name}
+            </h2>
+            <span className="text-xs text-slate-500">ID: {dept.id}</span>
+          </Link>
+        ))}
       </div>
-      <main className="flex-1 bg-slate-950 text-slate-50 p-6 md:p-10">
-        <h1 className="text-2xl font-semibold mb-6">Select Department</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {DEPARTMENTS.map((dept) => (
-            <Link
-              key={dept.id}
-              href={`/departments/${dept.id}`}
-              className="block p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition group"
-            >
-              <h2 className="text-lg font-medium text-slate-200 group-hover:text-emerald-400 transition-colors">
-                {dept.name}
-              </h2>
-              <span className="text-xs text-slate-500">ID: {dept.id}</span>
-            </Link>
-          ))}
-        </div>
-      </main>
     </div>
   );
 }
