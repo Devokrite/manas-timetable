@@ -181,21 +181,6 @@
       "courseName": "MFFB 303"
     },
     {
-      "day": "Perşembe",
-      "time": "10:45-11:30",
-      "courseName": "KGZ-103 KIRGIZ DİLİ VE EDEBİYATI I"
-    },
-    {
-      "day": "Perşembe",
-      "time": "10:45-11:30",
-      "courseName": "AYNURA BEYŞEYEVA"
-    },
-    {
-      "day": "Perşembe",
-      "time": "10:45-11:30",
-      "courseName": "MFFB 106"
-    },
-    {
       "day": "Cuma",
       "time": "10:45-11:30",
       "courseName": "MAT-171.05 MATEMATİK I"
@@ -241,21 +226,6 @@
       "courseName": "MFFB 401"
     },
     {
-      "day": "Perşembe",
-      "time": "11:40-12:25",
-      "courseName": "KGZ-103 KIRGIZ DİLİ VE EDEBİYATI I"
-    },
-    {
-      "day": "Perşembe",
-      "time": "11:40-12:25",
-      "courseName": "AYNURA BEYŞEYEVA"
-    },
-    {
-      "day": "Perşembe",
-      "time": "11:40-12:25",
-      "courseName": "MFFB 106"
-    },
-    {
       "day": "Cuma",
       "time": "11:40-12:25",
       "courseName": "MAT-171.05 MATEMATİK I"
@@ -316,21 +286,6 @@
       "courseName": "MFFB 321"
     },
     {
-      "day": "Perşembe",
-      "time": "13:30-14:15",
-      "courseName": "BES-111 BEDEN EĞİTİMİ VE SPOR I"
-    },
-    {
-      "day": "Perşembe",
-      "time": "13:30-14:15",
-      "courseName": "SIYMIK ARSTANBEKOV"
-    },
-    {
-      "day": "Perşembe",
-      "time": "13:30-14:15",
-      "courseName": "KSSB Spor sahası (kapalı)"
-    },
-    {
       "day": "Pazartesi",
       "time": "14:25-15:10",
       "courseName": "UME-111.05 (U) FİZİK I (UYGULAMA)"
@@ -376,21 +331,6 @@
       "courseName": "MFFB 321"
     },
     {
-      "day": "Perşembe",
-      "time": "14:25-15:10",
-      "courseName": "BES-111 BEDEN EĞİTİMİ VE SPOR I"
-    },
-    {
-      "day": "Perşembe",
-      "time": "14:25-15:10",
-      "courseName": "SIYMIK ARSTANBEKOV"
-    },
-    {
-      "day": "Perşembe",
-      "time": "14:25-15:10",
-      "courseName": "KSSB Spor sahası (kapalı)"
-    },
-    {
       "day": "Cuma",
       "time": "15:20-16:05",
       "courseName": "RSC-103 RUSÇA I"
@@ -451,36 +391,6 @@
       "courseName": "KSSB A-1"
     },
     {
-      "day": "Perşembe",
-      "time": "16:15-17:00",
-      "courseName": "ING-111 İNGİLİZCE I"
-    },
-    {
-      "day": "Perşembe",
-      "time": "16:15-17:00",
-      "courseName": "SVETLANA CEENBEKOBA"
-    },
-    {
-      "day": "Perşembe",
-      "time": "16:15-17:00",
-      "courseName": "MFFB ONLINE"
-    },
-    {
-      "day": "Perşembe",
-      "time": "16:15-17:00",
-      "courseName": "BES-111(LFK) BEDEN EĞİTİMİ VE SPOR I (SAĞLIK GRUBU)"
-    },
-    {
-      "day": "Perşembe",
-      "time": "16:15-17:00",
-      "courseName": "Emiliya Boljirova"
-    },
-    {
-      "day": "Perşembe",
-      "time": "16:15-17:00",
-      "courseName": "KSSB A-1"
-    },
-    {
       "day": "Cuma",
       "time": "16:15-17:00",
       "courseName": "RSC-103 RUSÇA I"
@@ -537,36 +447,6 @@
     },
     {
       "day": "Çarşamba",
-      "time": "17:10-17:55",
-      "courseName": "KSSB A-1"
-    },
-    {
-      "day": "Perşembe",
-      "time": "17:10-17:55",
-      "courseName": "ING-111 İNGİLİZCE I"
-    },
-    {
-      "day": "Perşembe",
-      "time": "17:10-17:55",
-      "courseName": "SVETLANA CEENBEKOBA"
-    },
-    {
-      "day": "Perşembe",
-      "time": "17:10-17:55",
-      "courseName": "MFFB ONLINE"
-    },
-    {
-      "day": "Perşembe",
-      "time": "17:10-17:55",
-      "courseName": "BES-111(LFK) BEDEN EĞİTİMİ VE SPOR I (SAĞLIK GRUBU)"
-    },
-    {
-      "day": "Perşembe",
-      "time": "17:10-17:55",
-      "courseName": "Emiliya Boljirova"
-    },
-    {
-      "day": "Perşembe",
       "time": "17:10-17:55",
       "courseName": "KSSB A-1"
     },
