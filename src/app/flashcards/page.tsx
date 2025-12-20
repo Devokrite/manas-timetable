@@ -11,6 +11,24 @@ const getIcon = (id: string) => {
     default: return '📚';
   }
 };
+export default function FlashcardsPage() {
+  // ... (your existing subjectsList logic) ...
+
+  return (
+    /* FIX: Added 'pb-24' (padding bottom)
+       This ensures the last item is high enough to be seen easily.
+    */
+    <div className="p-6 md:p-10 pb-24 max-w-7xl mx-auto">
+      <header className="mb-8">
+        {/* ... header content ... */}
+      </header>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* ... your list mapping ... */}
+      </div>
+    </div>
+  );
+}
 
 export default function FlashcardsPage() {
   // Convert the SUBJECTS object into an array for the loop
@@ -22,7 +40,7 @@ export default function FlashcardsPage() {
   }));
 
   return (
-    <div className="p-6 md:p-10 max-w-7xl mx-auto">
+    <div className="p-6 md:p-10 pb-24 max-w-7xl mx-auto">
       <header className="mb-8">
         <h1 className="text-3xl font-bold text-slate-100 mb-2">Flashcards</h1>
         <p className="text-slate-400">Select a subject to start practicing</p>
