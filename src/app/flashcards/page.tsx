@@ -1,7 +1,26 @@
 import Link from "next/link";
-import { flashcards } from "@/data/flashcards";
+import { SUBJECTS } from "@/data/flashcards";
+
+// Helper to assign icons based on the subject ID
+const getIcon = (id: string) => {
+  switch (id) {
+    case 'eco': return '💰';
+    case 'man': return '👔';
+    case 'acc': return '📊';
+    case 'law': return '⚖️';
+    default: return '📚';
+  }
+};
 
 export default function FlashcardsPage() {
+  // Convert the SUBJECTS object into an array for the loop
+  const subjectsList = Object.entries(SUBJECTS).map(([id, data]) => ({
+    id,
+    ...data,
+    icon: getIcon(id),
+    chapterCount: Object.keys(data.chapters).length
+  }));
+
   return (
     <div className="p-6 md:p-10 max-w-7xl mx-auto">
       <header className="mb-8">
@@ -10,7 +29,7 @@ export default function FlashcardsPage() {
       </header>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {flashcards.map((subject) => (
+        {subjectsList.map((subject) => (
           <Link 
             key={subject.id} 
             href={`/flashcards/${subject.id}`}
@@ -20,15 +39,15 @@ export default function FlashcardsPage() {
               <div className="flex items-center justify-between mb-4">
                 <span className="text-4xl">{subject.icon}</span>
                 <span className="text-xs font-mono text-slate-500 bg-slate-900/50 px-2 py-1 rounded-full">
-                  {subject.chapters.length} Chapters
+                  {subject.chapterCount} Chapters
                 </span>
               </div>
               
               <h2 className="text-xl font-bold text-slate-100 mb-2 group-hover:text-emerald-400 transition-colors">
-                {subject.title}
+                {subject.name}
               </h2>
               <p className="text-sm text-slate-400 line-clamp-2">
-                {subject.description}
+                Practice {subject.name} questions and answers.
               </p>
             </div>
             
