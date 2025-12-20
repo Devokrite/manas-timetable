@@ -1,48 +1,43 @@
-import Sidebar from "@/components/Sidebar";
-import FlashcardViewer from "@/components/FlashcardViewer";
-import { SUBJECTS } from "@/data/flashcards";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import FlashcardViewer from "@/components/FlashcardViewer"; 
+import { SUBJECTS } from "@/data/flashcards";
 
-export default async function ChapterPage({
-  params,
-}: {
-  params: Promise<{ subject: string; chapter: string }>;
-}) {
-  const { subject, chapter } = await params;
-  
-  const subjectData = SUBJECTS[subject];
-  if (!subjectData) return notFound();
+export default async function ChapterPage(props: { params: Promise<{ subject: string; chapter: string }> }) {
+  const params = await props.params;
+  const { subject: subjectId, chapter: chapterId } = params;
 
-  const chapterData = subjectData.chapters[chapter];
-  if (!chapterData) return notFound();
+  const subject = SUBJECTS[subjectId];
+  const chapter = subject?.chapters[chapterId];
 
-  const cards = chapterData.flashcards || [];
+  if (!subject || !chapter) {
+    return notFound();
+  }
 
   return (
-    <div className="flex min-h-screen">
-      <div className="hidden md:block">
-        <Sidebar />
-      </div>
-      <main className="flex-1 bg-slate-950 text-slate-50 p-6 md:p-10 flex flex-col">
-        <header className="mb-8 flex items-center justify-between">
-          <div>
-            <Link
-              href={`/flashcards/${subject}`}
-              className="text-xs text-slate-500 hover:text-slate-300 mb-1 inline-block"
-            >
-              ← Back to {subjectData.name}
-            </Link>
-            <h1 className="text-xl font-semibold text-slate-200">
-              {chapterData.name}
-            </h1>
-          </div>
-        </header>
-
-        <div className="flex-1 flex flex-col justify-center pb-20">
-          <FlashcardViewer cards={cards} />
+    <div className="p-4 md:p-8 max-w-4xl mx-auto h-[calc(100vh-4rem)] flex flex-col">
+      {/* Header with Navigation */}
+      <div className="flex items-center justify-between mb-6 shrink-0">
+        <Link 
+          href={`/flashcards/${subjectId}`}
+          className="text-sm text-slate-400 hover:text-white flex items-center gap-2"
+        >
+          &larr; {subject.name}
+        </Link>
+        <div className="text-center">
+          <h1 className="text-lg font-semibold text-slate-100">{chapter.name}</h1>
+          <span className="text-xs text-slate-500">{chapter.flashcards.length} Cards</span>
         </div>
-      </main>
+        <div className="w-20" /> {/* Spacer for centering */}
+      </div>
+
+      {/* The Flashcard Player */}
+      <div className="flex-1 min-h-0">
+        <FlashcardViewer 
+          cards={chapter.flashcards} 
+          title={chapter.name} 
+        />
+      </div>
     </div>
   );
 }
