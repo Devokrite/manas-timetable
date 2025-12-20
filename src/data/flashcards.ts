@@ -899,6 +899,51 @@ export const SUBJECTS: Record<string, {
             a: 'A performance measure used to evaluate the efficiency of an investment. ROI = (Net Profit / Cost of Investment) x 100.'
           }
         ]
+      },
+     man_ch11: {
+        name: 'Ch 11. Digital Presence',
+        flashcards: [
+          {
+            q: 'What is a "Digital Presence"?',
+            a: 'How a business appears online; it is the sum of all the identities a business creates (website, social media, emails, etc.) and the interactions those identities have with customers.'
+          },
+          {
+            q: 'What is a "Buyer Persona"?',
+            a: 'A semi-fictional representation of a business\'s ideal customer based on market research and real data about existing customers.'
+          },
+          {
+            q: 'What is "Content Marketing"?',
+            a: 'A strategic marketing approach focused on creating and distributing valuable, relevant, and consistent content to attract and retain a clearly defined audience.'
+          },
+          {
+            q: 'What is "Social Media Marketing"?',
+            a: 'The use of social media platforms to connect with the audience to build the brand, increase sales, and drive website traffic.'
+          },
+          {
+            q: 'What is the "Reach" metric in social media?',
+            a: 'The number of unique people who have seen a post. (Reach / Total Followers * 100).'
+          },
+          {
+            q: 'What are "Impressions" in social media?',
+            a: 'The total number of times a post shows up on a timeline or newsfeed, regardless of whether it was clicked.'
+          },
+          {
+            q: 'What is the "Engagement Rate"?',
+            a: 'A metric that measures the level of interaction (likes, comments, shares) a piece of content receives from an audience. (Total Interactions / Total Followers * 100).'
+          },
+          {
+            q: 'What is "Social Share of Voice"?',
+            a: 'It measures how many people are talking about the brand on social media compared to its competitors.'
+          },
+          {
+            q: 'What is the "Applause Rate"?',
+            a: 'The number of approval actions (likes, favorites, etc.) a post receives relative to the total number of followers.'
+          },
+          {
+            q: 'What is the "Virality Rate"?',
+            a: 'The number of people who shared a post relative to the number of unique views (impressions) it had during a period.'
+          }
+        ]
       }
     },
   },
