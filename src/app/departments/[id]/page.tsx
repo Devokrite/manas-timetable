@@ -1,37 +1,35 @@
-import Sidebar from "@/components/Sidebar";
-import Link from "next/link";
+import { notFound } from "next/navigation";
+import fs from "fs/promises";
+import path from "path";
+import Timetable from "@/components/Timetable";
 
-// Hardcoded list based on your file structure, ideally this comes from an API or config
-const DEPARTMENTS = [
-  { id: "1", name: "Computer Engineering (1)" }, 
-  { id: "7", name: "Computer Engineering (7)" }, 
-  { id: "10", name: "Department 10" },
-  { id: "191", name: "Department 191" },
-];
+// Helper to read the JSON file directly from your public folder
+async function getDepartmentData(id: string) {
+  const filePath = path.join(process.cwd(), "public", "departments", `${id}.json`);
+  try {
+    const fileContents = await fs.readFile(filePath, "utf8");
+    return JSON.parse(fileContents);
+  } catch (error) {
+    return null;
+  }
+}
 
-export default function DepartmentsListPage() {
+export default async function DepartmentPage({ params }: { params: { id: string } }) {
+  // 1. Fetch the data for this specific ID (e.g., "7")
+  const data = await getDepartmentData(params.id);
+
+  // 2. If no file exists (e.g. 999.json), show 404
+  if (!data) {
+    return notFound();
+  }
+
+  // 3. Render the Timetable component with the data
   return (
-    <div className="flex min-h-screen">
-      <div className="hidden md:block">
-        <Sidebar />
-      </div>
-      <main className="flex-1 bg-slate-950 text-slate-50 p-6 md:p-10">
-        <h1 className="text-2xl font-semibold mb-6">Select Department</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {DEPARTMENTS.map((dept) => (
-            <Link
-              key={dept.id}
-              href={`/departments/${dept.id}`}
-              className="block p-5 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900 transition group"
-            >
-              <h2 className="text-lg font-medium text-slate-200 group-hover:text-emerald-400 transition-colors">
-                {dept.name}
-              </h2>
-              <span className="text-xs text-slate-500">ID: {dept.id}</span>
-            </Link>
-          ))}
-        </div>
-      </main>
+    <div className="p-4 md:p-8">
+      <h1 className="text-2xl font-bold mb-6 text-emerald-400">
+        {data.name || `Department ${params.id}`}
+      </h1>
+      <Timetable data={data} />
     </div>
   );
 }
