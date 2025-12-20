@@ -5,15 +5,6 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 // Inline SVG Icons
-const LayoutGridIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <rect width="7" height="7" x="3" y="3" rx="1" />
-    <rect width="7" height="7" x="14" y="3" rx="1" />
-    <rect width="7" height="7" x="14" y="14" rx="1" />
-    <rect width="7" height="7" x="3" y="14" rx="1" />
-  </svg>
-);
-
 const UtensilsIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
@@ -58,18 +49,13 @@ const RECENT_UPDATE = {
 
 const menuItems = [
   {
-    title: "Timetable",
-    href: "/",
-    icon: LayoutGridIcon,
-  },
-  {
     title: "Menu",
     href: "/menu",
     icon: UtensilsIcon,
   },
   {
     title: "Departments",
-    href: "/departments/1", // Default to first dept
+    href: "/departments", // Changed to /departments to allow selection
     icon: Building2Icon,
   },
   {
@@ -79,9 +65,9 @@ const menuItems = [
   },
   {
     title: "Catalog",
-    href: "/catalog", // Assuming you might have a catalog page or similar
+    href: "/catalog", 
     icon: BookOpenIcon,
-    disabled: true // Example of disabled item
+    disabled: true
   }
 ];
 
@@ -89,7 +75,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 h-screen bg-slate-900 border-r border-slate-800 flex flex-col flex-shrink-0 sticky top-0">
+    <aside className="w-64 h-screen bg-slate-900 border-r border-slate-800 flex flex-col flex-shrink-0 sticky top-0 overflow-y-auto">
       <div className="p-6">
         <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
           Manas Timetable
@@ -100,7 +86,7 @@ export default function Sidebar() {
         {menuItems.map((item) => {
           if (item.disabled) return null;
           
-          const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+          const isActive = pathname.startsWith(item.href);
           
           return (
             <Link
@@ -124,7 +110,7 @@ export default function Sidebar() {
       </nav>
 
       {/* Recent Updates Footer */}
-      <div className="p-4 m-4 rounded-xl bg-slate-800/50 border border-slate-700/50">
+      <div className="p-4 m-4 rounded-xl bg-slate-800/50 border border-slate-700/50 mt-auto">
         <div className="flex items-center gap-2 mb-2">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
