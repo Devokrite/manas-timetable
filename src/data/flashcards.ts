@@ -864,42 +864,90 @@ export const SUBJECTS: Record<string, {
         ]
       },
       man_ch10: {
-        name: 'Ch 10. Financing the Business',
-        flashcards: [
-          {
-            q: 'What is "Finance"?',
-            a: 'The management of money, including investing, borrowing, lending, budgeting, saving, and forecasting.'
-          },
-          {
-            q: 'What is "Debt Financing"?',
-            a: 'Raising capital by borrowing money (loans, bonds) that must be repaid over time with interest.'
-          },
-          {
-            q: 'What is "Equity Financing"?',
-            a: 'Raising capital by selling shares of the business to investors (stock market, venture capital). No repayment is required, but ownership is diluted.'
-          },
-          {
-            q: 'What is "Bootstrapping"?',
-            a: 'Starting a business with little or no outside funding, using personal savings and revenue from the business.'
-          },
-          {
-            q: 'What is "Venture Capital"?',
-            a: 'A form of private equity and a type of financing that investors provide to startup companies and small businesses that are believed to have long-term growth potential.'
-          },
-          {
-            q: 'What is an "Angel Investor"?',
-            a: 'A high-net-worth individual who provides financial backing for small startups or entrepreneurs, typically in exchange for ownership equity in the company.'
-          },
-          {
-            q: 'What is "Crowdfunding"?',
-            a: 'The practice of funding a project or venture by raising small amounts of money from a large number of people, typically via the Internet.'
-          },
-          {
-            q: 'What is "Return on Investment" (ROI)?',
-            a: 'A performance measure used to evaluate the efficiency of an investment. ROI = (Net Profit / Cost of Investment) x 100.'
-          }
-        ]
+        name: "Chapter 10: Financing the Business",
+    flashcards: [
+      {
+        q: "What are the two primary types of financing sources?",
+        a: "1. Debt: An obligation (loan/bond) paid back with interest.\n2. Equity: Providing a portion of the business in exchange for financing."
       },
+      {
+        q: "What is the Small Business Administration (SBA)?",
+        a: "A part of the US Federal government that provides support, resources, and financing assistance to small businesses."
+      },
+      {
+        q: "What is a Financial Intermediary?",
+        a: "An entity like a bank that acts as the middleman between two parties in a financial transaction (e.g., between savers and borrowers)."
+      },
+      {
+        q: "What is the difference between Angel Investors and Venture Capital?",
+        a: "Angel Investors are individuals who invest their own money early on. Venture Capital comes from firms investing pooled money in high-growth companies."
+      },
+      {
+        q: "What are the Pros of Equity Financing?",
+        a: "You don't have to pay the money back (no monthly payments), and it reduces leverage ratios (debts)."
+      },
+      {
+        q: "What are the Cons of Equity Financing?",
+        a: "It is expensive (giving up future profits), it dilutes your ownership/control, and may require public listing."
+      },
+      {
+        q: "What is Net Present Value (NPV)?",
+        a: "A method of calculating the value of future cash flows in today's dollars. It helps determine if a project is worth investing in."
+      },
+      {
+        q: "What is Liquidity?",
+        a: "A measure of how easily an asset can be converted into cash. Cash is the most liquid; inventory is less liquid."
+      },
+      {
+        q: "What is Forecasting in finance?",
+        a: "The process of establishing a baseline of current performance to predict future financing needs (how much debt or equity to raise)."
+      },
+      {
+        q: "What is Break-even Analysis?",
+        a: "A calculation to find the specific quantity of sales needed where Total Revenue equals Total Expenses (no profit, no loss)."
+      },
+      {
+        q: "What makes an investment a 'Driver'?",
+        a: "An investment is a driver when the revenues generated from it are greater than the expenses (quantity sold > break-even point)."
+      },
+      {
+        q: "What are Fiduciary Duties?",
+        a: "Ethical responsibilities in finance requiring professionals to act in the best interest of their company or clients with the highest standard of care."
+      },
+      {
+        q: "How is Net Worth calculated?",
+        a: "Total Assets (what you own) minus Total Debt (what you owe)."
+      },
+      {
+        q: "What is the 'Snowballing' effect in debt?",
+        a: "When debt increases rapidly and becomes unmanageable, often because interest accumulates or unexpected expenses occur."
+      },
+      {
+        q: "What is Compounding Interest?",
+        a: "Interest calculated on the initial principal AND the accumulated interest from previous periods (earning interest on interest)."
+      },
+      {
+        q: "What is a Bull Market?",
+        a: "A market condition characterized by rising stock prices and optimistic investor confidence."
+      },
+      {
+        q: "What is a Bear Market?",
+        a: "A market condition characterized by falling stock prices and pessimistic investor sentiment."
+      },
+      {
+        q: "What is Asset Allocation?",
+        a: "The strategy of balancing risk and reward by distributing investments across different categories (Stocks, Bonds, Cash)."
+      },
+      {
+        q: "What is Risk Tolerance?",
+        a: "The degree of variability in investment returns that an investor is willing to withstand. It determines how aggressive or conservative their portfolio should be."
+      },
+      {
+        q: "What is the Kyrgyz Stock Exchange (KSE)?",
+        a: "A non-state, non-profit organization founded in 1994 to provide effective conditions for the securities market in Kyrgyzstan."
+      }
+    ]
+  },
      man_ch11: {
         name: 'Ch 11. Digital Presence',
         flashcards: [
