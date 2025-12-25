@@ -26,8 +26,8 @@ const BookOpenIcon = ({ className }: { className?: string }) => (
 );
 
 const RECENT_UPDATE = {
-  date: "20th December",
-  message: "Added Chapter 11 to Management"
+  date: "25th December",
+  message: "Accounting Flashcards 6-10th Chapters Improved"
 };
 
 const menuItems = [
