@@ -1147,6 +1147,31 @@ export const SUBJECTS: Record<string, {
             a: 'A structured list of all accounts used by a company to record transactions.'
           },
           {
+            q: 'What are the five main account types (Key Components) in a Chart of Accounts?',
+            a: '1. Assets (Resources owned)\n2. Liabilities (Obligations owed)\n3. Equity (Owner\'s interest)\n4. Revenue (Income from operations)\n5. Expenses (Costs incurred).'
+          },
+          {
+            q: 'What are Current Assets?',
+            a: 'Short-term assets that are expected to be converted to cash or used up within one year (Account codes starting with 1000).'
+          },
+          {
+            q: 'What are Non-Current Assets?',
+            a: 'Long-term assets that are expected to be used for more than one year (Account codes starting with 2000).'
+          },
+          {
+            q: 'What are Current Liabilities?',
+            a: 'Short-term obligations that are due within one year (Account codes starting with 3000).'
+          },
+          {
+            q: 'What are Non-Current Liabilities?',
+            a: 'Long-term obligations that are due after more than one year (Account codes starting with 4000).'
+          },
+          {
+            q: 'What is Equity?',
+            a: 'The owner\'s residual interest in the assets of the company after deducting liabilities (Account codes starting with 5000).'
+          },
+          
+          {
             q: 'What is the typical numbering for Assets?',
             a: 'Usually starts with 1 (e.g., 1000 - Cash).'
           },
@@ -1173,6 +1198,18 @@ export const SUBJECTS: Record<string, {
           {
             q: 'What is an "Analytical Account"?',
             a: 'A detailed sub-account tracking specific items (e.g., "Accounts Receivable - Customer A").'
+          },
+          {
+            q: 'What is the meaning of "Double-entry accounting"?',
+            a: 'A system where every transaction affects at least two accounts (a debit to one and a credit to another), keeping the accounting equation (Assets = Liabilities + Equity) balanced.'
+          },
+          {
+            q: 'Illustrate the double-entry for purchasing office supplies in cash for $100.',
+            a: 'Debit: Office Supplies Expense (or Inventory) $100.\nCredit: Cash (1110) $100.'
+          },
+          {
+            q: 'Why is it important to maintain a standardized Chart of Accounts?',
+            a: 'To ensure consistent financial reporting, facilitate comparison over time, and comply with legal and tax regulations.'
           }
         ]
       },
@@ -1192,16 +1229,40 @@ export const SUBJECTS: Record<string, {
             a: 'Adjusting entries made to align accounting records with economic reality (e.g., converting cash basis to accrual basis).'
           },
           {
-            q: 'What is "Revenue Recognition"?',
-            a: 'Recording revenue when it is earned, regardless of when cash is received.'
+            q: 'What is Revenue Recognition?',
+            a: 'Recording revenue when earned, not just when cash is received.'
           },
           {
-            q: 'What is "Deferred Revenue" (Unearned Revenue)?',
-            a: 'Cash received before services are performed. It is a Liability.'
+            q: 'What is the Matching Principle?',
+            a: 'Recording expenses in the same period as the revenue they generate.'
           },
           {
-            q: 'What is "Accrued Revenue"?',
-            a: 'Revenue earned but not yet received in cash. It is an Asset.'
+            q: 'What is Deferred Revenue (Unearned Revenue)?',
+            a: 'Cash received before service delivery. Liability.'
+          },
+          {
+            q: 'What is Accrued Revenue?',
+            a: 'Revenue earned but cash not received. Asset.'
+          },
+          {
+            q: 'What is a Prepaid Expense?',
+            a: 'Payment for future service. Asset.'
+          },
+          {
+            q: 'What is an Accrued Expense?',
+            a: 'Expense incurred but not paid. Liability.'
+          },
+          {
+            q: 'How is Gross Profit calculated?',
+            a: 'Sales Revenue - Cost of Goods Sold.'
+          },
+          {
+            q: 'How is Net Profit (Net Income) calculated?',
+            a: 'Gross Profit - Operating Expenses - Interest - Taxes.'
+          },
+          {
+            q: 'What is the entry for Prepaid Rent adjustment?',
+            a: 'Debit Rent Expense; Credit Prepaid Rent.'
           }
         ]
       },
@@ -1229,8 +1290,20 @@ export const SUBJECTS: Record<string, {
             a: 'Cost of Asset - Accumulated Depreciation.'
           },
           {
+            q: 'What is a "Transformed (Adjusted) Trial Balance"?',
+            a: 'A trial balance prepared after all adjusting entries (for accruals, deferrals, depreciation) have been posted.'
+          },
+          {
             q: 'What is an "Accrued Expense"?',
             a: 'An expense incurred but not yet paid (e.g., Salaries Payable).'
+          },
+          {
+            q: 'What are Accrued Revenues?',
+            a: 'Revenues that have been earned (service performed or goods delivered) but for which payment has not yet been received.'
+          },
+          {
+            q: 'What is a Contra-Asset Account?',
+            a: 'An asset account with a credit balance that reduces the value of a related asset on the balance sheet (e.g., Accumulated Depreciation reduces Equipment).'
           },
           {
             q: 'What is a "Prepaid Expense"?',
@@ -1242,20 +1315,56 @@ export const SUBJECTS: Record<string, {
         name: 'Lesson 9. Closing Cycle',
         flashcards: [
           {
-            q: 'What is "Closing the Books"?',
-            a: 'The process of resetting temporary accounts (Revenue, Expense, Dividends) to zero for the next period.'
+            q: 'What is the Accounting Cycle?',
+            a: 'The full process of recording and processing accounting events from transaction to closing.'
+          },
+          {
+            q: 'What are the 9 steps of the Accounting Cycle?',
+            a: 'Identify -> Record -> Post -> Unadjusted Trial Balance -> Adjust -> Adjusted Trial Balance -> Statements -> Close -> Post-Closing Trial Balance.'
+          },
+          {
+            q: 'What is a "Source Document"?',
+            a: 'Original records like invoices or receipts that prove a transaction happened.'
+          },
+          {
+            q: 'What is the "Journal"?',
+            a: 'A chronological record of all transactions using debits and credits.'
+          },
+          {
+            q: 'What is a "Ledger Account"?',
+            a: 'A record tracking the activity and balance of a specific account.'
+          },
+          {
+            q: 'What is a "Trial Balance"?',
+            a: 'A list of all accounts and balances to check if total debits equal total credits.'
+          },
+          {
+            q: 'Why make "Adjustment Entries"?',
+            a: 'To record revenues and expenses in the correct period (accruals/deferrals).'
+          },
+          {
+            q: 'What is an "Adjusted Trial Balance"?',
+            a: 'A trial balance made after adjusting entries, used to create financial statements.'
+          },
+          {
+            q: 'What are "Closing Entries"?',
+            a: 'Entries that reset revenue, expense, and dividend accounts to zero for the next period.'
+          },
+          {
+            q: 'Which accounts are "Temporary"?',
+            a: 'Revenue, Expense, and Dividends. They are closed at year-end.'
+          },
+          {
+            q: 'Which accounts are "Permanent"?',
+            a: 'Assets, Liabilities, and Equity. They are never closed.'
           },
           {
             q: 'What is the "Income Summary" account?',
-            a: 'A temporary account used during the closing process to aggregate revenues and expenses before transferring net income to Retained Earnings.'
+            a: 'A temporary account to hold revenue and expenses before moving net profit to Retained Earnings.'
           },
           {
-            q: 'Which accounts appear on the "Post-Closing Trial Balance"?',
-            a: 'Only Permanent accounts (Assets, Liabilities, Equity).'
-          },
-          {
-            q: 'What is the order of the Accounting Cycle?',
-            a: 'Analyze -> Journalize -> Post -> Trial Balance -> Adjusting Entries -> Adjusted Trial Balance -> Financial Statements -> Closing Entries -> Post-Closing Trial Balance.'
+            q: 'What is a "Post-Closing Trial Balance"?',
+            a: 'A final check of permanent accounts after closing entries to ensure books are balanced.'
           }
         ]
       },
@@ -1265,6 +1374,10 @@ export const SUBJECTS: Record<string, {
           {
             q: 'What is "Trade Accounting"?',
             a: 'Accounting specifically focused on buying and selling goods (inventory).'
+          },
+          {
+            q: 'What is the formula for Gross Profit?',
+            a: 'Gross Profit = Direct Revenue - Direct Expenses.'
           },
           {
             q: 'What is "Cost of Goods Sold" (COGS)?',
@@ -1289,6 +1402,10 @@ export const SUBJECTS: Record<string, {
           {
             q: 'What is "Unrealized Gain"?',
             a: 'Potential profit on an asset that has increased in value but has not yet been sold.'
+          },
+          {
+            q: 'What is "Account Reconciliation"?',
+            a: 'Comparing internal financial records with external statements (like bank statements) to ensure they match.'
           }
         ]
       }
