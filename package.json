@@ -6,23 +6,26 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-timetables": "node scripts/build-timetables.js",
+    "build-catalog-1": "node scripts/build-catalog-1.js"
   },
   "dependencies": {
-    "next": "15.1.9",
-    "react": "19.0.1",
-    "react-dom": "19.0.1",
-    "cheerio": "^1.1.2"
+    "google-translate-api-x": "^10.7.2",
+    "lucide-react": "^0.469.0",
+    "next": "15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
-    "eslint-config-next": "15.1.9",
-    "tailwindcss": "^4",
+    "eslint-config-next": "15.1.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
 }
