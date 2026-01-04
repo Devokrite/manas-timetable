@@ -3,29 +3,26 @@
 
 import React, { useState } from "react";
 
-// Define a subject type to hold metadata about each course
-interface SubjectMeta {
+// Define the shape of a subject
+interface Subject {
   id: string;
   name: string;
   credits: number;
   hasAssignment?: boolean;
 }
 
-// List of subjects for the first semester.  Adjust the `credits` or `hasAssignment`
-// fields to match your curriculum.
-const subjects = [
-  { id: 'eco', name: 'Economics', credits: 5, type: 'normal' },
-  { id: 'mat', name: 'Mathematics', credits: 5, type: 'normal' },
-  { id: 'kg',  name: 'Kyrgyz language', credits: 5, type: 'normal' },
-  { id: 'acc', name: 'Accounting', credits: 5, type: 'normal' },
-  { id: 'man', name: 'Management', credits: 5, type: 'management', hasAssignment: true },
-  { id: 'law', name: 'Law', credits: 4, type: 'normal' },
-  { id: 'pe',  name: 'Physical education', credits: 0, type: 'normal' },
+// List of subjects with their credit values
+const subjects: Subject[] = [
+  { id: "eco", name: "Economics", credits: 5 },
+  { id: "math", name: "Mathematics", credits: 5 },
+  { id: "kg", name: "Kyrgyz Language", credits: 5 },
+  { id: "law", name: "Law", credits: 4 },
+  { id: "acc", name: "Accounting", credits: 5 },
+  { id: "man", name: "Management", credits: 5, hasAssignment: true },
+  { id: "pe", name: "Physical Education", credits: 0 },
 ];
 
-
-
-// Map letter grades to grade points for GPA computation
+// Letter grade to grade point mapping
 const gradePoints: Record<string, number> = {
   AA: 4.0,
   BA: 3.5,
@@ -34,11 +31,11 @@ const gradePoints: Record<string, number> = {
   CC: 2.0,
   DC: 1.5,
   DD: 1.0,
-  FF: 0.0
+  FF: 0.0,
 };
 
-// Convert a numeric score into a letter grade
-function toLetter(score: number): keyof typeof gradePoints {
+// Convert numeric score to letter grade
+const toLetter = (score: number): keyof typeof gradePoints => {
   if (score >= 90) return "AA";
   if (score >= 85) return "BA";
   if (score >= 80) return "BB";
@@ -47,68 +44,58 @@ function toLetter(score: number): keyof typeof gradePoints {
   if (score >= 58) return "DC";
   if (score >= 50) return "DD";
   return "FF";
-}
+};
 
-// Calculate the total score for a course according to weighting rules
+// Compute total score based on course type
 function computeTotal(
-  subject: SubjectMeta,
+  subject: Subject,
   visa: number,
   finalExam: number,
   assignment: number
 ): number {
-  // Guard against NaN by defaulting undefined values to zero
   const v = isNaN(visa) ? 0 : visa;
   const f = isNaN(finalExam) ? 0 : finalExam;
   const a = isNaN(assignment) ? 0 : assignment;
-  // Management has assignments (24%), visa (36%), final (40%)
+  // Management uses homework (24%), visa (36%), final (40%)
   if (subject.hasAssignment) {
     return 0.36 * v + 0.24 * a + 0.40 * f;
   }
-  // Other courses: 40% visa + 60% final
+  // Other subjects: visa 40%, final 60%
   return 0.40 * v + 0.60 * f;
 }
 
 export default function GpaCalculator() {
-  // State holds the raw input values per subject
+  // State to hold input values for each subject
   const [scores, setScores] = useState<
-    Record<
-      string,
-      {
-        visa: number | "";
-        final: number | "";
-        assignment: number | "";
-      }
-    >
+    Record<string, { visa: number | ""; final: number | ""; assignment: number | "" }>
   >(() => {
-    // Initialise each subject with empty strings (no input yet)
-    const initial: any = {};
-    subjects.forEach((subj) => {
-      initial[subj.id] = { visa: "", final: "", assignment: "" };
+    const init: Record<string, any> = {};
+    subjects.forEach((s) => {
+      init[s.id] = { visa: "", final: "", assignment: "" };
     });
-    return initial;
+    return init;
   });
 
-  // Handler to update a particular field for a subject
+  // Update handler for score inputs
   const handleChange = (
-    subjectId: string,
+    id: string,
     field: "visa" | "final" | "assignment",
     value: string
   ) => {
-    // Convert input string to number if possible, else empty string
     const numValue = value === "" ? "" : parseFloat(value);
     setScores((prev) => ({
       ...prev,
-      [subjectId]: { ...prev[subjectId], [field]: numValue }
+      [id]: { ...prev[id], [field]: numValue },
     }));
   };
 
-  // Compute results per subject: total, letter, point
+  // Build the results array
   const results = subjects.map((subj) => {
-    const { visa, final, assignment } = scores[subj.id];
+    const { visa, final: finalExam, assignment } = scores[subj.id];
     const total = computeTotal(
       subj,
       typeof visa === "number" ? visa : 0,
-      typeof final === "number" ? final : 0,
+      typeof finalExam === "number" ? finalExam : 0,
       typeof assignment === "number" ? assignment : 0
     );
     const letter = toLetter(total);
@@ -116,31 +103,22 @@ export default function GpaCalculator() {
     return { subj, total, letter, point };
   });
 
-  // Overall GPA across all subjects
-  const gpa = (() => {
-  const totalCredits = results.reduce(
-    (acc, r) => acc + r.subj.credits,
+  // Compute overall GPA
+  const totalCredits = results.reduce((sum, r) => sum + r.subj.credits, 0);
+  const totalPoints = results.reduce(
+    (sum, r) => sum + r.point * r.subj.credits,
     0
   );
-
-  const totalPoints = results.reduce((acc, r) => {
-    if (r.subj.credits === 0) return acc; // PE ignored
-    return acc + r.point * r.subj.credits;
-  }, 0);
-
-  return totalCredits > 0
-    ? (totalPoints / totalCredits).toFixed(2)
-    : "0.00";
-})();
-
+  const gpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
       <h2 className="text-3xl font-bold text-center">GPA Calculator</h2>
       <p className="text-sm text-slate-400 text-center">
-        Enter your scores below.  The midterm (visa) and final are required for
-        all courses; assignments are only used for Management.
+        Enter your scores below. The midterm (visa) and final exam are required
+        for all courses. Homework is used only for Management.
       </p>
+
       <div className="space-y-8">
         {subjects.map((subj) => (
           <div
@@ -152,7 +130,9 @@ export default function GpaCalculator() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex flex-col">
-                <label className="text-sm text-slate-300 mb-1">Midterm (Visa)</label>
+                <label className="text-sm text-slate-300 mb-1">
+                  Midterm (Visa)
+                </label>
                 <input
                   type="number"
                   min="0"
@@ -166,17 +146,19 @@ export default function GpaCalculator() {
               </div>
               {subj.hasAssignment && (
                 <div className="flex flex-col">
-                  <label className="text-sm text-slate-300 mb-1">Homework</label>
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={scores[subj.id].assignment}
-                    onChange={(e) =>
-                      handleChange(subj.id, "assignment", e.target.value)
-                    }
-                    className="p-2 rounded bg-slate-900 border border-slate-700 text-slate-100"
-                  />
+                  <label className="text-sm text-slate-300 mb-1">
+                    Homework
+                  </label>
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={scores[subj.id].assignment}
+                      onChange={(e) =>
+                        handleChange(subj.id, "assignment", e.target.value)
+                      }
+                      className="p-2 rounded bg-slate-900 border border-slate-700 text-slate-100"
+                    />
                 </div>
               )}
               <div className="flex flex-col">
@@ -193,28 +175,40 @@ export default function GpaCalculator() {
                 />
               </div>
             </div>
-            {/* Display the computed results for this subject */}
+
+            {/* Per-subject results */}
             <div className="flex flex-wrap gap-4 text-sm text-slate-300">
               <span>
-                Total Score: <strong>{results.find((r) => r.subj.id === subj.id)?.total.toFixed(2)}</strong>
+                Total Score:{" "}
+                <strong>
+                  {results.find((r) => r.subj.id === subj.id)?.total.toFixed(2)}
+                </strong>
               </span>
               <span>
-                Grade: <strong>{results.find((r) => r.subj.id === subj.id)?.letter}</strong>
+                Grade:{" "}
+                <strong>
+                  {results.find((r) => r.subj.id === subj.id)?.letter}
+                </strong>
               </span>
               <span>
-                Points: <strong>{results.find((r) => r.subj.id === subj.id)?.point.toFixed(1)}</strong>
+                Points:{" "}
+                <strong>
+                  {results
+                    .find((r) => r.subj.id === subj.id)
+                    ?.point.toFixed(1)}
+                </strong>
               </span>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Overall GPA */}
       <div className="p-4 border border-slate-700 rounded-xl bg-slate-800 mt-6">
         <h3 className="text-lg font-semibold text-emerald-400 mb-2">
           Overall GPA
         </h3>
-        <p className="text-2xl font-bold text-white">
-          {Number.isNaN(gpa) ? "0.00" : gpa.toFixed(2)}
-        </p>
+        <p className="text-2xl font-bold text-white">{gpa.toFixed(2)}</p>
       </div>
     </div>
   );
