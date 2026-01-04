@@ -14,14 +14,15 @@ interface SubjectMeta {
 // List of subjects for the first semester.  Adjust the `credits` or `hasAssignment`
 // fields to match your curriculum.
 const subjects = [
-  { name: "Economics", credits: 5, type: "normal" },
-  { name: "Mathematics", credits: 5, type: "normal" },
-  { name: "Kyrgyz language", credits: 5, type: "normal" },
-  { name: "Accounting", credits: 5, type: "normal" },
-  { name: "Management", credits: 5, type: "management" },
-  { name: "Law", credits: 4, type: "normal" },
-  { name: "Physical education", credits: 0, type: "normal" }
+  { id: 'eco', name: 'Economics', credits: 5, type: 'normal' },
+  { id: 'mat', name: 'Mathematics', credits: 5, type: 'normal' },
+  { id: 'kg',  name: 'Kyrgyz language', credits: 5, type: 'normal' },
+  { id: 'acc', name: 'Accounting', credits: 5, type: 'normal' },
+  { id: 'man', name: 'Management', credits: 5, type: 'management' },
+  { id: 'law', name: 'Law', credits: 4, type: 'normal' },
+  { id: 'pe',  name: 'Physical education', credits: 0, type: 'normal' }
 ];
+
 
 
 // Map letter grades to grade points for GPA computation
