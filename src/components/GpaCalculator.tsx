@@ -13,15 +13,16 @@ interface SubjectMeta {
 
 // List of subjects for the first semester.  Adjust the `credits` or `hasAssignment`
 // fields to match your curriculum.
-const subjects: SubjectMeta[] = [
-  { id: "economics", name: "Economics", credits: 5 },
-  { id: "mathematics", name: "Mathematics", credits: 5 },
-  { id: "kyrgyz", name: "Kyrgyz Language", credits: 4 },
-  { id: "management", name: "Management", credits: 3, hasAssignment: true },
-  { id: "physical_education", name: "Physical Education", credits: 1 },
-  { id: "law", name: "Law", credits: 4 },
-  { id: "accounting", name: "Accounting", credits: 5 }
+const subjects = [
+  { name: "Economics", credits: 5, type: "normal" },
+  { name: "Mathematics", credits: 5, type: "normal" },
+  { name: "Kyrgyz language", credits: 5, type: "normal" },
+  { name: "Accounting", credits: 5, type: "normal" },
+  { name: "Management", credits: 5, type: "management" },
+  { name: "Law", credits: 4, type: "normal" },
+  { name: "Physical education", credits: 0, type: "normal" }
 ];
+
 
 // Map letter grades to grade points for GPA computation
 const gradePoints: Record<string, number> = {
