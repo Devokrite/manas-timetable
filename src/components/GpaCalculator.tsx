@@ -18,9 +18,9 @@ const subjects = [
   { id: 'mat', name: 'Mathematics', credits: 5, type: 'normal' },
   { id: 'kg',  name: 'Kyrgyz language', credits: 5, type: 'normal' },
   { id: 'acc', name: 'Accounting', credits: 5, type: 'normal' },
-  { id: 'man', name: 'Management', credits: 5, type: 'management' },
+  { id: 'man', name: 'Management', credits: 5, type: 'management', hasAssignment: true },
   { id: 'law', name: 'Law', credits: 4, type: 'normal' },
-  { id: 'pe',  name: 'Physical education', credits: 0, type: 'normal' }
+  { id: 'pe',  name: 'Physical education', credits: 0, type: 'normal' },
 ];
 
 
