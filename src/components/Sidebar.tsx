@@ -26,8 +26,8 @@ const BookOpenIcon = ({ className }: { className?: string }) => (
 );
 
 const RECENT_UPDATE = {
-  date: "25th December",
-  message: "Accounting Flashcards 6-10th Chapters Improved"
+  date: "5th January",
+  message: "Added GPA Calculator"
 };
 
 const menuItems = [
