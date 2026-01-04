@@ -117,13 +117,21 @@ export default function GpaCalculator() {
 
   // Overall GPA across all subjects
   const gpa = (() => {
-    const totalCredits = subjects.reduce((acc, s) => acc + s.credits, 0);
-    const weightedPoints = results.reduce(
-      (acc, r) => acc + r.point * r.subj.credits,
-      0
-    );
-    return weightedPoints / totalCredits;
-  })();
+  const totalCredits = results.reduce(
+    (acc, r) => acc + r.subj.credits,
+    0
+  );
+
+  const totalPoints = results.reduce((acc, r) => {
+    if (r.subj.credits === 0) return acc; // PE ignored
+    return acc + r.point * r.subj.credits;
+  }, 0);
+
+  return totalCredits > 0
+    ? (totalPoints / totalCredits).toFixed(2)
+    : "0.00";
+})();
+
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 space-y-6">
