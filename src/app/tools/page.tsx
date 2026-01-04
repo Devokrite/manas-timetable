@@ -1,10 +1,7 @@
 // src/app/tools/page.tsx
-import dynamic from "next/dynamic";
+'use client';
 
-// Dynamically import the calculator so it only renders on the client
-const GpaCalculator = dynamic(() => import("@/components/GpaCalculator"), {
-  ssr: false
-});
+import GpaCalculator from '@/components/GpaCalculator';
 
 export default function ToolsPage() {
   return (
