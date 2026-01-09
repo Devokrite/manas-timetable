@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { CalendarDays } from "lucide-react";
+
 
 // --- ICONS ---
 const MenuIcon = ({ className }: { className?: string }) => (
@@ -35,7 +37,7 @@ const menuItems = [
   { title: "Departments", href: "/departments", icon: Building2Icon },
   { title: "Flashcards", href: "/flashcards", icon: LibraryIcon },
   { title: "GPA Calculator", href: "/tools", icon: BookOpenIcon },
-  { title: "Calendar", href: "/calendar" },
+  { title: "Calendar", href: "/calendar", icon: CalendarDays},
   { title: "Catalog", href: "/catalog", icon: BookOpenIcon, disabled: true }
 ];
 
