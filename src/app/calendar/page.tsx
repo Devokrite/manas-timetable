@@ -140,7 +140,7 @@ export default function CalendarPage() {
                   <div
                     className="
                       pointer-events-none absolute
-                      bottom-[calc(100%+8px)]
+                      bottom-[calc(100%+2px)]
                       z-20 w-56
                       rounded-xl border border-slate-700 bg-slate-950
                       px-3 py-2 text-xs text-slate-100 shadow-lg
