@@ -38,7 +38,7 @@ const menuItems = [
   { title: "Flashcards", href: "/flashcards", icon: LibraryIcon },
   { title: "GPA Calculator", href: "/tools", icon: BookOpenIcon },
   { title: "Calendar", href: "/calendar", icon: CalendarDays},
-  { label: "Campus Map", href: "/campus", icon: "🗺️" },
+  { label: "Campus Map", href: "/campus", icon: Map },
   { title: "Catalog", href: "/catalog", icon: BookOpenIcon, disabled: true }
 ];
 
