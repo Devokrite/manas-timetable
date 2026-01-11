@@ -30,8 +30,8 @@ const BookOpenIcon = ({ className }: { className?: string }) => (
 );
 
 const RECENT_UPDATE = {
-  date: "5th January",
-  message: "Added GPA Calculator"
+  date: "11th January",
+  message: "Added Campus Map"
 };
 
 const menuItems = [
