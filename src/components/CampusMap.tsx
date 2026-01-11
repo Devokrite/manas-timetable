@@ -27,7 +27,7 @@ export default function CampusMap() {
 ).addTo(map);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors",
-  opacity: 0.25,
+  opacity: 0.85,
 }).addTo(map);
 
 
