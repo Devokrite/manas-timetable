@@ -5,9 +5,6 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 // Fix marker icons (required in Next.js)
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 const places = [
   { name: "SAHA", lat: 42.834673, lng: 74.572489 },
@@ -28,13 +25,7 @@ const places = [
 
 export default function CampusMap() {
   useEffect(() => {
-    // Fix default icon paths
-    delete (L.Icon.Default.prototype as any)._getIconUrl;
-    L.Icon.Default.mergeOptions({
-      iconRetinaUrl: markerIcon2x.src,
-      iconUrl: markerIcon.src,
-      shadowUrl: markerShadow.src,
-    });
+    // Fix default icon pa
 
     const map = L.map("campus-map", {
       center: [42.8354, 74.5739],
@@ -51,11 +42,28 @@ export default function CampusMap() {
       }
     ).addTo(map);
 
-    places.forEach((p) => {
-      L.marker([p.lat, p.lng])
-        .addTo(map)
-        .bindPopup(`<b>${p.name}</b>`);
-    });
+    // ✅ Green dot style (like your screenshot)
+const dotStyle: L.CircleMarkerOptions = {
+  radius: 8,
+  color: "#A7F3D0",      // border (light mint)
+  weight: 2,
+  fillColor: "#34D399",  // fill (emerald)
+  fillOpacity: 1,
+};
+
+places.forEach((p) => {
+  const dot = L.circleMarker([p.lat, p.lng], dotStyle).addTo(map);
+
+  dot.bindPopup(`<b>${p.name}</b>`);
+
+  // Optional: show name on hover (nice UX)
+  dot.bindTooltip(p.name, {
+    direction: "top",
+    offset: [0, -10],
+    opacity: 0.95,
+  });
+});
+
 
     return () => {
       map.remove();
