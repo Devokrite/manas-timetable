@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { CalendarDays } from "lucide-react";
-import { Map } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 
 
@@ -40,7 +40,7 @@ const menuItems = [
   { title: "Flashcards", href: "/flashcards", icon: LibraryIcon },
   { title: "GPA Calculator", href: "/tools", icon: BookOpenIcon },
   { title: "Calendar", href: "/calendar", icon: CalendarDays},
-  { label: "Campus Map", href: "/campus", icon: Map },
+  { label: "Campus Map", href: "/campus", icon: MapPin },
   { title: "Catalog", href: "/catalog", icon: BookOpenIcon, disabled: true }
 ];
 
