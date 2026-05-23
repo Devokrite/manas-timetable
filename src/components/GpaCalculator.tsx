@@ -39,6 +39,8 @@ const semesters: Semester[] = [
       { id: "kg2", name: "Kyrgyz Language", credits: 4 },
       { id: "acc2", name: "Accounting", credits: 5 },
       { id: "stat", name: "Statistics", credits: 5 },
+      { id: "eng2", name: "English", credits: 2 },
+      { id: "info2", name: "Informatics", credits: 4 },
       { id: "pe2", name: "Physical Education", credits: 0 },
     ],
   },
